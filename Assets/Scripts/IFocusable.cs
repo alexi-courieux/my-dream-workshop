@@ -1,11 +1,8 @@
-﻿namespace AshLight.BakerySim
+﻿/// <summary>
+/// Interface for objects that can be interacted with
+/// </summary>
+public interface IFocusable
 {
-       /// <summary>
-       /// Interface for objects that can be interacted with
-       /// </summary>
-       public interface IFocusable
-       {
-              public void Focus();
-              public void StopFocus();
-       }
+       public void Focus();
+       public void StopFocus();
 }

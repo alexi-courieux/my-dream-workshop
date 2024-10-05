@@ -1,116 +1,114 @@
 ﻿using System;
+using AshLight.BakerySim;
 using UnityEngine;
 
-namespace AshLight.BakerySim
+public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFocusable
 {
-    public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFocusable
+    private IHandleItems _parent;
+    private Rigidbody _rb;
+
+    public static void SpawnItem<T>(Transform itemPrefab, IHandleItems parent) where T : Item
     {
-        private IHandleItems _parent;
-        private Rigidbody _rb;
+        Transform itemTransform = Instantiate(itemPrefab);
+        Item item = itemTransform.GetComponent<Item>();
+        item.SetParent<T>(parent);
+    }
 
-        public static void SpawnItem<T>(Transform itemPrefab, IHandleItems parent) where T : Item
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
+
+    /// <summary>
+    /// Try to change the parent of this item to another one, it must have an available slot or be null
+    /// </summary>
+    /// <param name="targetParent">new parent</param>
+    /// <returns>true if the parent have changed</returns>
+    public void SetParent<T>(IHandleItems targetParent) where T : Item
+    {
+        if (targetParent is null)
         {
-            Transform itemTransform = Instantiate(itemPrefab);
-            Item item = itemTransform.GetComponent<Item>();
-            item.SetParent<T>(parent);
+            throw new Exception("SetParent<T> must have a non-null parent, use Drop or DestroySelf instead");
         }
 
-        private void Awake()
+        if (!targetParent.HasAvailableSlot<T>())
         {
-            _rb = GetComponent<Rigidbody>();
+            throw new ArgumentException("The parent must have an available slot or be null");
         }
 
-        /// <summary>
-        /// Try to change the parent of this item to another one, it must have an available slot or be null
-        /// </summary>
-        /// <param name="targetParent">new parent</param>
-        /// <returns>true if the parent have changed</returns>
-        public void SetParent<T>(IHandleItems targetParent) where T : Item
+        _parent?.ClearItem(this);
+
+        _parent = targetParent;
+
+        if (_parent is not null)
         {
-            if (targetParent is null)
-            {
-                throw new Exception("SetParent<T> must have a non-null parent, use Drop or DestroySelf instead");
-            }
-
-            if (!targetParent.HasAvailableSlot<T>())
-            {
-                throw new ArgumentException("The parent must have an available slot or be null");
-            }
-
-            _parent?.ClearItem(this);
-
-            _parent = targetParent;
-
-            if (_parent is not null)
-            {
-                transform.parent = _parent.GetAvailableItemSlot<T>();
-                _parent.AddItem<T>(this);
-                transform.localPosition = Vector3.zero;
-                transform.localRotation = Quaternion.identity;
-            }
-
-            if (_rb is not null)
-            {
-                _rb.isKinematic = true;
-            }
+            transform.parent = _parent.GetAvailableItemSlot<T>();
+            _parent.AddItem<T>(this);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
         }
 
-        public void Drop()
+        if (_rb is not null)
         {
-            _parent.ClearItem(this);
-            _parent = null;
-            transform.parent = null;
-            if (_rb is not null)
-            {
-                _rb.isKinematic = false;
-            }
-            else
-            {
-                Debug.LogWarning(
-                    "This item doesn't have a Rigidbody component so it might not be affected by physics");
-            }
+            _rb.isKinematic = true;
         }
+    }
 
-        public void DestroySelf()
+    public void Drop()
+    {
+        _parent.ClearItem(this);
+        _parent = null;
+        transform.parent = null;
+        if (_rb is not null)
         {
-            _parent.ClearItem(this);
-            Destroy(gameObject);
+            _rb.isKinematic = false;
         }
-
-        public void Interact()
+        else
         {
-            if (_parent is IInteractable interactableParent)
-            {
-                interactableParent.Interact();
-            }
-            else
-            {
-                SetParent<Item>(Player.Instance.HandleSystem);
-            }
+            Debug.LogWarning(
+                "This item doesn't have a Rigidbody component so it might not be affected by physics");
         }
+    }
 
-        public void InteractAlt()
+    public void DestroySelf()
+    {
+        _parent.ClearItem(this);
+        Destroy(gameObject);
+    }
+
+    public void Interact()
+    {
+        if (_parent is IInteractable interactableParent)
         {
-            if (_parent is IInteractableAlt interactableParent)
-            {
-                interactableParent.InteractAlt();
-            }
+            interactableParent.Interact();
         }
-
-        public void Focus()
+        else
         {
-            if (_parent is IFocusable focusableParent)
-            {
-                focusableParent.Focus();
-            }
+            SetParent<Item>(Player.Instance.HandleSystem);
         }
+    }
 
-        public void StopFocus()
+    public void InteractAlt()
+    {
+        if (_parent is IInteractableAlt interactableParent)
         {
-            if (_parent is IFocusable focusableParent)
-            {
-                focusableParent.StopFocus();
-            }
+            interactableParent.InteractAlt();
+        }
+    }
+
+    public void Focus()
+    {
+        if (_parent is IFocusable focusableParent)
+        {
+            focusableParent.Focus();
+        }
+    }
+
+    public void StopFocus()
+    {
+        if (_parent is IFocusable focusableParent)
+        {
+            focusableParent.StopFocus();
         }
     }
 }
