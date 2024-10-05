@@ -18,7 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a51cc40878da424199665b433a2fb0a, type: 2}
   toolRecipes:
   - {fileID: 11400000, guid: 24e5ce1252dd3554386daf6c9d0aa3b3, type: 2}
-<<<<<<< HEAD
   woodcuttingRecipes: []
-=======
->>>>>>> 46413df642b27c48ae5a3a67e00234909d648da4
