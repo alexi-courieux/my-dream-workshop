@@ -36,7 +36,7 @@
                     "name": "InteractAlt",
                     "type": "Button",
                     "id": "624a704e-793d-4d8e-9d40-ab9159f01d1b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -51,28 +51,10 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Camera",
-                    "type": "Button",
-                    "id": "3db1aa56-92e4-4b4d-aadb-6d20021a3d76",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Drop",
-                    "type": "Button",
-                    "id": "29e5a5ad-e217-4685-bcd1-d29d3d940aef",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Previous/Next",
                     "type": "Button",
                     "id": "e23b2448-dfd5-4999-b0b2-2dac1f978c91",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -235,28 +217,6 @@
                 },
                 {
                     "name": "",
-                    "id": "88d7f77e-7869-4c00-8d7d-bb222bba421d",
-                    "path": "<Keyboard>/v",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Camera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aa35d522-f106-418b-a434-75eb691a5b91",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Camera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3bfc5d09-be91-49ab-941f-a59aadcff76a",
                     "path": "<Mouse>/delta",
                     "interactions": "",
@@ -331,28 +291,6 @@
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "9a54dec7-c2f2-4828-9e1f-4e1787860c41",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Drop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "420711fa-ca30-4a12-a158-2afb4b86fe4d",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Drop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "Scroll [Mouse]",
