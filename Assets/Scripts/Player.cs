@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
             // Rotate towards the movement direction
             Quaternion targetRotation =
                 Quaternion.LookRotation(Vector3.ProjectOnPlane(moveDirection, Vector3.up), Vector3.up);
-            visualTransform.rotation = Quaternion.Lerp(visualTransform.rotation, targetRotation,
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation,
                 characterRotationSpeed * Time.fixedDeltaTime);
         }
         else
@@ -129,7 +129,8 @@ public class Player : MonoBehaviour
 
     private void InputManager_OnNext(object sender, EventArgs e)
     {
-        CheckForRaycastHit(out RaycastHit hitInfo, new[] {_stationMask});
+        if (!CheckForRaycastHit(out RaycastHit hitInfo, new[] {_stationMask})) return;
+        
         if (hitInfo.transform.TryGetComponent(out IInteractableNext interactableComponent))
         {
             interactableComponent.InteractNext();
@@ -138,7 +139,8 @@ public class Player : MonoBehaviour
 
     private void InputManager_OnPrevious(object sender, EventArgs e)
     {
-        CheckForRaycastHit(out RaycastHit hitInfo, new[] {_stationMask});
+        if (!CheckForRaycastHit(out RaycastHit hitInfo, new[] {_stationMask})) return;
+        
         if (hitInfo.transform.TryGetComponent(out IInteractablePrevious interactableComponent))
         {
             interactableComponent.InteractPrevious();
