@@ -1,5 +1,4 @@
 using System;
-using AshLight.BakerySim;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,8 +8,6 @@ public class InputManager : MonoBehaviour
 
     public EventHandler OnInteract;
     public EventHandler OnInteractAlt;
-    public EventHandler OnDrop;
-    public EventHandler OnCameraSwitch;
     public EventHandler OnPause;
     public EventHandler OnNext;
     public EventHandler OnPrevious;
@@ -26,8 +23,6 @@ public class InputManager : MonoBehaviour
         _inputActions.Player.Interact.performed += Interact_OnPerformed;
         _inputActions.Player.InteractAlt.performed += InteractAlt_OnPerformed;
         _inputActions.Player.Pause.performed += Pause_OnPerformed;
-        _inputActions.Player.Camera.performed += Camera_OnPerformed;
-        _inputActions.Player.Drop.performed += Drop_OnPerformed;
         _inputActions.Player.PreviousNext.performed += PreviousNext_OnPerformed;
     }
 
@@ -36,8 +31,6 @@ public class InputManager : MonoBehaviour
         _inputActions.Player.Interact.performed -= Interact_OnPerformed;
         _inputActions.Player.InteractAlt.performed -= InteractAlt_OnPerformed;
         _inputActions.Player.Pause.performed -= Pause_OnPerformed;
-        _inputActions.Player.Camera.performed -= Camera_OnPerformed;
-        _inputActions.Player.Drop.performed -= Drop_OnPerformed;
 
         _inputActions.Dispose();
     }
@@ -65,16 +58,6 @@ public class InputManager : MonoBehaviour
     private void Pause_OnPerformed(InputAction.CallbackContext obj)
     {
         OnPause?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Camera_OnPerformed(InputAction.CallbackContext obj)
-    {
-        OnCameraSwitch?.Invoke(this, EventArgs.Empty);
-    }
-
-    private void Drop_OnPerformed(InputAction.CallbackContext obj)
-    {
-        OnDrop?.Invoke(this, EventArgs.Empty);
     }
 
     private void PreviousNext_OnPerformed(InputAction.CallbackContext obj)

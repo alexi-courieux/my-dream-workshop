@@ -6,11 +6,16 @@ public class ProductSo : ScriptableObject
     public Transform prefab;
     public Sprite sprite;
     public string itemName;
-    public float buyPrice;
-    public float sellPrice;
+    public int buyPrice;
+    public int sellPrice;
 
-    public bool CanBeSold()
+    public bool CanSell()
     {
         return sellPrice > 0f;
+    }
+
+    public bool CanBuy()
+    {
+        return buyPrice > 0f;
     }
 }
