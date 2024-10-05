@@ -8,6 +8,12 @@ public class RecipesDictionarySo : ScriptableObject
     public OvenRecipeSo[] ovenRecipes;
     public BlenderRecipeSo[] blenderRecipes;
     public ToolRecipeSo[] toolRecipes;
+    public WoodcuttingRecipeSo[] woodcuttingRecipes;
+    public SmelterRecipeSo[] smelterRecipeSo;
+    public MoldingRecipeSo[] moldingRecipeSo;
+    public AnvilRecipeSo[] anvilRecipeSo;
+    public SculptingRecipeSo[] sculptingRecipeSo;
+    public AssemblyRecipeSo[] assemblyRecipeSo;
 }
 
 #if UNITY_EDITOR
@@ -33,6 +39,36 @@ public class RecipeDictionarySoEditor : Editor
             recipeGuids = AssetDatabase.FindAssets($"t:{nameof(ToolRecipeSo)}");
             recipes.toolRecipes = recipeGuids
                 .Select(guid => AssetDatabase.LoadAssetAtPath<ToolRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
+                .ToArray();
+
+            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(WoodcuttingRecipeSo)}");
+            recipes.woodcuttingRecipes = recipeGuids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<WoodcuttingRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
+                .ToArray();
+
+            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(SmelterRecipeSo)}");
+            recipes.smelterRecipeSo = recipeGuids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<SmelterRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
+                .ToArray();
+
+            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(MoldingRecipeSo)}");
+            recipes.moldingRecipeSo = recipeGuids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<MoldingRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
+                .ToArray();
+
+            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(AnvilRecipeSo)}");
+            recipes.anvilRecipeSo = recipeGuids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<AnvilRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
+                .ToArray();
+
+            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(SculptingRecipeSo)}");
+            recipes.sculptingRecipeSo = recipeGuids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<SculptingRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
+                .ToArray();
+
+            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(AssemblyRecipeSo)}");
+            recipes.assemblyRecipeSo = recipeGuids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<AssemblyRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
                 .ToArray();
 
             AssetDatabase.SaveAssets();

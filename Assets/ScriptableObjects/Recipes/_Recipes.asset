@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61549c269b3a4bcfa83a378991c31af3, type: 3}
   m_Name: _Recipes
   m_EditorClassIdentifier: 
-  ovenRecipes: []
-  blenderRecipes: []
-  toolRecipes: []
+  ovenRecipes:
+  - {fileID: 11400000, guid: 82e06bb6e1acad345ab00c8bd431338a, type: 2}
+  blenderRecipes:
+  - {fileID: 11400000, guid: 2a51cc40878da424199665b433a2fb0a, type: 2}
+  toolRecipes:
+  - {fileID: 11400000, guid: 24e5ce1252dd3554386daf6c9d0aa3b3, type: 2}
+  woodcuttingRecipes: []
