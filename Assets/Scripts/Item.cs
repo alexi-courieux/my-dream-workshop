@@ -5,18 +5,12 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFocusable
 {
     private IHandleItems _parent;
-    private Rigidbody _rb;
 
     public static void SpawnItem<T>(Transform itemPrefab, IHandleItems parent) where T : Item
     {
         Transform itemTransform = Instantiate(itemPrefab);
         Item item = itemTransform.GetComponent<Item>();
         item.SetParent<T>(parent);
-    }
-
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
     }
 
     /// <summary>
@@ -46,27 +40,6 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
             _parent.AddItem<T>(this);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
-        }
-
-        if (_rb is not null)
-        {
-            _rb.isKinematic = true;
-        }
-    }
-
-    public void Drop()
-    {
-        _parent.ClearItem(this);
-        _parent = null;
-        transform.parent = null;
-        if (_rb is not null)
-        {
-            _rb.isKinematic = false;
-        }
-        else
-        {
-            Debug.LogWarning(
-                "This item doesn't have a Rigidbody component so it might not be affected by physics");
         }
     }
 

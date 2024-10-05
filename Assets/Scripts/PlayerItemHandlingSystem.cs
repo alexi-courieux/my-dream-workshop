@@ -1,6 +1,4 @@
-﻿using System;
-using AshLight.BakerySim;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
 {
@@ -8,22 +6,6 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     [SerializeField] private Transform itemSlot;
     private Item _item;
     private int _defaultHandleableItemsLayer;
-
-    private void Start()
-    {
-        InputManager.Instance.OnDrop += InputManager_Drop;
-    }
-
-    private void InputManager_Drop(object sender, EventArgs e)
-    {
-        Drop();
-    }
-
-    private void Drop()
-    {
-        if (!HaveItems<Item>()) return;
-        _item.Drop();
-    }
 
     public void AddItem<T>(Item item) where T : Item
     {

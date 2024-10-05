@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  sprite: {fileID: 0}
+  prefab: {fileID: 6782091576727403236, guid: e418193a673fbbe4aba268833a16b180, type: 3}
+  sprite: {fileID: 21300000, guid: 53831ffd2c1064d07b3fcc10982b1e0d, type: 3}
   itemName: Bread
   buyPrice: 5
   sellPrice: 10
