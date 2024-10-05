@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ToolContainerStation : MonoBehaviour, IInteractable
 {
-    [FormerlySerializedAs("productSo")] [SerializeField] private ToolSo toolSo;
+    [SerializeField] private ToolSo toolSo;
 
     public void Interact()
     {
