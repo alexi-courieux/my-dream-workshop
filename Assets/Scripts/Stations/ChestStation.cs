@@ -35,10 +35,12 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable
             product.DestroySelf();
         }
     }
+    
     public void Focus()
     {
         OnFocus?.Invoke(this, EventArgs.Empty);
     }
+    
     public void StopFocus()
     {
         OnStopFocus?.Invoke(this, EventArgs.Empty);
@@ -52,5 +54,10 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable
     public ProductSo GetProductSo()
     {
         return productSo;
+    }
+    public void AddProduct()
+    {
+        productAmount++;
+        OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
     }
 }

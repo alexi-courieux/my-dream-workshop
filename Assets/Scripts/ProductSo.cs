@@ -18,4 +18,19 @@ public class ProductSo : ScriptableObject
     {
         return buyPrice > 0f;
     }
+
+    public override bool Equals(object other)
+    {
+        if (other is ProductSo product)
+        {
+            return product.itemName == itemName;
+        }
+
+        return false;
+    }
+    
+    public override int GetHashCode()
+    {
+        return itemName.GetHashCode();
+    }
 }

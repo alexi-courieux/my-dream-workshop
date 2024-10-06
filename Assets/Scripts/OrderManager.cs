@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class OrderManager : MonoBehaviour
 {
     public static OrderManager Instance { get; private set; }
     
     [SerializeField] private ProductDictionarySo buyableProducts;
+    [SerializeField] private List<ChestStation> chestStations;
     
     private void Awake()
     {
@@ -18,6 +20,11 @@ public class OrderManager : MonoBehaviour
     
     public void Buy(ProductSo productSo)
     {
-        Debug.Log($"Buying {productSo.name}");
+        foreach (ChestStation chestStation in chestStations)
+        {
+            if (chestStation.GetProductSo() != productSo) continue;
+            chestStation.AddProduct();
+            return;
+        }
     }
 }

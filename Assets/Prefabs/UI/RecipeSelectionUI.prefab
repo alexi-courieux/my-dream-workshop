@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3039559616006914514}
   - component: {fileID: 7141482619078488350}
   - component: {fileID: 6887928434847176903}
-  - component: {fileID: 7844872549272112569}
+  - component: {fileID: 4048385708478900451}
+  - component: {fileID: 8976454887467358742}
   m_Layer: 5
   m_Name: RecipeSelectionUI
   m_TagString: Untagged
@@ -79,7 +80,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7844872549272112569
+--- !u!114 &4048385708478900451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,7 +89,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1465034783681905165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e4ee1a3ea5ff974abe0b7ea68aad4c3, type: 3}
+  m_Script: {fileID: 11500000, guid: bc0083cefe344fa3a3808079d9e1869b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  station: {fileID: 0}
+  icon: {fileID: 355063755858597598}
+  next: {fileID: 2296375015740961644}
+  previous: {fileID: 370660595075160179}
+--- !u!114 &8976454887467358742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1465034783681905165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b2b1d7111043dfabd991cb10a5a96c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 2
