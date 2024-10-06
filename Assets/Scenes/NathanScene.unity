@@ -2613,7 +2613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dea5936831e24048ab31bca661ba663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productSo: {fileID: 11400000, guid: c22cef3e8466914429e9458edf9f5f63, type: 2}
+  productSo: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
   containerSprite: {fileID: 2002792479}
 --- !u!4 &2055204235
 Transform:
@@ -2743,11 +2743,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 864979859558459171, guid: 71e31a106a58fb14993f74c50ccd9ae3,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 503bcbd25de2db54db12b797d28bb711, type: 2}
     - target: {fileID: 3284555249109134078, guid: 71e31a106a58fb14993f74c50ccd9ae3,
         type: 3}
       propertyPath: m_Name
       value: WoodcuttingStation
       objectReference: {fileID: 0}
+    - target: {fileID: 4152210366982556018, guid: 71e31a106a58fb14993f74c50ccd9ae3,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 503bcbd25de2db54db12b797d28bb711, type: 2}
+    - target: {fileID: 6860424133434126300, guid: 71e31a106a58fb14993f74c50ccd9ae3,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a64c037d264fee545ad58fea5d3819a2, type: 2}
     - target: {fileID: 8189339906586034208, guid: 71e31a106a58fb14993f74c50ccd9ae3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2799,7 +2814,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -5251648229289003743, guid: 71e31a106a58fb14993f74c50ccd9ae3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71e31a106a58fb14993f74c50ccd9ae3, type: 3}
