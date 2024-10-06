@@ -71,4 +71,14 @@ public class InputManager : MonoBehaviour
             OnPrevious?.Invoke(this, EventArgs.Empty);
         }
     }
+    
+    public void DisableGameplayInput()
+    {
+        _inputActions.Player.Disable();
+    }
+    
+    public void EnableGameplayInput()
+    {
+        _inputActions.Player.Enable();
+    }
 }

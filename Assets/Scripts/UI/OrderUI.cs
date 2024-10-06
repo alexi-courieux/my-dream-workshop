@@ -23,7 +23,7 @@ public class OrderUI : MonoBehaviour
     public void Show()
     {
         if (gameObject.activeSelf) return;
-        
+        InputManager.Instance.DisableGameplayInput();
         gameObject.SetActive(true);
         UpdateVisuals();
     }
@@ -31,6 +31,7 @@ public class OrderUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+        InputManager.Instance.EnableGameplayInput();
     }
 
     private void UpdateVisuals()
