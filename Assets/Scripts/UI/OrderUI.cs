@@ -1,3 +1,5 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,18 +8,22 @@ public class OrderUI : MonoBehaviour
     [SerializeField] private Transform orderItemsParent;
     [SerializeField] private GameObject orderSingleItemUITemplate;
     [SerializeField] private Button closeButton;
+    [SerializeField] private TextMeshProUGUI moneyText;
 
     private void Awake()
     {
         orderSingleItemUITemplate.SetActive(false);
-        Hide();
-        
         closeButton.onClick.AddListener(Hide);
+        EconomyManager.Instance.OnMoneyChanged += EconomyManager_OnMoneyChanged;
+    }
+    private void EconomyManager_OnMoneyChanged(object sender, EventArgs e)
+    {
+        SetMoneyText();
     }
 
     private void Start()
     {
-        UpdateVisuals();
+        Hide();
     }
 
     public void Show()
@@ -36,6 +42,7 @@ public class OrderUI : MonoBehaviour
 
     private void UpdateVisuals()
     {
+        SetMoneyText();
         ProductDictionarySo buyableProducts = OrderManager.Instance.GetBuyableProducts();
         
         foreach (Transform child in orderItemsParent)
@@ -50,5 +57,10 @@ public class OrderUI : MonoBehaviour
             orderSingleItemUI.SetActive(true);
             orderSingleItemUI.GetComponent<OrderSingleItemUI>().UpdateVisual(product);
         }
+    }
+    
+    private void SetMoneyText()
+    {
+        moneyText.text = EconomyManager.Instance.GetMoney().ToString("D");
     }
 }

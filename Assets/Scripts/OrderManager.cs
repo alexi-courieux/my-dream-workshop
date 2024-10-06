@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OrderManager : MonoBehaviour
@@ -20,11 +21,9 @@ public class OrderManager : MonoBehaviour
     
     public void Buy(ProductSo productSo)
     {
-        foreach (ChestStation chestStation in chestStations)
-        {
-            if (chestStation.GetProductSo() != productSo) continue;
-            chestStation.AddProduct();
-            return;
-        }
+        if (EconomyManager.Instance.GetMoney() < productSo.buyPrice) return;
+        
+        EconomyManager.Instance.RemoveMoney(productSo.buyPrice);
+        chestStations.FirstOrDefault(chest => chest.GetProductSo() == productSo)?.AddProduct();
     }
 }

@@ -1,5 +1,4 @@
 using System;
-using AshLight.BakerySim;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -25,7 +24,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform playerPositionForRaycast;
 
     private CharacterController _characterController;
-    private Camera _camera;
     private IFocusable _focusedObject;
 
     private void Awake()
@@ -35,7 +33,6 @@ public class Player : MonoBehaviour
         Instance = this;
         _characterController = GetComponent<CharacterController>();
         HandleSystem = GetComponent<PlayerItemHandlingSystem>();
-        _camera = Camera.main;
     }
 
     private void Start()
