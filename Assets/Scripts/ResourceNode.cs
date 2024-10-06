@@ -60,6 +60,7 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
         depletedPrefab.SetActive(false);
         resourceLeft = resourceNodeSo.maxResource;
         interactionsLeft = resourceNodeSo.interactionCountToHarvest;
+        RandomiseVisual();
     }
     
     private void Deplete()
@@ -68,6 +69,17 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
         fullPrefab.SetActive(false);
         depletedPrefab.SetActive(true);
         regenTimer = resourceNodeSo.timeToRegen;
+    }
+    
+    private void RandomiseVisual()
+    {
+        float randomScale = UnityEngine.Random.Range(0.6f, 1.1f);
+        fullPrefab.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        depletedPrefab.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        
+        float randomRotation = UnityEngine.Random.Range(0, 360);
+        fullPrefab.transform.rotation = Quaternion.Euler(0, randomRotation, 0);
+        depletedPrefab.transform.rotation = Quaternion.Euler(0, randomRotation, 0);
     }
 
     private void Harvest()
