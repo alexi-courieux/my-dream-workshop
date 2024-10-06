@@ -44,7 +44,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
                 {
                     _items.ToList().ForEach(i => i.DestroySelf());
                     Item.SpawnItem<Product>(_assemblyRecipeSo.output.prefab, this);
-                    CheckForRecipe();
+                    _state = State.Idle;
                 }
                 break;
             default:
@@ -79,6 +79,10 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
                 Item item = _items.Pop();
                 item.SetParent<Item>(Player.Instance.HandleSystem);
                 OnTakeOut?.Invoke(this, EventArgs.Empty);
+                _state = State.Idle;
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                    progressNormalized = 0f
+                });
             }
         }
     }

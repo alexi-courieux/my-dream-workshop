@@ -48,7 +48,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
                 {
                     _product.DestroySelf();
                     Item.SpawnItem<Product>(_woodcuttingRecipeSo.output.prefab, this);
-                    CheckForRecipe();
+                    _state = State.Idle;
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                         progressNormalized = 0f
                     });
@@ -68,6 +68,10 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             if (isPlayerHoldingProduct) return;
             _product.SetParent<Item>(Player.Instance.HandleSystem);
             OnTakeOut?.Invoke(this, EventArgs.Empty);
+            _state = State.Idle;
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = 0f
+            });
         }
         else
         {

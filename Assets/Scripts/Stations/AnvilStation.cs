@@ -44,7 +44,7 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
                 {
                     _product.DestroySelf();
                     Item.SpawnItem<Product>(_anvilRecipeSo.output.prefab, this);
-                    CheckForRecipe();
+                    _state = State.Idle;
                 }
                 break;
             default:
@@ -61,6 +61,10 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
             if (isPlayerHoldingProduct) return;
             _product.SetParent<Item>(Player.Instance.HandleSystem);
             OnTakeOut?.Invoke(this, EventArgs.Empty);
+            _state = State.Idle;
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = 0f
+            });
         }
         else
         {

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8189339906586034208}
-  - component: {fileID: 666882331948268222}
   - component: {fileID: 6065342983001230123}
+  - component: {fileID: 5808589924741446195}
   m_Layer: 6
   m_Name: WoodcuttingStation
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3284555249109134078}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.69, y: 0.5218037, z: 3.7986546}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -36,7 +36,22 @@ Transform:
   - {fileID: 3731875033350425472}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &666882331948268222
+--- !u!114 &6065342983001230123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3284555249109134078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f223f7651e4a842b53c23fe5129423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSlot: {fileID: 2939191054843910211}
+  recipesDictionarySo: {fileID: 11400000, guid: 0024a4fe4a4b68c48a9400b6d76300a9,
+    type: 2}
+--- !u!65 &5808589924741446195
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,23 +70,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6065342983001230123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3284555249109134078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8f223f7651e4a842b53c23fe5129423, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSlot: {fileID: 2939191054843910211}
-  recipesDictionarySo: {fileID: 11400000, guid: 0024a4fe4a4b68c48a9400b6d76300a9,
-    type: 2}
+  m_Size: {x: 1.2112442, y: 1.189174, z: 1.771497}
+  m_Center: {x: -0.001576364, y: 0.59274524, z: 0.0043370426}
 --- !u!1 &8553755239820226971
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 8553755239820226971}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.006, y: 0.5, z: -0.243}
+  m_LocalPosition: {x: -0.006, y: 1.128, z: -0.704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -263,7 +263,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3497c7e7b12ee4649b3d138ef5cb9163,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.38
+      value: 0.899
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3497c7e7b12ee4649b3d138ef5cb9163,
         type: 3}
@@ -310,11 +310,26 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5169578811043067064, guid: 3497c7e7b12ee4649b3d138ef5cb9163,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 503bcbd25de2db54db12b797d28bb711, type: 2}
+    - target: {fileID: -1480014626947693641, guid: 3497c7e7b12ee4649b3d138ef5cb9163,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a64c037d264fee545ad58fea5d3819a2, type: 2}
     - target: {fileID: 919132149155446097, guid: 3497c7e7b12ee4649b3d138ef5cb9163,
         type: 3}
       propertyPath: m_Name
       value: WoodcuttingVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 999637193369429273, guid: 3497c7e7b12ee4649b3d138ef5cb9163,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 503bcbd25de2db54db12b797d28bb711, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

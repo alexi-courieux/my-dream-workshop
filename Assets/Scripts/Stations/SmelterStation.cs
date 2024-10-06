@@ -48,7 +48,7 @@ public class SmelterStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
                 {
                     _product.DestroySelf();
                     Item.SpawnItem<Product>(_smelterRecipeSo.output.prefab, this);
-                    CheckForRecipe();
+                    _state = State.Idle;
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                         progressNormalized = 0f
                     });
@@ -65,9 +65,13 @@ public class SmelterStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItems<Product>();
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingProduct) return;
+            if (isPlayerHoldingProduct || _state != State.Processing) return;
             _product.SetParent<Item>(Player.Instance.HandleSystem);
             OnTakeOut?.Invoke(this, EventArgs.Empty);
+            _state = State.Idle;
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = 0f
+            });
         }
         else
         {
