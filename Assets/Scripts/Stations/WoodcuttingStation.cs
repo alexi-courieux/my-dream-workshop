@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress
 {
-    public EventHandler OnPutIn;
-    public EventHandler OnTakeOut;
-    public EventHandler<State> OnStateChanged;
+    public event EventHandler OnPutIn;
+    public event EventHandler OnTakeOut;
+    public event EventHandler OnProcessing;
+    public event EventHandler OnStopProcessing;
+    public event EventHandler<State> OnStateChanged;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public enum State
@@ -49,6 +51,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
                     _product.DestroySelf();
                     Item.SpawnItem<Product>(_woodcuttingRecipeSo.output.prefab, this);
                     _state = State.Idle;
+                    OnStopProcessing?.Invoke(this, EventArgs.Empty);
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                         progressNormalized = 0f
                     });
@@ -69,6 +72,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             _product.SetParent<Item>(Player.Instance.HandleSystem);
             OnTakeOut?.Invoke(this, EventArgs.Empty);
             _state = State.Idle;
+            OnStopProcessing?.Invoke(this, EventArgs.Empty);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
@@ -102,10 +106,12 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = _timeToProcess / _timeToProcessMax
             });
+            OnProcessing?.Invoke(this, EventArgs.Empty);
         }
         else 
         {
             CurrentState = State.Idle;
+            OnStopProcessing?.Invoke(this, EventArgs.Empty);
         }
     }
     private void CheckForRecipe()
