@@ -119,7 +119,7 @@ public class BlenderStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         }
     }
 
-    public void AddItem<T>(Item item) where T : Item
+    public void AddItem<T>(Item newItem) where T : Item
     {
         if (typeof(T) != typeof(Product))
         {
@@ -127,7 +127,7 @@ public class BlenderStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
             return;
         }
     
-        _items.Push(item as Product);
+        _items.Push(newItem as Product);
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -141,9 +141,9 @@ public class BlenderStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         return _items.Cast<Item>().ToArray();
     }
 
-    public void ClearItem(Item item)
+    public void ClearItem(Item itemToClear)
     {
-        _items.Remove(item as Product);
+        _items.Remove(itemToClear as Product);
     }
 
     public bool HaveItems<T>() where T : Item

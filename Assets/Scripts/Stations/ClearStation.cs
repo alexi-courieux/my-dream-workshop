@@ -134,7 +134,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
     }
 
 
-    public void AddItem<T>(Item item) where T : Item
+    public void AddItem<T>(Item newItem) where T : Item
     {
         if (typeof(T) != typeof(Product) && typeof(T) != typeof(Tool))
         {
@@ -143,12 +143,12 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
     
         if (typeof(T) == typeof(Product))
         {
-            _product = item as Product;
+            _product = newItem as Product;
         }
     
         if (typeof(T) == typeof(Tool))
         {
-            _tool = item as Tool;
+            _tool = newItem as Tool;
         }
     }
 
@@ -168,13 +168,13 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         return new Item[] { };
     }
 
-    public void ClearItem(Item item)
+    public void ClearItem(Item itemToClear)
     {
-        if (item is Product)
+        if (itemToClear is Product)
         {
             _product = null;
         }
-        if (item is Tool)
+        if (itemToClear is Tool)
         {
             _tool = null;
         }

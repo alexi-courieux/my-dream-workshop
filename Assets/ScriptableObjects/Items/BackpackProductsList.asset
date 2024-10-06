@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5635be15ca1461392b7dae55f4020ac, type: 3}
-  m_Name: LogResourceNode
+  m_Script: {fileID: 11500000, guid: 93730e0c6127474aa7adbf36e4c3da17, type: 3}
+  m_Name: BackpackProductsList
   m_EditorClassIdentifier: 
-  product: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
-  maxResource: 2
-  timeToRegen: 60
-  interactionCountToHarvest: 3
+  products:
+  - {fileID: 11400000, guid: 53ae4c15fb9360b44bd7460b7b34cfb9, type: 2}
+  - {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}

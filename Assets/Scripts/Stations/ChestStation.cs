@@ -39,6 +39,19 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable
     public void Focus()
     {
         OnFocus?.Invoke(this, EventArgs.Empty);
+        if (Player.Instance.HandleSystem.HaveBackpackItems())
+        {
+            // Try to fit backpack items in the chest
+            foreach (Item backpackItem in Player.Instance.HandleSystem.GetBackpackItems())
+            {
+                if (backpackItem is not Product product) continue;
+                if (product.ProductSo != productSo) continue;
+                
+                productAmount++;
+                OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
+                Player.Instance.HandleSystem.ClearItemFromBackpack(backpackItem);
+            }
+        }
     }
     
     public void StopFocus()

@@ -35,9 +35,9 @@ public interface IHandleItems
     /// <summary>
     /// Add an item to the parent
     /// </summary>
-    /// <param name="item">Item to be added</param>
+    /// <param name="newItem">Item to be added</param>
     /// <typeparam name="T">Type of the item</typeparam>
-    public void AddItem<T>(Item item) where T : Item;
+    public void AddItem<T>(Item newItem) where T : Item;
 
     /// <summary>
     /// Get all items of the specified type
@@ -49,6 +49,6 @@ public interface IHandleItems
     /// <summary>
     /// Remove a specific item from the parent
     /// </summary>
-    /// <param name="item">Item to be removed</param>
-    public void ClearItem(Item item);
+    /// <param name="itemToClear">Item to be removed</param>
+    public void ClearItem(Item itemToClear);
 }

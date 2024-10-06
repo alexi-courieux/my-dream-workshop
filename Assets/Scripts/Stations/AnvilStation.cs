@@ -128,14 +128,14 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
         }
     }
 
-    public void AddItem<T>(Item item) where T : Item
+    public void AddItem<T>(Item newItem) where T : Item
     {
         if(typeof(T) != typeof(Product))
         {
             throw new Exception("This station can only hold products!");
         }
     
-        _product = item as Product;
+        _product = newItem as Product;
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -148,9 +148,9 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
         return new Item[]{};
     }
 
-    public void ClearItem(Item item)
+    public void ClearItem(Item itemToClear)
     {
-        if (_product == item as Product)
+        if (_product == itemToClear as Product)
         {
             _product = null;
         }
