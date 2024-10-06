@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float movementSpeed = 6f;
 
-    [SerializeField] private float characterRotationSpeed = 5f;
+    [SerializeField] private float characterRotationSpeed = 8f;
     [SerializeField] private Transform visualTransform;
     [SerializeField] private Transform playerPositionForRaycast;
 
