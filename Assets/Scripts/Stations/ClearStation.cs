@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using UnityEngine;
-public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInteractableAlt, IFocusable, IInteractableNext, IInteractablePrevious
+public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInteractableAlt, IFocusable, IInteractableNext, IInteractablePrevious, ISelectableRecipe
 {
-    public EventHandler OnFocus;
-    public EventHandler OnStopFocus;
-    public EventHandler<RecipeSelectedEventArgs> OnRecipeSelected;
+    public event EventHandler OnFocus;
+    public event EventHandler OnStopFocus;
+    public event EventHandler<RecipeSelectedEventArgs> OnRecipeSelected;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     [SerializeField] private Transform productSlot;
     [SerializeField] private Transform toolSlot;
@@ -231,17 +231,5 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
 
         Debug.LogWarning($"This station doesn't have slots for the specified item : {typeof(T)}");
         return false;
-    }
-}
-
-public class RecipeSelectedEventArgs : EventArgs
-{
-    public ToolRecipeSo Recipe { get; }
-    public int AvailableRecipesCount { get; }
-
-    public RecipeSelectedEventArgs(ToolRecipeSo recipe, int availableRecipesCount)
-    {
-        Recipe = recipe;
-        AvailableRecipesCount = availableRecipesCount;
     }
 }

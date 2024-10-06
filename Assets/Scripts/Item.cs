@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFocusable
 {
+    public event EventHandler OnFocus;
+    public event EventHandler OnStopFocus;
+    
     private IHandleItems _parent;
 
     public static void SpawnItem<T>(Transform itemPrefab, IHandleItems parent) where T : Item
@@ -71,6 +74,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
 
     public void Focus()
     {
+        OnFocus?.Invoke(this, EventArgs.Empty);
         if (_parent is IFocusable focusableParent)
         {
             focusableParent.Focus();
@@ -79,6 +83,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
 
     public void StopFocus()
     {
+        OnStopFocus?.Invoke(this, EventArgs.Empty);
         if (_parent is IFocusable focusableParent)
         {
             focusableParent.StopFocus();

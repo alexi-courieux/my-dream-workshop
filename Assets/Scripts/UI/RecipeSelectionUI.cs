@@ -6,7 +6,7 @@ namespace AshLight.BakerySim.UI
 {
     public class RecipeSelectionUI : MonoBehaviour
     {
-        [SerializeField] ClearStation clearStation;
+        [SerializeField] GameObject station;
         [SerializeField] Image icon;
         [SerializeField] Image next;
         [SerializeField] Image previous;
@@ -20,17 +20,31 @@ namespace AshLight.BakerySim.UI
         private void Awake()
         {
             gameObject.SetActive(false);
-            clearStation.OnFocus += ClearStation_OnFocus;
-            clearStation.OnStopFocus += ClearStation_OnStopFocus;
-            clearStation.OnRecipeSelected += ClearStation_OnRecipeSelected;
+            
+            if (station.TryGetComponent(out IFocusable focusableStation))
+            {
+                focusableStation.OnFocus += FocusableElementOnFocus;
+                focusableStation.OnStopFocus += FocusableElementOnStopFocus;
+            }
+            else
+            {
+                Debug.LogError("Station doesn't Implement IFocusable");
+            }
+            
+            if (station.TryGetComponent(out ISelectableRecipe SelectableRecipeStation))
+            {
+                SelectableRecipeStation.OnRecipeSelected += ClearStation_OnRecipeSelected;
+            } else {
+                Debug.LogError("Station doesn't Implement ISelectableRecipe");
+            }
         }
     
-        private void ClearStation_OnFocus(object sender, EventArgs e)
+        private void FocusableElementOnFocus(object sender, EventArgs e)
         {
             Show();
         }
     
-        private void ClearStation_OnStopFocus(object sender, EventArgs e)
+        private void FocusableElementOnStopFocus(object sender, EventArgs e)
         {
             Hide();
         }
