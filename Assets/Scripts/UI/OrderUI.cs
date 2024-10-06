@@ -22,6 +22,8 @@ public class OrderUI : MonoBehaviour
 
     public void Show()
     {
+        if (gameObject.activeSelf) return;
+        
         gameObject.SetActive(true);
         UpdateVisuals();
     }
