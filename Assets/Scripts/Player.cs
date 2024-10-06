@@ -4,8 +4,10 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private const string LayerStation = "Station";
+    private const string LayerResourceNode = "ResourceNode";
 
     private int _stationMask;
+    private int _resourceNodeMask;
     public static Player Instance { get; private set; }
 
     public EventHandler OnMove;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _stationMask = LayerMask.GetMask(LayerStation);
+        _resourceNodeMask = LayerMask.GetMask(LayerResourceNode);
 
         Instance = this;
         _characterController = GetComponent<CharacterController>();
@@ -116,7 +119,7 @@ public class Player : MonoBehaviour
     private void InputManager_OnInteractAlt(object sender, EventArgs e)
     {
         if (!CheckForRaycastHit(out RaycastHit hitInfo,
-                new[] {_stationMask})) return;
+                new[] {_stationMask, _resourceNodeMask})) return;
         if (hitInfo.transform.TryGetComponent(out IInteractableAlt interactableComponent))
         {
             interactableComponent.InteractAlt();
