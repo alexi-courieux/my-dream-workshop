@@ -2,11 +2,12 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems
+public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress
 {
     public EventHandler OnPutIn;
     public EventHandler OnTakeOut;
     public EventHandler<State> OnStateChanged;
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public enum State
     {
@@ -18,6 +19,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private WoodcuttingRecipeSo _woodcuttingRecipeSo;
     private Product _product;
+    private float _timeToProcessMax;
     private float _timeToProcess;
 
     private State _state;
@@ -38,12 +40,18 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             case State.Idle:
                 break;
             case State.Processing:
-                _timeToProcess -= Time.deltaTime;
-                if (_timeToProcess <= 0f)
+                _timeToProcess += Time.deltaTime;
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                    progressNormalized = _timeToProcess / _timeToProcessMax
+                });
+                if (_timeToProcess >= _timeToProcessMax)
                 {
                     _product.DestroySelf();
                     Item.SpawnItem<Product>(_woodcuttingRecipeSo.output.prefab, this);
                     CheckForRecipe();
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                        progressNormalized = 0f
+                    });
                 }
                 break;
             default:
@@ -72,6 +80,11 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             }
             product.SetParent<Product>(this);
             OnPutIn?.Invoke(this, EventArgs.Empty);
+            _timeToProcess = 0f;
+
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = _timeToProcess / _timeToProcessMax
+            });
         }
     }
 
@@ -82,6 +95,9 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             if (CurrentState == State.Idle)
             {
                 CheckForRecipe();
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                    progressNormalized = _timeToProcess / _timeToProcessMax
+                });
             }
         }
         else 
@@ -95,7 +111,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         if (recipe is not null)
         {
             CurrentState = State.Processing;
-            _timeToProcess = recipe.timeToProcess;
+            _timeToProcessMax = recipe.timeToProcess;
             _woodcuttingRecipeSo = recipe;
         }
         else

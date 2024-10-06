@@ -2,11 +2,12 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems
+public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress
 {
     public EventHandler OnPutIn;
     public EventHandler OnTakeOut;
     public EventHandler<State> OnStateChanged;
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public enum State
     {
@@ -18,6 +19,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private SculptingRecipeSo _sculptingRecipeSo;
     private Product _product;
+    private int _hitToProcessMax;
     private int _hitToProcess;
 
     private State _state;
@@ -38,7 +40,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
             case State.Idle:
                 break;
             case State.Processing:
-                if (_hitToProcess == 0)
+                if (_hitToProcess == _hitToProcessMax)
                 {
                     _product.DestroySelf();
                     Item.SpawnItem<Product>(_sculptingRecipeSo.output.prefab, this);
@@ -71,6 +73,11 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
             }
             product.SetParent<Product>(this);
             OnPutIn?.Invoke(this, EventArgs.Empty);
+            _hitToProcess = 0;
+
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = (float)_hitToProcess / _hitToProcessMax
+            });
         }
     }
 
@@ -81,14 +88,20 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
             if (CurrentState == State.Idle)
             {
                 CheckForRecipe();
-                if (_hitToProcess != 0)
+                if (_hitToProcess == 0)
                 {
-                    _hitToProcess--;
+                    _hitToProcess++;
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                        progressNormalized = (float)_hitToProcess / _hitToProcessMax
+                    });
                 }
             }
             else 
             {
-                _hitToProcess--;
+                _hitToProcess++;
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                    progressNormalized = (float)_hitToProcess / _hitToProcessMax
+                });
             }
         }
         else 
@@ -102,7 +115,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
         if (recipe is not null)
         {
             CurrentState = State.Processing;
-            _hitToProcess = recipe.hitToProcess;
+            _hitToProcessMax = recipe.hitToProcess;
             _sculptingRecipeSo = recipe;
         }
         else

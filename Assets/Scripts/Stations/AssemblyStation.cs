@@ -3,11 +3,12 @@ using System;
 using System.Linq;
 using Utils;
 
-public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems
+public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress
 {
     public EventHandler OnPutIn;
     public EventHandler OnTakeOut;
     public EventHandler<State> OnStateChanged;
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
 
     public enum State
     {
@@ -29,6 +30,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         }
     }
     private AssemblyRecipeSo _assemblyRecipeSo;
+    private int _hitToProcessMax;
     private int _hitToProcess;
 
     private void Update()
@@ -38,7 +40,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             case State.Idle:
                 break;
             case State.Processing:
-                if (_hitToProcess == 0)
+                if (_hitToProcess == _hitToProcessMax)
                 {
                     _items.ToList().ForEach(i => i.DestroySelf());
                     Item.SpawnItem<Product>(_assemblyRecipeSo.output.prefab, this);
@@ -63,6 +65,12 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             }
             Player.Instance.HandleSystem.GetItem().SetParent<Product>(this);
             OnPutIn?.Invoke(this, EventArgs.Empty);
+
+            _hitToProcess = 0;
+
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = (float)_hitToProcess / _hitToProcessMax
+            });
         }
         else
         {
@@ -82,14 +90,20 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             if (CurrentState == State.Idle)
             {
                 CheckForRecipe();
-                if (_hitToProcess != 0)
+                if (_hitToProcess == 0 && _assemblyRecipeSo is not null)
                 {
-                    _hitToProcess--;
+                    _hitToProcess++;
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                        progressNormalized = (float)_hitToProcess / _hitToProcessMax
+                    });
                 }
             }
             else if (CurrentState == State.Processing && _hitToProcess != 0)
             {
-                _hitToProcess--;
+                _hitToProcess++;
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                    progressNormalized = (float)_hitToProcess / _hitToProcessMax
+                });
             }
             else
             {
@@ -117,7 +131,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         if (recipe is not null)
         {
             CurrentState = State.Processing;
-            _hitToProcess = recipe.hitToProcess;
+            _hitToProcessMax = recipe.hitToProcess;
             _assemblyRecipeSo = recipe;
         }
         else
