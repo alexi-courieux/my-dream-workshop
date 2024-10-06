@@ -14,8 +14,8 @@ public class OrderUI : MonoBehaviour
     {
         orderSingleItemUITemplate.SetActive(false);
         closeButton.onClick.AddListener(Hide);
-        EconomyManager.Instance.OnMoneyChanged += EconomyManager_OnMoneyChanged;
     }
+    
     private void EconomyManager_OnMoneyChanged(object sender, EventArgs e)
     {
         SetMoneyText();
@@ -24,6 +24,7 @@ public class OrderUI : MonoBehaviour
     private void Start()
     {
         Hide();
+        EconomyManager.Instance.OnMoneyChanged += EconomyManager_OnMoneyChanged;
     }
 
     public void Show()

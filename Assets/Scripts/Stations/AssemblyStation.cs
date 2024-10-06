@@ -30,7 +30,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         }
     }
     private AssemblyRecipeSo _assemblyRecipeSo;
-    private int _hitToProcessMax;
+    private int _hitToProcessMax = int.MaxValue;
     private int _hitToProcess;
 
     private void Update()
@@ -69,7 +69,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             _hitToProcess = 0;
 
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                progressNormalized = (float)_hitToProcess / _hitToProcessMax
+                progressNormalized = 0f
             });
         }
         else

@@ -19,7 +19,7 @@ public class MoldingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private MoldingRecipeSo _moldingRecipeSo;
     private Product _product;
-    private float _timeToProcessMax;
+    private float _timeToProcessMax = float.MaxValue;
     private float _timeToProcess;
 
     private State _state;
@@ -84,7 +84,7 @@ public class MoldingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
             _timeToProcess = 0f;
 
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                progressNormalized = _timeToProcess / _timeToProcessMax
+                progressNormalized = 0f
             });
         }
     }

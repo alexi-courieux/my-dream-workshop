@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 8924322665267452102}
   - {fileID: 2516033047637490606}
-  - {fileID: 1600682483991995704}
+  - {fileID: 3767852578978222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5969715212815004933
@@ -216,6 +216,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProgressBarUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6923752015053262908, guid: c8a7562ac4cb5584994f681658214d95,
+        type: 3}
+      propertyPath: hasProgressGameObject
+      value: 
+      objectReference: {fileID: 2649828998242166331}
     - target: {fileID: 8248558111542422955, guid: c8a7562ac4cb5584994f681658214d95,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -236,9 +241,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8a7562ac4cb5584994f681658214d95, type: 3}
---- !u!224 &1600682483991995704 stripped
+--- !u!224 &3767852578978222 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1073032170755292050, guid: c8a7562ac4cb5584994f681658214d95,
+  m_CorrespondingSourceObject: {fileID: 1792305076005381892, guid: c8a7562ac4cb5584994f681658214d95,
     type: 3}
   m_PrefabInstance: {fileID: 1788748394167475882}
   m_PrefabAsset: {fileID: 0}

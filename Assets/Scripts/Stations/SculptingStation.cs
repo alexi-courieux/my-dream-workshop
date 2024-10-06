@@ -19,7 +19,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private SculptingRecipeSo _sculptingRecipeSo;
     private Product _product;
-    private int _hitToProcessMax;
+    private int _hitToProcessMax = int.MaxValue;
     private int _hitToProcess;
 
     private State _state;
@@ -76,7 +76,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
             _hitToProcess = 0;
 
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                progressNormalized = (float)_hitToProcess / _hitToProcessMax
+                progressNormalized = 0f
             });
         }
     }

@@ -19,7 +19,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private WoodcuttingRecipeSo _woodcuttingRecipeSo;
     private Product _product;
-    private float _timeToProcessMax;
+    private float _timeToProcessMax = float.MaxValue;
     private float _timeToProcess;
 
     private State _state;
@@ -83,7 +83,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             _timeToProcess = 0f;
 
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                progressNormalized = _timeToProcess / _timeToProcessMax
+                progressNormalized = 0f
             });
         }
     }
@@ -92,13 +92,12 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
     {
         if (_product is not null)
         {
-            if (CurrentState == State.Idle)
-            {
-                CheckForRecipe();
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                    progressNormalized = _timeToProcess / _timeToProcessMax
-                });
-            }
+            if (CurrentState is not State.Idle) return;
+            
+            CheckForRecipe();
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = _timeToProcess / _timeToProcessMax
+            });
         }
         else 
         {
