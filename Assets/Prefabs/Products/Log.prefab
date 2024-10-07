@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1708182585262796304}
   - component: {fileID: 1071649601718694810}
   m_Layer: 0
-  m_Name: WoodLog
+  m_Name: Log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

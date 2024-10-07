@@ -80,7 +80,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         {
             _recipes = CheckForRecipes(tool.ToolSo, _product.ProductSo);
             _selectedRecipe = _recipes.FirstOrDefault();
-            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe, _recipes.Length));
+            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe?.output, _recipes.Length));
         }
     }
 
@@ -108,7 +108,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
             index = 0;
         }
         _selectedRecipe = _recipes[index];
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe, _recipes.Length));
+        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe?.output, _recipes.Length));
     }
 
     public void InteractPrevious()
@@ -121,7 +121,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
             index = _recipes.Length - 1;
         }
         _selectedRecipe = _recipes[index];
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe, _recipes.Length));
+        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe?.output, _recipes.Length));
     }
 
     public void StopFocus()

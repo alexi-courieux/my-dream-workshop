@@ -7,12 +7,12 @@ public interface ISelectableRecipe
 
 public class RecipeSelectedEventArgs : EventArgs
 {
-    public ToolRecipeSo Recipe { get; }
+    public ProductSo Output { get; }
     public int AvailableRecipesCount { get; }
 
-    public RecipeSelectedEventArgs(ToolRecipeSo recipe, int availableRecipesCount)
+    public RecipeSelectedEventArgs(ProductSo output, int availableRecipesCount)
     {
-        Recipe = recipe;
+        Output = output;
         AvailableRecipesCount = availableRecipesCount;
     }
 }

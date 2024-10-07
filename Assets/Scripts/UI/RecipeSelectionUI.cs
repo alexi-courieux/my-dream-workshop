@@ -14,7 +14,7 @@ namespace AshLight.BakerySim.UI
         private static readonly Color Active = Color.black;
         private static readonly Color Inactive = Color.gray;
     
-        private ToolRecipeSo _selectedRecipe;
+        private ProductSo _selectedOutput;
         private int _availableRecipesCount;
 
         private void Awake()
@@ -23,8 +23,8 @@ namespace AshLight.BakerySim.UI
             
             if (station.TryGetComponent(out IFocusable focusableStation))
             {
-                focusableStation.OnFocus += FocusableElementOnFocus;
-                focusableStation.OnStopFocus += FocusableElementOnStopFocus;
+                focusableStation.OnFocus += FocusableStation_OnFocus;
+                focusableStation.OnStopFocus += FocusableStation_OnStopFocus;
             }
             else
             {
@@ -33,33 +33,40 @@ namespace AshLight.BakerySim.UI
             
             if (station.TryGetComponent(out ISelectableRecipe SelectableRecipeStation))
             {
-                SelectableRecipeStation.OnRecipeSelected += ClearStation_OnRecipeSelected;
+                SelectableRecipeStation.OnRecipeSelected += SelectableRecipeStation_OnRecipeSelected;
             } else {
                 Debug.LogError("Station doesn't Implement ISelectableRecipe");
             }
         }
     
-        private void FocusableElementOnFocus(object sender, EventArgs e)
+        private void FocusableStation_OnFocus(object sender, EventArgs e)
         {
             Show();
         }
     
-        private void FocusableElementOnStopFocus(object sender, EventArgs e)
+        private void FocusableStation_OnStopFocus(object sender, EventArgs e)
         {
             Hide();
         }
     
-        private void ClearStation_OnRecipeSelected(object sender, RecipeSelectedEventArgs e)
+        private void SelectableRecipeStation_OnRecipeSelected(object sender, RecipeSelectedEventArgs e)
         {
-            _selectedRecipe = e.Recipe;
+            _selectedOutput = e.Output;
             _availableRecipesCount = e.AvailableRecipesCount;
-            UpdateVisuals();
-            Show();
+            if (_selectedOutput is null)
+            {
+                Hide();
+            }
+            else
+            {
+                UpdateVisuals();
+                Show();
+            }
         }
 
         private void Show()
         {
-            if (_selectedRecipe is null) return;
+            if (_selectedOutput is null) return;
             gameObject.SetActive(true);
         }
         private void Hide()
@@ -69,12 +76,7 @@ namespace AshLight.BakerySim.UI
 
         private void UpdateVisuals()
         {
-            if (_selectedRecipe is null)
-            {
-                Hide();
-                return;
-            }
-            icon.sprite = _selectedRecipe.output.sprite;
+            icon.sprite = _selectedOutput.sprite;
             next.color = _availableRecipesCount > 1 ? Active : Inactive;
             previous.color = _availableRecipesCount > 1 ? Active : Inactive;
         }

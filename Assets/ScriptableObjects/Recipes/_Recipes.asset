@@ -18,4 +18,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a51cc40878da424199665b433a2fb0a, type: 2}
   toolRecipes:
   - {fileID: 11400000, guid: 24e5ce1252dd3554386daf6c9d0aa3b3, type: 2}
-  woodcuttingRecipes: []
+  woodcuttingRecipes:
+  - {fileID: 11400000, guid: c6e97425b4885a741abf2ad141a1492f, type: 2}
+  smelterRecipeSo:
+  - {fileID: 11400000, guid: e3421d86bcaa6a4459eac8d4f3b13fe4, type: 2}
+  moldingRecipeSo:
+  - {fileID: 11400000, guid: 353cab5f839707342b48a3ae9be0abb7, type: 2}
+  anvilRecipeSo:
+  - {fileID: 11400000, guid: cf2682acc832c404ba917029449f5114, type: 2}
+  - {fileID: 11400000, guid: 0fa266cca24727a4d9b9c48bbe8d260f, type: 2}
+  - {fileID: 11400000, guid: a514653320cca0647b53612fdf5f51cf, type: 2}
+  - {fileID: 11400000, guid: d67b504be8f84ca47918d26524e89b88, type: 2}
+  sculptingRecipeSo:
+  - {fileID: 11400000, guid: 7578c12a26c97a04d94e92c1de543cf9, type: 2}
+  assemblyRecipeSo:
+  - {fileID: 11400000, guid: 615d2e43aeef508428610823b911e775, type: 2}
