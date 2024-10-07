@@ -5473,6 +5473,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: LogResourceNode
       objectReference: {fileID: 0}
+    - target: {fileID: 6874624850396749524, guid: 1abbb812d8a4ae04f91e1aa48d5aa926,
+        type: 3}
+      propertyPath: resourceNodeSo
+      value: 
+      objectReference: {fileID: 11400000, guid: e691f214da58da14eb526a0faee2752b,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
