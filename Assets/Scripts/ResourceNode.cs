@@ -5,6 +5,7 @@ using UnityEngine;
 public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
 {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler OnStartHarvest;
     
     [SerializeField] private GameObject fullPrefab;
     [SerializeField] private GameObject depletedPrefab;
@@ -20,6 +21,7 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
     private int interactionsLeft;
     
     private float regenTimer;
+    private float timeBeforeNextInteraction;
 
     private void Start()
     {
@@ -28,29 +30,41 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
 
     private void Update()
     {
-        if (state is not State.Depleted) return;
-        regenTimer -= Time.deltaTime;
-        if (regenTimer <= 0)
+        if (state is State.Depleted)
         {
-            Fill();
+            regenTimer -= Time.deltaTime;
+            if (regenTimer <= 0)
+            {
+                Fill();
+            }
+        }
+        
+        if (state is State.Full && timeBeforeNextInteraction > 0)
+        {
+            timeBeforeNextInteraction -= Time.deltaTime;
+            if (timeBeforeNextInteraction <= 0)
+            {
+                interactionsLeft--;
+                if (interactionsLeft <= 0)
+                {
+                    Harvest();
+                }
+        
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+                {
+                    progressNormalized = 1 - (float)interactionsLeft / resourceNodeSo.interactionCountToHarvest
+                });
+            }
         }
     }
 
     public void InteractAlt()
     {
         if (state is State.Depleted) return;
+        if (timeBeforeNextInteraction > 0) return;
         if(Player.Instance.HandleSystem.HaveAnyItems()) return;
-        
-        interactionsLeft--;
-        if (interactionsLeft <= 0)
-        {
-            Harvest();
-        }
-        
-        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
-        {
-            progressNormalized = 1 - (float)interactionsLeft / resourceNodeSo.interactionCountToHarvest
-        });
+        timeBeforeNextInteraction = resourceNodeSo.timeBetweenInteractions;
+        OnStartHarvest?.Invoke(this, EventArgs.Empty);
     }
     
     private void Fill()

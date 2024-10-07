@@ -16,3 +16,4 @@ MonoBehaviour:
   maxResource: 3
   timeToRegen: 90
   interactionCountToHarvest: 5
+  timeBetweenInteractions: 0.5
