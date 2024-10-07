@@ -144,7 +144,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         }
     }
 
-    public void AddItem<T>(Item item) where T : Item
+    public void AddItem<T>(Item newItem) where T : Item
     {
         if (typeof(T) != typeof(Product))
         {
@@ -152,7 +152,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             return;
         }
     
-        _items.Push(item as Product);
+        _items.Push(newItem as Product);
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -166,9 +166,9 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         return _items.Cast<Item>().ToArray();
     }
 
-    public void ClearItem(Item item)
+    public void ClearItem(Item itemToClear)
     {
-        _items.Remove(item as Product);
+        _items.Remove(itemToClear as Product);
     }
 
     public bool HaveItems<T>() where T : Item

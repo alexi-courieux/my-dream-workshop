@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   product: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
   maxResource: 2
-  timeToRegen: 20
+  timeToRegen: 60
   interactionCountToHarvest: 3
+  timeBetweenInteractions: 0.5

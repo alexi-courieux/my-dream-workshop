@@ -9,5 +9,6 @@ namespace AshLight.BakerySim.ScriptableObjects
         public int maxResource;
         public float timeToRegen;
         public int interactionCountToHarvest;
+        public float timeBetweenInteractions;
     }
 }

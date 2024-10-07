@@ -9,16 +9,6 @@ public class ProductSo : ScriptableObject
     public int buyPrice;
     public int sellPrice;
 
-    public bool CanSell()
-    {
-        return sellPrice > 0f;
-    }
-
-    public bool CanBuy()
-    {
-        return buyPrice > 0f;
-    }
-
     public override bool Equals(object other)
     {
         if (other is ProductSo product)
