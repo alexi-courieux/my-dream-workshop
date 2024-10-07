@@ -2493,6 +2493,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlot: {fileID: 1080083057}
+  backpackVisual: {fileID: 919132149155446097, guid: 20171098cf893544488f3722ade00df7,
+    type: 3}
+  backpackProductDictionarySo: {fileID: 11400000, guid: ba3be261ca1293e4cb0b3a6374cbb504,
+    type: 2}
 --- !u!114 &1927588505
 MonoBehaviour:
   m_ObjectHideFlags: 0
