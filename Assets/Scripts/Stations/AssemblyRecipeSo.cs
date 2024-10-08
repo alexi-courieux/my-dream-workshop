@@ -4,6 +4,6 @@ using UnityEngine;
 public class AssemblyRecipeSo : ScriptableObject
 {
     public ProductSo[] inputs;
-    public ProductSo output;
+    public FinalProductSo output;
     public int hitToProcess;
 }

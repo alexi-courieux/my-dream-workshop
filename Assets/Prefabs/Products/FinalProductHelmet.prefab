@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3255530098180596297}
-  - component: {fileID: 403821833361461575}
+  - component: {fileID: -7006603485211682292}
   m_Layer: 0
-  m_Name: FinalProduct
+  m_Name: FinalProductHelmet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,14 +26,14 @@ Transform:
   m_GameObject: {fileID: 660015108624918058}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.418, y: 1.062, z: 5.487}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 112819676086337330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &403821833361461575
+--- !u!114 &-7006603485211682292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 660015108624918058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 529786b1db9245b7993c90f549d707b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1220c4d0a10ecb440ae89a255af9afb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productSo: {fileID: 11400000, guid: 18610ae91bc2ccc45888648bf797c0b5, type: 2}
+  finalProductSo: {fileID: 11400000, guid: b3699ee8492114240bde35a53461c70b, type: 2}
 --- !u!1 &989299503583586287
 GameObject:
   m_ObjectHideFlags: 0

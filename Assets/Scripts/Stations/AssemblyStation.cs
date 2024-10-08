@@ -19,6 +19,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     [SerializeField] private Transform itemSlot;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private readonly StackList<Product> _items = new();
+    private FinalProduct _finalProduct;
     private State _state;
     private State CurrentState
     {
@@ -43,7 +44,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
                 if (_hitToProcess == _hitToProcessMax)
                 {
                     _items.ToList().ForEach(i => i.DestroySelf());
-                    Item.SpawnItem<Product>(_assemblyRecipeSo.output.prefab, this);
+                    Item.SpawnItem<FinalProduct>(_assemblyRecipeSo.output.prefab, this);
                     _state = State.Idle;
                 }
                 break;
@@ -77,6 +78,16 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             if (_items.Count > 0) 
             {
                 Item item = _items.Pop();
+                item.SetParent<Item>(Player.Instance.HandleSystem);
+                OnTakeOut?.Invoke(this, EventArgs.Empty);
+                _state = State.Idle;
+                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                    progressNormalized = 0f
+                });
+            }
+            else if (_finalProduct is not null)
+            {
+                Item item = _finalProduct;
                 item.SetParent<Item>(Player.Instance.HandleSystem);
                 OnTakeOut?.Invoke(this, EventArgs.Empty);
                 _state = State.Idle;
@@ -146,13 +157,18 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public void AddItem<T>(Item newItem) where T : Item
     {
-        if (typeof(T) != typeof(Product))
+        if (typeof(T) == typeof(Product))
         {
-            Debug.LogWarning("This station can only hold products!");
+            _items.Push(newItem as Product);
+            return;
+        }
+        else if (typeof(T) == typeof(FinalProduct))
+        {
+            _finalProduct = newItem as FinalProduct;
             return;
         }
     
-        _items.Push(newItem as Product);
+        Debug.LogWarning("This station can only hold products or final product!");
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -189,9 +205,9 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public Transform GetAvailableItemSlot<T>() where T : Item
     {
-        if (typeof(T) != typeof(Product))
+        if (typeof(T) != typeof(Product) && typeof(T) != typeof(FinalProduct))
         {
-            Debug.LogWarning("This station can only hold products!");
+            Debug.LogWarning("This station can only hold products or final product!");
             return null;
         }
     
@@ -200,9 +216,9 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public bool HasAvailableSlot<T>() where T : Item
     {
-        if (typeof(T) != typeof(Product))
+        if (typeof(T) != typeof(Product) && typeof(T) != typeof(FinalProduct))
         {
-            Debug.LogWarning("This station can only hold products!");
+            Debug.LogWarning("This station can only hold products or final product!");
             return false;
         }
     
