@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        RotateTowardsNearestStation();
     }
 
     private void Update()
@@ -73,6 +75,32 @@ public class Player : MonoBehaviour
 
         _focusedObject?.StopFocus();
         _focusedObject = null;
+    }
+    
+    private void RotateTowardsNearestStation()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1f);
+        int[] poiLayers = {_stationMask, _resourceNodeMask};
+        
+        if (hitColliders.Length == 0) return;
+        float minDistance = float.MaxValue;
+        Transform nearestPoi = null;
+        foreach (Collider hitCollider in hitColliders)
+        {
+            if (!Array.Exists(poiLayers, layer => layer == 1 << hitCollider.gameObject.layer)) continue;
+            float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+            if (!(distance < minDistance)) continue;
+            
+            minDistance = distance;
+            nearestPoi = hitCollider.transform;
+        }
+
+        if (nearestPoi is null) return;
+        
+        Vector3 directionToStation = (nearestPoi.position - transform.position).normalized;
+        directionToStation.y = 0; // Keep the rotation on the horizontal plane
+        Quaternion targetRotation = Quaternion.LookRotation(directionToStation);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, characterRotationSpeed/2 * Time.deltaTime);
     }
 
     private void Move()
