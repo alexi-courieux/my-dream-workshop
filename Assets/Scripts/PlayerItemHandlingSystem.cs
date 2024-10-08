@@ -45,6 +45,11 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     {
         return item;
     }
+    
+    public T GetItem<T>() where T : Item
+    {
+        return item as T;
+    }
 
     public void ClearItem(Item itemToClear)
     {

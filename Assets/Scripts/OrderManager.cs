@@ -7,6 +7,7 @@ public class OrderManager : MonoBehaviour
     public static OrderManager Instance { get; private set; }
     
     [SerializeField] private ProductDictionarySo buyableProducts;
+    [SerializeField] private ProductDictionarySo sellableProducts;
     [SerializeField] private List<ChestStation> chestStations;
     
     private void Awake()
@@ -17,6 +18,11 @@ public class OrderManager : MonoBehaviour
     public ProductDictionarySo GetBuyableProducts()
     {
         return buyableProducts;
+    }
+    
+    public ProductDictionarySo GetSellableProducts()
+    {
+        return sellableProducts;
     }
     
     public void Buy(ProductSo productSo)

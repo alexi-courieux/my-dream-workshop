@@ -4,13 +4,14 @@ using UnityEngine;
 public class CustomerManager : MonoBehaviour
 {
     public static CustomerManager Instance { get; private set; }
-    private const int CustomerLimit = 10;
+    public const int CustomerLimit = 10;
 
     [SerializeField] private GameObject customerPrefab;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform dispawnPoint;
     [SerializeField] private float spawnIntervalMin = 5f;
     [SerializeField] private float spawnIntervalMax = 10f;
+    [SerializeField] private CheckoutStation checkoutStation;
 
     private Customer[] _customers;
     private float _spawnTimer;
@@ -56,7 +57,7 @@ public class CustomerManager : MonoBehaviour
 
             _customers[i].transform.position = spawnPoint.position;
             _customers[i].gameObject.SetActive(true);
-            _customers[i].Initialize();
+            _customers[i].Initialize(checkoutStation);
             break;
         }
     }

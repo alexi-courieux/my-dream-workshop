@@ -15,5 +15,5 @@ MonoBehaviour:
   prefab: {fileID: 3255530098180596297, guid: 255272e3957edbd4fb1a047f52270848, type: 3}
   sprite: {fileID: 21300000, guid: f59401c5c79564fd1ae3bfb0876455a7, type: 3}
   itemName: FinalProduct
-  buyPrice: 2
-  sellPrice: 2
+  buyPrice: 0
+  sellPrice: 20
