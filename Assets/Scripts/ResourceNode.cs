@@ -85,6 +85,8 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
         regenTimer = resourceNodeSo.timeToRegen;
     }
     
+    // We can move this logic in a separate class defined by each resource node type (Allow for different customisation, like tree leaves color)
+    // ResourceNodeRandomizer ? Listening for ResourceNode.OnFill event ?
     private void RandomiseVisual()
     {
         float randomScale = UnityEngine.Random.Range(0.6f, 1.1f);
