@@ -8,11 +8,8 @@ namespace AshLight.BakerySim.UI
     {
         [SerializeField] GameObject station;
         [SerializeField] Image icon;
-        [SerializeField] Image next;
-        [SerializeField] Image previous;
-
-        private static readonly Color Active = Color.black;
-        private static readonly Color Inactive = Color.gray;
+        [SerializeField] private GameObject next;
+        [SerializeField] private GameObject previous;
     
         private ProductSo _selectedOutput;
         private int _availableRecipesCount;
@@ -77,8 +74,8 @@ namespace AshLight.BakerySim.UI
         private void UpdateVisuals()
         {
             icon.sprite = _selectedOutput.sprite;
-            next.color = _availableRecipesCount > 1 ? Active : Inactive;
-            previous.color = _availableRecipesCount > 1 ? Active : Inactive;
+            next.SetActive(_availableRecipesCount > 1);
+            previous.SetActive(_availableRecipesCount > 1);
         }
     }
 }
