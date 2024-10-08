@@ -47,6 +47,7 @@ public class CheckoutStation : MonoBehaviour, IInteractable
         ProductSo order = customer.GetOrder();
         if (order != playerProduct.ProductSo) return;
         
+        OrderManager.Instance.Sell(order);
         playerProduct.DestroySelf();
         _customerQueue.Shift();
         OnCustomerCheckout?.Invoke(this, customer);

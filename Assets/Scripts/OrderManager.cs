@@ -32,4 +32,9 @@ public class OrderManager : MonoBehaviour
         EconomyManager.Instance.RemoveMoney(productSo.buyPrice);
         chestStations.FirstOrDefault(chest => chest.GetProductSo() == productSo)?.AddProduct();
     }
+    
+    public void Sell(ProductSo productSo)
+    {
+        EconomyManager.Instance.AddMoney(productSo.sellPrice);
+    }
 }
