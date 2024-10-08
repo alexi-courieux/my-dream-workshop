@@ -44,12 +44,9 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
         else
         {
             if (!isPlayerHoldingProduct) return;
-            Item item = Player.Instance.HandleSystem.GetItem();
-            if (item is not Product product)
-            {
-                Debug.LogWarning("Station can only hold products!");
-                return;
-            }
+            
+            _state = State.Idle;
+            Item product = Player.Instance.HandleSystem.GetItem();
             product.SetParent<Product>(this);
             CheckForRecipes();
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
