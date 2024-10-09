@@ -125,6 +125,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     {
         _items.ToList().ForEach(i => i.DestroySelf());
         Item.SpawnItem<FinalProduct>(_selectedRecipe.output.prefab, this);
+        ClearRecipe();
         _state = State.Idle;
     }
     
@@ -178,27 +179,25 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public Item[] GetItems<T>() where T : Item
     {
-        if (typeof(T) != typeof(Product))
-        {
-            Debug.LogWarning("This station can only hold products!");
-            return null;
-        }
+        if (typeof(T) != typeof(Product)) return null;
     
         return _items.Cast<Item>().ToArray();
     }
 
     public void ClearItem(Item itemToClear)
     {
+        if (itemToClear is FinalProduct)
+        {
+            _finalProduct = null;
+            return;
+        }
+        
         _items.Remove(itemToClear as Product);
     }
 
     public bool HaveItems<T>() where T : Item
     {
-        if (typeof(T) != typeof(Product))
-        {
-            Debug.LogWarning("This station can only hold products!");
-            return false;
-        }
+        if (typeof(T) != typeof(Product)) return false;
     
         return _items.Count > 0;
     }
@@ -221,11 +220,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public bool HasAvailableSlot<T>() where T : Item
     {
-        if (typeof(T) != typeof(Product) && typeof(T) != typeof(FinalProduct))
-        {
-            Debug.LogWarning("This station can only hold products or final product!");
-            return false;
-        }
+        if (typeof(T) != typeof(Product) && typeof(T) != typeof(FinalProduct)) return false;
     
         return true;
     }
