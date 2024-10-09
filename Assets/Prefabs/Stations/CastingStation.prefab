@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 2842562849905452428}
   - component: {fileID: 4585843033666253227}
   m_Layer: 6
-  m_Name: MoldingStation
+  m_Name: CastingStation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
