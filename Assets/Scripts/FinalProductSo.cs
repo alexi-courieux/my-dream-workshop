@@ -1,13 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Product", menuName = "ScriptableObject/FinalProduct")]
-public class FinalProductSo : ScriptableObject
+public class FinalProductSo : ProductSo
 {
-    public Transform prefab;
-    public Sprite sprite;
-    public string itemName;
-    public int buyPrice;
-    public int sellPrice;
     public enum ItemType {
         Helmet,
         Chest,
