@@ -3,14 +3,14 @@ using System;
 using System.Linq;
 using Utils;
 
-public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress
-{
-    public EventHandler OnPutIn;
-    public EventHandler OnTakeOut;
-    public EventHandler<State> OnStateChanged;
+public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableRecipe, IInteractablePrevious, IInteractableNext, IFocusable
+{ 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<RecipeSelectedEventArgs> OnRecipeSelected; 
+    public event EventHandler OnFocus;
+    public event EventHandler OnStopFocus;
 
-    public enum State
+    private enum State
     {
         Idle,
         Processing
@@ -18,141 +18,146 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     [SerializeField] private Transform itemSlot;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
+    
     private readonly StackList<Product> _items = new();
     private FinalProduct _finalProduct;
     private State _state;
-    private State CurrentState
-    {
-        get => _state;
-        set
-        {
-            _state = value;
-            OnStateChanged?.Invoke(this, _state);
-        }
-    }
-    private AssemblyRecipeSo _assemblyRecipeSo;
-    private int _hitToProcessMax = int.MaxValue;
+    private AssemblyRecipeSo[] _availableRecipes;
+    private AssemblyRecipeSo _selectedRecipe;
     private int _hitToProcess;
 
-    private void Update()
+    private void Start()
     {
-        switch (CurrentState)
-        {
-            case State.Idle:
-                break;
-            case State.Processing:
-                if (_hitToProcess == _hitToProcessMax)
-                {
-                    _items.ToList().ForEach(i => i.DestroySelf());
-                    Item.SpawnItem<FinalProduct>(_assemblyRecipeSo.output.prefab, this);
-                    _state = State.Idle;
-                }
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+        _state = State.Idle;
     }
 
     public void Interact()
     {
-        if (CurrentState is not State.Idle) return;
-
         if (Player.Instance.HandleSystem.HaveAnyItems())
         {
-            if (!Player.Instance.HandleSystem.HaveItems<Product>())
-            {
-                Debug.LogWarning("Station can only hold products!");
-                return;
-            }
+            if (_finalProduct is not null) return;
+            if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
+            
             Player.Instance.HandleSystem.GetItem().SetParent<Product>(this);
-            OnPutIn?.Invoke(this, EventArgs.Empty);
 
-            _hitToProcess = 0;
-
+            CheckRecipes();
+            _state = State.Idle;
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
         }
         else
         {
-            if (_items.Count > 0) 
+            if (_finalProduct is not null)
             {
-                Item item = _items.Pop();
-                item.SetParent<Item>(Player.Instance.HandleSystem);
-                OnTakeOut?.Invoke(this, EventArgs.Empty);
-                _state = State.Idle;
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                    progressNormalized = 0f
-                });
+                _finalProduct.SetParent<Item>(Player.Instance.HandleSystem);
+                return;
             }
-            else if (_finalProduct is not null)
-            {
-                Item item = _finalProduct;
-                item.SetParent<Item>(Player.Instance.HandleSystem);
-                OnTakeOut?.Invoke(this, EventArgs.Empty);
-                _state = State.Idle;
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                    progressNormalized = 0f
-                });
-            }
+
+            if (_items.Count <= 0) return;
+            
+            Item item = _items.Pop();
+            item.SetParent<Item>(Player.Instance.HandleSystem);
+            _state = State.Idle;
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+                progressNormalized = 0f
+            });
+            CheckRecipes();
         }
+    }
+
+    private void CheckRecipes()
+    {
+        ProductSo[] productsSo = GetItems<Product>()
+            .Cast<Product>()
+            .Select(i => i.ProductSo)
+            .OrderBy(i => i.itemName)
+            .ToArray();
+        _availableRecipes = recipesDictionarySo.assemblyRecipeSo
+            .Where(r =>
+            {
+                ProductSo[] recipeInputs = r.inputs
+                    .OrderBy(i => i.itemName)
+                    .ToArray();
+                return productsSo.SequenceEqual(recipeInputs);
+            })
+            .ToArray();
+        if (_availableRecipes.Length > 0)
+        {
+            SelectRecipe(_availableRecipes[0]);
+        }
+        else
+        {
+            ClearRecipe();
+        }
+    }
+
+    private void SelectRecipe(AssemblyRecipeSo recipe)
+    {
+        _selectedRecipe = recipe;
+        _hitToProcess = recipe.hitToProcess;
+        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(recipe.output, _availableRecipes.Length));
+    }
+
+    private void ClearRecipe()
+    {
+        _selectedRecipe = null;
+        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
     }
 
     public void InteractAlt()
     {
-        if (_items.Count > 0)
+        if(_selectedRecipe is null) return;
+        _state = State.Processing;
+        _hitToProcess--;
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+            progressNormalized = 1 - (float)_hitToProcess / _selectedRecipe.hitToProcess
+        });
+        
+        if (_hitToProcess <= 0)
         {
-            if (CurrentState == State.Idle)
-            {
-                CheckForRecipe();
-                if (_hitToProcess == 0 && _assemblyRecipeSo is not null)
-                {
-                    _hitToProcess++;
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                        progressNormalized = (float)_hitToProcess / _hitToProcessMax
-                    });
-                }
-            }
-            else if (CurrentState == State.Processing && _hitToProcess != 0)
-            {
-                _hitToProcess++;
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                    progressNormalized = (float)_hitToProcess / _hitToProcessMax
-                });
-            }
-            else
-            {
-                CurrentState = State.Idle;
-            }
+            Transform();
         }
+        
+    }
     
+    private void Transform()
+    {
+        _items.ToList().ForEach(i => i.DestroySelf());
+        Item.SpawnItem<FinalProduct>(_selectedRecipe.output.prefab, this);
+        _state = State.Idle;
+    }
+    
+    public void InteractPrevious()
+    {
+        if(_state is State.Processing) return;
+        if (_selectedRecipe is null) return;
+        
+        int index = Array.IndexOf(_availableRecipes, _selectedRecipe);
+        index--;
+        if (index < 0) index = _availableRecipes.Length - 1;
+        SelectRecipe(_availableRecipes[index]);
+    }
+    
+    public void InteractNext()
+    {
+        if(_state is State.Processing) return;
+        if (_selectedRecipe is null) return;
+        
+        int index = Array.IndexOf(_availableRecipes, _selectedRecipe);
+        index++;
+        if (index >= _availableRecipes.Length) index = 0;
+        SelectRecipe(_availableRecipes[index]);
+    }
+    
+    public void Focus()
+    {
+        OnFocus?.Invoke(this, EventArgs.Empty);
     }
 
-    private void CheckForRecipe()
+    public void StopFocus()
     {
-        string[] itemsSo = GetItems<Product>()
-            .Cast<Product>()
-            .Select((i) => i.ProductSo.itemName)
-            .OrderBy(n => n)
-            .ToArray();
-        AssemblyRecipeSo recipe = recipesDictionarySo.assemblyRecipeSo.FirstOrDefault(r =>
-        {
-            string[] recipeItemsSo = r.inputs
-                .Select(i => i.itemName)
-                .OrderBy(n => n)
-                .ToArray();
-            return itemsSo.SequenceEqual(recipeItemsSo);
-        });
-        if (recipe is not null)
-        {
-            CurrentState = State.Processing;
-            _hitToProcessMax = recipe.hitToProcess;
-            _assemblyRecipeSo = recipe;
-        }
-        else
-        {
-            CurrentState = State.Idle;
-        }
+        OnStopFocus?.Invoke(this, EventArgs.Empty);
     }
 
     public void AddItem<T>(Item newItem) where T : Item
