@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 3945478119368884426}
   - {fileID: 3731875033350425472}
-  - {fileID: 8867087862706837254}
+  - {fileID: 9000563453129928307}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6065342983001230123
@@ -425,7 +425,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1001 &5845837465224910548
+--- !u!1001 &6252900206822240161
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -471,12 +471,12 @@ PrefabInstance:
     - target: {fileID: 3039559616006914514, guid: fe60731cc17e7d846adca2d2431b1ebc,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 80
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 3039559616006914514, guid: fe60731cc17e7d846adca2d2431b1ebc,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3039559616006914514, guid: fe60731cc17e7d846adca2d2431b1ebc,
         type: 3}
@@ -521,7 +521,7 @@ PrefabInstance:
     - target: {fileID: 3039559616006914514, guid: fe60731cc17e7d846adca2d2431b1ebc,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.702
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 3039559616006914514, guid: fe60731cc17e7d846adca2d2431b1ebc,
         type: 3}
@@ -548,9 +548,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe60731cc17e7d846adca2d2431b1ebc, type: 3}
---- !u!224 &8867087862706837254 stripped
+--- !u!224 &9000563453129928307 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3039559616006914514, guid: fe60731cc17e7d846adca2d2431b1ebc,
     type: 3}
-  m_PrefabInstance: {fileID: 5845837465224910548}
+  m_PrefabInstance: {fileID: 6252900206822240161}
   m_PrefabAsset: {fileID: 0}

@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: SellableProductsList
   m_EditorClassIdentifier: 
   products:
-  - {fileID: 11400000, guid: 18610ae91bc2ccc45888648bf797c0b5, type: 2}
+  - {fileID: 11400000, guid: bb0b937d481c6784da2d98011ebf898f, type: 2}
+  - {fileID: 11400000, guid: d295f4a86f2cff648bcfe161a9e872df, type: 2}
+  - {fileID: 11400000, guid: b3699ee8492114240bde35a53461c70b, type: 2}
+  - {fileID: 11400000, guid: c8b036e590e675c41ba643f7f08daff5, type: 2}

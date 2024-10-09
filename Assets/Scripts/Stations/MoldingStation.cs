@@ -2,14 +2,14 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class MoldingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress
+public class MoldingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableRecipe, IInteractablePrevious, IInteractableNext, IFocusable
 {
-    public EventHandler OnPutIn;
-    public EventHandler OnTakeOut;
-    public EventHandler<State> OnStateChanged;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<RecipeSelectedEventArgs> OnRecipeSelected;
+    public event EventHandler OnFocus;
+    public event EventHandler OnStopFocus;
 
-    public enum State
+    private enum State
     {
         Idle,
         Processing
@@ -17,61 +17,59 @@ public class MoldingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
 
     [SerializeField] private Transform itemSlot;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
-    private MoldingRecipeSo _moldingRecipeSo;
+    private MoldingRecipeSo _selectedRecipeSo;
+    private MoldingRecipeSo[] _availableRecipes;
     private Product _product;
     private float _timeToProcessMax = float.MaxValue;
     private float _timeToProcess;
 
     private State _state;
-    private State CurrentState
+
+    private void Start()
     {
-        get => _state;
-        set
-        {
-            _state = value;
-            OnStateChanged?.Invoke(this, _state);
-        }
+        _state = State.Idle;
     }
-    
+
     private void Update()
     {
-        switch (CurrentState)
+        if (_state is not State.Processing) return;
+        
+        _timeToProcess -= Time.deltaTime;
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+            progressNormalized = 1 - _timeToProcess / _timeToProcessMax
+        });
+        
+        if (_timeToProcess <= 0)
         {
-            case State.Idle:
-                break;
-            case State.Processing:
-                _timeToProcess += Time.deltaTime;
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                    progressNormalized = _timeToProcess / _timeToProcessMax
-                });
-                if (_timeToProcess >= _timeToProcessMax)
-                {
-                    _product.DestroySelf();
-                    Item.SpawnItem<Product>(_moldingRecipeSo.output.prefab, this);
-                    _state = State.Idle;
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                        progressNormalized = 0f
-                    });
-                }
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            Transform();
         }
+    }
+
+    private void Transform()
+    {
+        _product.DestroySelf();
+        Item.SpawnItem<Product>(_selectedRecipeSo.output.prefab, this);
+        _state = State.Idle;
+        CheckForRecipes();
+        OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
+            progressNormalized = 0f
+        });
     }
 
 
     public void Interact()
     {
         bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItems<Product>();
+        
         if (HaveItems<Product>())
         {
             if (isPlayerHoldingProduct) return;
             _product.SetParent<Item>(Player.Instance.HandleSystem);
-            OnTakeOut?.Invoke(this, EventArgs.Empty);
             _state = State.Idle;
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
+            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
         }
         else
         {
@@ -83,46 +81,52 @@ public class MoldingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
                 return;
             }
             product.SetParent<Product>(this);
-            OnPutIn?.Invoke(this, EventArgs.Empty);
-
-            _timeToProcess = 0f;
-
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
+            CheckForRecipes();
         }
     }
 
     public void InteractAlt()
     {
-        if (_product is not null)
+        if (_product is null) return;
+
+        if (_state is State.Idle && _selectedRecipeSo is not null)
         {
-            if (CurrentState == State.Idle)
-            {
-                CheckForRecipe();
-                OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-                    progressNormalized = _timeToProcess / _timeToProcessMax
-                });
-            }
+            _state = State.Processing;
+            return;
         }
-        else 
-        {
-            CurrentState = State.Idle;
-        }
+
+        if (_state is not State.Processing) return;
+        
+        _state = State.Idle;
     }
-    private void CheckForRecipe()
+    private void CheckForRecipes()
     {
-        MoldingRecipeSo recipe = recipesDictionarySo.moldingRecipeSo.FirstOrDefault(r => r.input == _product.ProductSo);
-        if (recipe is not null)
+        _availableRecipes = recipesDictionarySo.moldingRecipeSo.Where(r => r.input == _product.ProductSo).ToArray();
+        if (_availableRecipes.Length > 0)
         {
-            CurrentState = State.Processing;
-            _timeToProcessMax = recipe.timeToProcess;
-            _moldingRecipeSo = recipe;
+            SelectRecipe(_availableRecipes[0]);
         }
         else
         {
-            CurrentState = State.Idle;
+            ClearRecipe();
         }
+    }
+
+    private void SelectRecipe(MoldingRecipeSo recipe)
+    {
+        _selectedRecipeSo = recipe;
+        _timeToProcessMax = recipe.timeToProcess;
+        _timeToProcess = _timeToProcessMax;
+        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(recipe.output, 0));
+    }
+    
+    private void ClearRecipe()
+    {
+        _selectedRecipeSo = null;
+        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
     }
 
     public void AddItem<T>(Item newItem) where T : Item
@@ -186,5 +190,41 @@ public class MoldingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         }
         Debug.LogWarning($"This station doesn't have items of the specified type : {typeof(T)}");
         return false;
+    }
+    
+    public void InteractPrevious()
+    {
+        if (_state is State.Processing) return;
+        if (_selectedRecipeSo is null) return;
+        
+        int index = Array.IndexOf(_availableRecipes, _selectedRecipeSo);
+        index--;
+        if (index < 0)
+        {
+            index = _availableRecipes.Length - 1;
+        }
+        SelectRecipe(_availableRecipes[index]);
+    }
+    
+    public void InteractNext()
+    {
+        if (_state is State.Processing) return;
+        if (_selectedRecipeSo is null) return;
+        
+        int index = Array.IndexOf(_availableRecipes, _selectedRecipeSo);
+        index++;
+        if (index >= _availableRecipes.Length)
+        {
+            index = 0;
+        }
+        SelectRecipe(_availableRecipes[index]);
+    }
+    public void Focus()
+    {
+        OnFocus?.Invoke(this, EventArgs.Empty);
+    }
+    public void StopFocus()
+    {
+        OnStopFocus?.Invoke(this, EventArgs.Empty);
     }
 }
