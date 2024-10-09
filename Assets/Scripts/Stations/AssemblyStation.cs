@@ -10,7 +10,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
 
-    public enum State
+    private enum State
     {
         Idle,
         Processing
