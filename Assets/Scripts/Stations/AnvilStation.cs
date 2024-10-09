@@ -39,7 +39,7 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
-            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
+            ClearRecipe();
         }
         else
         {
@@ -202,6 +202,6 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
     private void ClearRecipe()
     {
         _anvilRecipeSo = null;
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, _availableRecipes.Length));
+        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
     }
 }
