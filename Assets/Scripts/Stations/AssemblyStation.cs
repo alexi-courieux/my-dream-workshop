@@ -43,6 +43,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         {
             if (_finalProduct is not null) return;
             if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
+            if (!HasAvailableSlot<Product>()) return;
             
             Player.Instance.HandleSystem.GetItem().SetParent<Product>(this);
 

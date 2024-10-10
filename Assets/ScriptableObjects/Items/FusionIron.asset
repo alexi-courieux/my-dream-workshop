@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FusionIron
   m_EditorClassIdentifier: 
   prefab: {fileID: 1708182585262796304, guid: ccf392abc8946724596a7c90bee695e0, type: 3}
-  sprite: {fileID: 21300000, guid: 1618cb37bcd5144fd923b9697be57d63, type: 3}
+  sprite: {fileID: 21300000, guid: 7e082cc2cf2a4433d85e388c6bf94234, type: 3}
   itemName: FusionIron
   buyPrice: 0
   sellPrice: 0

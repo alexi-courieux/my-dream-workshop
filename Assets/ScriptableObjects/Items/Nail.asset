@@ -15,5 +15,5 @@ MonoBehaviour:
   prefab: {fileID: 3908874931380198303, guid: eae96b0b51b32c04bb2aeb0b0d9b089d, type: 3}
   sprite: {fileID: 21300000, guid: 1618cb37bcd5144fd923b9697be57d63, type: 3}
   itemName: Nail
-  buyPrice: 0
+  buyPrice: 12
   sellPrice: 0

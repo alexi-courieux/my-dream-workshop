@@ -21,6 +21,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
     /// </summary>
     /// <param name="targetParent">new parent</param>
     /// <returns>true if the parent have changed</returns>
+    /// <exception cref="ArgumentException">The parent does not have available slot to take the item</exception>
     public void SetParent<T>(IHandleItems targetParent) where T : Item
     {
         if (targetParent is null)

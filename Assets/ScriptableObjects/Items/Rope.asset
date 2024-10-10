@@ -15,5 +15,5 @@ MonoBehaviour:
   prefab: {fileID: 1708182585262796304, guid: 88f0f976d19acf84295a209d756a00ae, type: 3}
   sprite: {fileID: 21300000, guid: 1618cb37bcd5144fd923b9697be57d63, type: 3}
   itemName: Rope
-  buyPrice: 0
+  buyPrice: 10
   sellPrice: 0
