@@ -22,14 +22,28 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c6e97425b4885a741abf2ad141a1492f, type: 2}
   smelterRecipeSo:
   - {fileID: 11400000, guid: e3421d86bcaa6a4459eac8d4f3b13fe4, type: 2}
-  moldingRecipeSo:
-  - {fileID: 11400000, guid: 353cab5f839707342b48a3ae9be0abb7, type: 2}
+  castingRecipeSo:
+  - {fileID: 11400000, guid: 620da4a6ce9e8344ab6c11e4e2ea3a51, type: 2}
   anvilRecipeSo:
+  - {fileID: 11400000, guid: 9db6e7a5d8f2992469d860cae01a71e0, type: 2}
   - {fileID: 11400000, guid: cf2682acc832c404ba917029449f5114, type: 2}
-  - {fileID: 11400000, guid: 0fa266cca24727a4d9b9c48bbe8d260f, type: 2}
-  - {fileID: 11400000, guid: a514653320cca0647b53612fdf5f51cf, type: 2}
   - {fileID: 11400000, guid: d67b504be8f84ca47918d26524e89b88, type: 2}
+  - {fileID: 11400000, guid: 3a53b70b06cbcee448f4361219df8c90, type: 2}
+  - {fileID: 11400000, guid: a514653320cca0647b53612fdf5f51cf, type: 2}
+  - {fileID: 11400000, guid: 0fa266cca24727a4d9b9c48bbe8d260f, type: 2}
   sculptingRecipeSo:
+  - {fileID: 11400000, guid: f4aea43915c595143afd5def358f5295, type: 2}
+  - {fileID: 11400000, guid: 83e62505dff5f884f869bffbc9a31db0, type: 2}
   - {fileID: 11400000, guid: 7578c12a26c97a04d94e92c1de543cf9, type: 2}
+  - {fileID: 11400000, guid: b73c0ce93f2aa8f48943d54fbf7f5792, type: 2}
   assemblyRecipeSo:
+  - {fileID: 11400000, guid: 45ef90580f3e2994f9875516e4a3268e, type: 2}
+  - {fileID: 11400000, guid: 636167f9b657b4549b7a1d86b8cc1b5b, type: 2}
+  - {fileID: 11400000, guid: c235de787ad09b14db03e06ed06b56bb, type: 2}
   - {fileID: 11400000, guid: 615d2e43aeef508428610823b911e775, type: 2}
+  - {fileID: 11400000, guid: cf3ae3b4c7088b24e91cc27b0f0ad72a, type: 2}
+  - {fileID: 11400000, guid: 6362e2c17c0f0f747be095d25c10a133, type: 2}
+  - {fileID: 11400000, guid: e937702588673d34d983d509ec81ff0d, type: 2}
+  - {fileID: 11400000, guid: b9222cf1fb274d7479617eb48bdf68ff, type: 2}
+  - {fileID: 11400000, guid: c6f1065d2b6f06a4290e2c86630c001a, type: 2}
+  - {fileID: 11400000, guid: cd4207156b22dec4f9ac7a52331e67e0, type: 2}
