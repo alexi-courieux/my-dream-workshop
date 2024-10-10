@@ -16,7 +16,8 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         Processing
     }
 
-    [SerializeField] private Transform itemSlot;
+    [SerializeField] private Transform[] itemSlots;
+    [SerializeField] private Transform finalProductSlot;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     
     private readonly StackList<Product> _items = new();
@@ -25,6 +26,11 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     private AssemblyRecipeSo[] _availableRecipes;
     private AssemblyRecipeSo _selectedRecipe;
     private int _hitToProcess;
+    private int _capacity;
+
+    private void Awake() {
+        _capacity = itemSlots.Length;
+    }
 
     private void Start()
     {
@@ -209,19 +215,23 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public Transform GetAvailableItemSlot<T>() where T : Item
     {
-        if (typeof(T) != typeof(Product) && typeof(T) != typeof(FinalProduct))
+        if (typeof(T) == typeof(Product))
         {
-            Debug.LogWarning("This station can only hold products or final product!");
-            return null;
+            return itemSlots[_items.Count];
+        }
+        if (typeof(T) == typeof(FinalProduct))
+        {
+            return finalProductSlot;
         }
     
-        return itemSlot;
+        Debug.LogWarning("This station can only hold products or final product!");
+            return null;
     }
 
     public bool HasAvailableSlot<T>() where T : Item
     {
         if (typeof(T) != typeof(Product) && typeof(T) != typeof(FinalProduct)) return false;
     
-        return true;
+        return _items.Count < _capacity;
     }
 }
