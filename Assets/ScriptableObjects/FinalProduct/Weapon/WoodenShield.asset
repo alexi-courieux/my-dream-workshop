@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7595b261424aaf54bbf4edc48fabebfc, type: 3}
   m_Name: WoodenShield
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  sprite: {fileID: 0}
-  itemName: 
+  prefab: {fileID: 3255530098180596297, guid: 3b23f57a93ec78a4187f6a6a860751c2, type: 3}
+  sprite: {fileID: 21300000, guid: e0eac6b76fdd842e88a7f8c75ecffaf4, type: 3}
+  itemName: WoodenShield
   buyPrice: 0
-  sellPrice: 0
-  itemType: 0
+  sellPrice: 20
+  itemType: 4

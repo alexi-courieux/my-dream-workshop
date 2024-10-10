@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc09dd4a4f9f8444b9eae496327bf291, type: 3}
   m_Name: AnvilRecipe_Nail
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
-  output: {fileID: 11400000, guid: c22cef3e8466914429e9458edf9f5f63, type: 2}
+  input: {fileID: 11400000, guid: 91d07c10f44b2d94bb0cc34b87049ee1, type: 2}
+  output: {fileID: 11400000, guid: 0fc746cb698ee3b4d812ae2ebe246990, type: 2}
   hitToProcess: 3

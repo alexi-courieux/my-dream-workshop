@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: AssemblyRecipe_IronChest
   m_EditorClassIdentifier: 
   inputs:
-  - {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
+  - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
+  - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
+  - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
+  - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
+  - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
   output: {fileID: 11400000, guid: d295f4a86f2cff648bcfe161a9e872df, type: 2}
   hitToProcess: 5

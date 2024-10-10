@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: b6e5e436cacd2174795a567d81091296, type: 3}
   sprite: {fileID: 21300000, guid: 1232b4251095b144fa2f21632012c082, type: 3}
-  itemName: FinalProductBoot
+  itemName: IronBoot
   buyPrice: 0
   sellPrice: 10
   itemType: 3

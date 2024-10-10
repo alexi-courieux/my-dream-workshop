@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc09dd4a4f9f8444b9eae496327bf291, type: 3}
+  m_Name: AnvilRecipe_IronGuard
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: 91d07c10f44b2d94bb0cc34b87049ee1, type: 2}
+  output: {fileID: 11400000, guid: 1b99fd0d6cf43cd408d3cdd2e28299d8, type: 2}
+  hitToProcess: 5

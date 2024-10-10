@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc09dd4a4f9f8444b9eae496327bf291, type: 3}
-  m_Name: AnvilRecipe_Blade
+  m_Name: AnvilRecipe_IronBlade
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 53ae4c15fb9360b44bd7460b7b34cfb9, type: 2}
-  output: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
-  hitToProcess: 5
+  input: {fileID: 11400000, guid: 91d07c10f44b2d94bb0cc34b87049ee1, type: 2}
+  output: {fileID: 11400000, guid: db89058e17f489244b83b87fcc1c7805, type: 2}
+  hitToProcess: 8

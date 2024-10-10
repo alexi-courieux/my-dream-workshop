@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: 633abe17b8ec8bb4999b1dc59a2676a6, type: 3}
   sprite: {fileID: 21300000, guid: a57c08401dcda0a4a95522ee57a06ac2, type: 3}
-  itemName: FinalProductChest
+  itemName: IronChest
   buyPrice: 0
   sellPrice: 10
   itemType: 1

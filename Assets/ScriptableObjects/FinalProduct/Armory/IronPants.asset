@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: 258c63472563eac4c95a46f13e9b8397, type: 3}
   sprite: {fileID: 21300000, guid: d61282722f6c31e47b8160b135c0eadc, type: 3}
-  itemName: FinalProductPants
+  itemName: IronPants
   buyPrice: 0
   sellPrice: 10
   itemType: 2

@@ -7,7 +7,8 @@ public class FinalProductSo : ProductSo
         Helmet,
         Chest,
         Pants,
-        Boot
+        Boot,
+        Weapon
     }
     public ItemType itemType;
 

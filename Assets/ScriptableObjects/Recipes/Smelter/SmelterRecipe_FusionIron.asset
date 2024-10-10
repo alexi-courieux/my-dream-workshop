@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52eb7f55008483749ad195d0f4d0b45f, type: 3}
   m_Name: SmelterRecipe_FusionIron
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 7e9fc5476b6005249a063ae74e7fcf60, type: 2}
-  output: {fileID: 11400000, guid: c22cef3e8466914429e9458edf9f5f63, type: 2}
+  input: {fileID: 11400000, guid: 53ae4c15fb9360b44bd7460b7b34cfb9, type: 2}
+  output: {fileID: 11400000, guid: c4746e6b3f38d9745a5c179fce30f96a, type: 2}
   timeToProcess: 10

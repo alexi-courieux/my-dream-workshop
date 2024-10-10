@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51663df6e3a6d8b45abd10642784e554, type: 3}
-  m_Name: SculptingRecipe_Handle
+  m_Name: SculptingRecipe_WoodenSwordHandle
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: c22cef3e8466914429e9458edf9f5f63, type: 2}
-  output: {fileID: 11400000, guid: 7e9fc5476b6005249a063ae74e7fcf60, type: 2}
-  hitToProcess: 3
+  input: {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
+  output: {fileID: 11400000, guid: 82d1415511fecb940bf7215e29204f7a, type: 2}
+  hitToProcess: 5
