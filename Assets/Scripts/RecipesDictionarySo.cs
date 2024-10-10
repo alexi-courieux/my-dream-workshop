@@ -10,7 +10,7 @@ public class RecipesDictionarySo : ScriptableObject
     public ToolRecipeSo[] toolRecipes;
     public WoodcuttingRecipeSo[] woodcuttingRecipes;
     public SmelterRecipeSo[] smelterRecipeSo;
-    public MoldingRecipeSo[] moldingRecipeSo;
+    public CastingRecipeSo[] castingRecipeSo;
     public AnvilRecipeSo[] anvilRecipeSo;
     public SculptingRecipeSo[] sculptingRecipeSo;
     public AssemblyRecipeSo[] assemblyRecipeSo;
@@ -51,9 +51,9 @@ public class RecipeDictionarySoEditor : Editor
                 .Select(guid => AssetDatabase.LoadAssetAtPath<SmelterRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
                 .ToArray();
 
-            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(MoldingRecipeSo)}");
-            recipes.moldingRecipeSo = recipeGuids
-                .Select(guid => AssetDatabase.LoadAssetAtPath<MoldingRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
+            recipeGuids = AssetDatabase.FindAssets($"t:{nameof(CastingRecipeSo)}");
+            recipes.castingRecipeSo = recipeGuids
+                .Select(guid => AssetDatabase.LoadAssetAtPath<CastingRecipeSo>(AssetDatabase.GUIDToAssetPath(guid)))
                 .ToArray();
 
             recipeGuids = AssetDatabase.FindAssets($"t:{nameof(AnvilRecipeSo)}");

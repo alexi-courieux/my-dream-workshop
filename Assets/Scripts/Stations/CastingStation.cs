@@ -17,8 +17,8 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
 
     [SerializeField] private Transform itemSlot;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
-    private MoldingRecipeSo _selectedRecipeSo;
-    private MoldingRecipeSo[] _availableRecipes;
+    private CastingRecipeSo _selectedRecipeSo;
+    private CastingRecipeSo[] _availableRecipes;
     private Product _product;
     private float _timeToProcessMax = float.MaxValue;
     private float _timeToProcess;
@@ -104,7 +104,7 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
     }
     private void CheckForRecipes()
     {
-        _availableRecipes = recipesDictionarySo.moldingRecipeSo.Where(r => r.input == _product.ProductSo).ToArray();
+        _availableRecipes = recipesDictionarySo.castingRecipeSo.Where(r => r.input == _product.ProductSo).ToArray();
         if (_availableRecipes.Length > 0)
         {
             SelectRecipe(_availableRecipes[0]);
@@ -115,7 +115,7 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         }
     }
 
-    private void SelectRecipe(MoldingRecipeSo recipe)
+    private void SelectRecipe(CastingRecipeSo recipe)
     {
         _selectedRecipeSo = recipe;
         _timeToProcessMax = recipe.timeToProcess;
