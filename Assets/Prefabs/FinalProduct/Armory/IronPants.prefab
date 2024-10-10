@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3255530098180596297}
   - component: {fileID: -7006603485211682292}
   m_Layer: 0
-  m_Name: FinalProductPants
+  m_Name: IronPants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

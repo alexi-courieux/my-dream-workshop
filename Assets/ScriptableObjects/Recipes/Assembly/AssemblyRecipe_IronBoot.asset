@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf7169447704c0640bd319092178cda1, type: 3}
-  m_Name: AssemblyRecipe_Pants
+  m_Name: AssemblyRecipe_IronBoot
   m_EditorClassIdentifier: 
   inputs:
   - {fileID: 11400000, guid: 53ae4c15fb9360b44bd7460b7b34cfb9, type: 2}
-  - {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
-  output: {fileID: 11400000, guid: c8b036e590e675c41ba643f7f08daff5, type: 2}
+  output: {fileID: 11400000, guid: bb0b937d481c6784da2d98011ebf898f, type: 2}
   hitToProcess: 8
