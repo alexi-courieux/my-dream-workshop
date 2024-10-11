@@ -62,7 +62,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
         type: 3}
@@ -104,40 +104,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: -1512316738315180758, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.035
-      objectReference: {fileID: 0}
-    - target: {fileID: -1512316738315180758, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.009
-      objectReference: {fileID: 0}
-    - target: {fileID: -1512316738315180758, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.104
-      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
         type: 3}
       propertyPath: m_Name
       value: WoodenBow
-      objectReference: {fileID: 0}
-    - target: {fileID: 7638586379769430779, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.033
-      objectReference: {fileID: 0}
-    - target: {fileID: 7638586379769430779, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.011
-      objectReference: {fileID: 0}
-    - target: {fileID: 7638586379769430779, guid: 22dc0d5b3af5c3c419548b0d859a4e53,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.107
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

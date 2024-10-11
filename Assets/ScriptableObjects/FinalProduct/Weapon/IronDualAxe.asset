@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IronDualAxe
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: aba3cea4613e7cf4395d3a85481c343a, type: 3}
-  sprite: {fileID: 21300000, guid: e0eac6b76fdd842e88a7f8c75ecffaf4, type: 3}
+  sprite: {fileID: 21300000, guid: 5e72ba80b7072ee42b6bfd8f49f59448, type: 3}
   itemName: IronDualAxe
   buyPrice: 0
   sellPrice: 55

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodenSword
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: 0810ad0c658a98945bb057c0e756b737, type: 3}
-  sprite: {fileID: 21300000, guid: e0eac6b76fdd842e88a7f8c75ecffaf4, type: 3}
+  sprite: {fileID: 21300000, guid: 8224a5b912880a8499091cf5511b1479, type: 3}
   itemName: WoodenSword
   buyPrice: 0
   sellPrice: 35
