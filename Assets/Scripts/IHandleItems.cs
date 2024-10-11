@@ -10,7 +10,7 @@ public interface IHandleItems
     /// </summary>
     /// <typeparam name="T">Type of the item</typeparam>
     /// <returns>true if the parent has an available slot for this item</returns>
-    bool HasAvailableSlot<T>() where T : Item;
+    bool HasAvailableSlot(Item item);
 
     /// <summary>
     /// Check if the parent has an item of the specified type
@@ -30,7 +30,7 @@ public interface IHandleItems
     /// </summary>
     /// <typeparam name="T">Type of the item</typeparam>
     /// <returns>Transform of the slot where the item can be placed</returns>
-    Transform GetAvailableItemSlot<T>() where T : Item;
+    Transform GetAvailableItemSlot(Item item);
 
     /// <summary>
     /// Add an item to the parent

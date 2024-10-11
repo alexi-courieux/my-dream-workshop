@@ -129,7 +129,6 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
         {
             return _product is not null;
         }
-        Debug.LogWarning($"This station doesn't have items of the specified type : {typeof(T)}");
         return false;
     }
 
@@ -138,23 +137,21 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
         return _product is not null;
     }
 
-    public Transform GetAvailableItemSlot<T>() where T : Item
+    public Transform GetAvailableItemSlot(Item newItem)
     {
-        if (typeof(T) == typeof(Product))
+        if (newItem is Product)
         {
             return itemSlot;
         }
-        Debug.LogWarning($"This station doesn't have items of the specified type : {typeof(T)}");
         return null;
     }
 
-    public bool HasAvailableSlot<T>() where T : Item
+    public bool HasAvailableSlot(Item item)
     {
-        if(typeof(T) == typeof(Product))
+        if(item is Product)
         {
             return _product is null;
         }
-        Debug.LogWarning($"This station doesn't have items of the specified type : {typeof(T)}");
         return false;
     }
     public void InteractNext()

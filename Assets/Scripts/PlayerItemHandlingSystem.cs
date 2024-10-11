@@ -66,12 +66,12 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
         return item is not null;
     }
 
-    public Transform GetAvailableItemSlot<T>() where T : Item
+    public Transform GetAvailableItemSlot(Item newItem)
     {
         return itemSlot;
     }
 
-    public bool HasAvailableSlot<T>() where T : Item
+    public bool HasAvailableSlot(Item newItem)
     {
         return item is null;
     }

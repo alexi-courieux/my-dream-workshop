@@ -29,7 +29,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
             throw new Exception("SetParent<T> must have a non-null parent, use Drop or DestroySelf instead");
         }
 
-        if (!targetParent.HasAvailableSlot<T>())
+        if (!targetParent.HasAvailableSlot(this))
         {
             throw new ArgumentException("The parent must have an available slot or be null");
         }
@@ -40,7 +40,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
 
         if (_parent is not null)
         {
-            transform.parent = _parent.GetAvailableItemSlot<T>();
+            transform.parent = _parent.GetAvailableItemSlot(this);
             _parent.AddItem<T>(this);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;

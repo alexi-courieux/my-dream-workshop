@@ -163,8 +163,6 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         {
             return new Item[] { _tool };
         }
-
-        Debug.LogWarning($"This station doesn't have items of the specified type : {typeof(T)}");
         return new Item[] { };
     }
 
@@ -191,8 +189,6 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         {
             return _tool is not null;
         }
-    
-        Debug.LogWarning($"This station doesn't have items of the specified type : {typeof(T)}");
         return false;
     }
 
@@ -201,35 +197,28 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         return _product is not null || _tool is not null;
     }
 
-    public Transform GetAvailableItemSlot<T>() where T : Item
+    public Transform GetAvailableItemSlot(Item newItem)
     {
-        if (typeof(T) == typeof(Product))
+        if (newItem is Product)
         {
             return productSlot;
         }
 
-        if (typeof(T) == typeof(Tool))
+        if (newItem is Tool)
         {
             return toolSlot;
         }
-
-        Debug.LogWarning($"This station doesn't have slots for the specified item : {typeof(T)}");
         return null;
     }
 
-    public bool HasAvailableSlot<T>() where T : Item
+    public bool HasAvailableSlot(Item item)
     {
-        if (typeof(T) == typeof(Product))
+        return item switch
         {
-            return _product is null;
-        }
+            Product => _product is null,
+            Tool => _tool is null,
+            _ => false
+        };
 
-        if (typeof(T) == typeof(Tool))
-        {
-            return _tool is null;
-        }
-
-        Debug.LogWarning($"This station doesn't have slots for the specified item : {typeof(T)}");
-        return false;
     }
 }

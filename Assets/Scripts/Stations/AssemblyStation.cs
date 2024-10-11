@@ -43,9 +43,10 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         {
             if (_finalProduct is not null) return;
             if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
-            if (!HasAvailableSlot<Product>()) return;
+            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            if (!HasAvailableSlot(playerItem)) return;
             
-            Player.Instance.HandleSystem.GetItem().SetParent<Product>(this);
+            playerItem.SetParent<Product>(this);
 
             CheckRecipes();
             _state = State.Idle;
@@ -180,8 +181,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             _finalProduct = newItem as FinalProduct;
             return;
         }
-    
-        Debug.LogWarning("This station can only hold products or final product!");
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -214,24 +213,22 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         return _items.Count > 0;
     }
 
-    public Transform GetAvailableItemSlot<T>() where T : Item
+    public Transform GetAvailableItemSlot(Item newItem)
     {
-        if (typeof(T) == typeof(Product))
+        if (newItem is Product)
         {
             return itemSlots[_items.Count];
         }
-        if (typeof(T) == typeof(FinalProduct))
+        if (newItem is FinalProduct)
         {
             return finalProductSlot;
         }
-    
-        Debug.LogWarning("This station can only hold products or final product!");
-            return null;
+        return null;
     }
 
-    public bool HasAvailableSlot<T>() where T : Item
+    public bool HasAvailableSlot(Item item)
     {
-        if (typeof(T) != typeof(Product) && typeof(T) != typeof(FinalProduct)) return false;
+        if (item is not Product && item is not FinalProduct) return false;
     
         return _items.Count < _capacity;
     }

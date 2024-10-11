@@ -1,5 +1,4 @@
 ﻿using System;
-using AshLight.BakerySim.UI;
 using UnityEngine;
 
 public class ChestStation : MonoBehaviour, IInteractable, IFocusable
@@ -27,7 +26,7 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable
             // If player has items, try to put in the chest
             if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
             
-            Product product = (Product) Player.Instance.HandleSystem.GetItem();
+            Product product = Player.Instance.HandleSystem.GetItem<Product>();
             if (product.ProductSo != productSo) return;
             
             productAmount++;
