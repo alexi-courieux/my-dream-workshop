@@ -24,14 +24,23 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable
         else
         {
             // If player has items, try to put in the chest
-            if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
+            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            if (playerItem is not Product && playerItem is not FinalProduct) return;
+            ProductSo playerProductSo = null;
+            if (playerItem is Product product)
+            {
+                playerProductSo = product.ProductSo;
+            }
+            if (playerItem is FinalProduct finalProduct)
+            {
+                playerProductSo = finalProduct.FinalProductSo;
+            }
             
-            Product product = Player.Instance.HandleSystem.GetItem<Product>();
-            if (product.ProductSo != productSo) return;
+            if (playerProductSo != productSo) return;
             
             productAmount++;
             OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
-            product.DestroySelf();
+            playerItem.DestroySelf();
         }
     }
     
