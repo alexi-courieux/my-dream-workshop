@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Log
   m_EditorClassIdentifier: 
   prefab: {fileID: 1708182585262796304, guid: 8a44b8a707207024d8d290057575678a, type: 3}
-  sprite: {fileID: 21300000, guid: e0eac6b76fdd842e88a7f8c75ecffaf4, type: 3}
+  sprite: {fileID: 21300000, guid: efb7455ed3de48f418721790b230f347, type: 3}
   itemName: Log
   buyPrice: 5
   sellPrice: 3

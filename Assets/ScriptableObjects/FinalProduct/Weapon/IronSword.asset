@@ -16,5 +16,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 46c993598ebc54c0c9ebd8a0050516fb, type: 3}
   itemName: IronSword
   buyPrice: 0
-  sellPrice: 20
+  sellPrice: 40
   itemType: 4

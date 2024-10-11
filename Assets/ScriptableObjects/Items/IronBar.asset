@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IronBar
   m_EditorClassIdentifier: 
   prefab: {fileID: 3908874931380198303, guid: 581c358530be69b43af16eda897d3f0c, type: 3}
-  sprite: {fileID: 21300000, guid: 7e082cc2cf2a4433d85e388c6bf94234, type: 3}
+  sprite: {fileID: 21300000, guid: 468ef090fe66db644b65fe7fa548ee69, type: 3}
   itemName: IronBar
   buyPrice: 10
-  sellPrice: 0
+  sellPrice: 8

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
-  m_Name: Nail
+  m_Name: Nails
   m_EditorClassIdentifier: 
   prefab: {fileID: 3908874931380198303, guid: eae96b0b51b32c04bb2aeb0b0d9b089d, type: 3}
-  sprite: {fileID: 21300000, guid: 1618cb37bcd5144fd923b9697be57d63, type: 3}
-  itemName: Nail
+  sprite: {fileID: 21300000, guid: 7d9543cbdde22bf4490f0dd3c03d87c0, type: 3}
+  itemName: Nails
   buyPrice: 12
-  sellPrice: 0
+  sellPrice: 10
