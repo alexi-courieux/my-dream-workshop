@@ -5,7 +5,7 @@ using UnityEngine;
 public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
 {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public event EventHandler OnStartHarvest;
+    public event EventHandler OnHarvesting;
     
     [SerializeField] private GameObject fullPrefab;
     [SerializeField] private GameObject depletedPrefab;
@@ -64,7 +64,7 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
         if (timeBeforeNextInteraction > 0) return;
         if(Player.Instance.HandleSystem.HaveAnyItems()) return;
         timeBeforeNextInteraction = resourceNodeSo.timeBetweenInteractions;
-        OnStartHarvest?.Invoke(this, EventArgs.Empty);
+        OnHarvesting?.Invoke(this, EventArgs.Empty);
     }
     
     private void Fill()

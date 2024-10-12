@@ -10,10 +10,10 @@ public class ResourceNodeVisual : MonoBehaviour
 
     private void Start()
     {
-        resourceNode.OnStartHarvest += ResourceNode_OnStartHarvest;
+        resourceNode.OnHarvesting += ResourceNode_OnHarvesting;
     }
     
-    private void ResourceNode_OnStartHarvest(object sender, EventArgs e)
+    private void ResourceNode_OnHarvesting(object sender, EventArgs e)
     {
         animator.SetTrigger(Harvest);
     }
