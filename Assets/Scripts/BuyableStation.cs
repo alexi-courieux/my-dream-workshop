@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class BuyableStation : MonoBehaviour, IInteractable
+public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
 {
+    public event EventHandler OnFocus;
+    public event EventHandler OnStopFocus;
+    
     [SerializeField] private int price;
     [SerializeField] private GameObject[] stations;
     [SerializeField] private ProductSo[] orders;
     [SerializeField] private RecipeSo[] recipes;
     [SerializeField] private RecipeSo[] buyableRecipes;
-    [SerializeField] private BuyableRecipeGroupSo[] recipeGroups;
+    [SerializeField] private BuyableRecipeGroupSo[] buyableRecipeGroups;
 
     private void Start()
     {
@@ -38,15 +42,30 @@ public class BuyableStation : MonoBehaviour, IInteractable
         {
             RecipeManager.Instance.AddRecipe(recipe);
         }
-        foreach (BuyableRecipeGroupSo recipeGroup in recipeGroups)
+        foreach (BuyableRecipeGroupSo recipeGroup in buyableRecipeGroups)
         {
             OrderManager.Instance.AddBuyableRecipeGroup(recipeGroup);
         }
         DestroySelf();
     }
     
+    public void Focus()
+    {
+        OnFocus?.Invoke(this, EventArgs.Empty);
+    }
+    
+    public void StopFocus()
+    {
+        OnStopFocus?.Invoke(this, EventArgs.Empty);
+    }
+    
     private void DestroySelf()
     {
         Destroy(gameObject);
+    }
+    
+    public int GetPrice()
+    {
+        return price;
     }
 }
