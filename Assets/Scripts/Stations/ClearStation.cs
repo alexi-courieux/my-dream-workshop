@@ -21,12 +21,12 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
             if (Player.Instance.HandleSystem.HaveItems<Product>())
             {
                 if (HaveItems<Product>()) return;
-                Player.Instance.HandleSystem.GetItem().SetParent<Product>(this);
+                Player.Instance.HandleSystem.GetItem().SetParent(this);
             }
             else if (Player.Instance.HandleSystem.HaveItems<Tool>())
             {
                 if (HaveItems<Tool>()) return;
-                Player.Instance.HandleSystem.GetItem().SetParent<Tool>(this);
+                Player.Instance.HandleSystem.GetItem().SetParent(this);
             }
             else
             {
@@ -37,11 +37,11 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         {
             if (HaveItems<Product>())
             {
-                _product.SetParent<Product>(Player.Instance.HandleSystem);
+                _product.SetParent(Player.Instance.HandleSystem);
             } 
             else if (HaveItems<Tool>())
             {
-                _tool.SetParent<Tool>(Player.Instance.HandleSystem);
+                _tool.SetParent(Player.Instance.HandleSystem);
             }
         }
         RefreshRecipes();
@@ -134,21 +134,21 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
     }
 
 
-    public void AddItem<T>(Item newItem) where T : Item
+    public void AddItem(Item newItem)
     {
-        if (typeof(T) != typeof(Product) && typeof(T) != typeof(Tool))
+        if (newItem is not Product && newItem is not Tool)
         {
             throw new Exception("This station can only hold products or tools!");
         }
     
-        if (typeof(T) == typeof(Product))
+        if (newItem is Product product)
         {
-            _product = newItem as Product;
+            _product = product;
         }
     
-        if (typeof(T) == typeof(Tool))
+        if (newItem is Tool tool)
         {
-            _tool = newItem as Tool;
+            _tool = tool;
         }
     }
 

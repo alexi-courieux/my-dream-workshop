@@ -37,7 +37,7 @@ public interface IHandleItems
     /// </summary>
     /// <param name="newItem">Item to be added</param>
     /// <typeparam name="T">Type of the item</typeparam>
-    public void AddItem<T>(Item newItem) where T : Item;
+    public void AddItem(Item newItem);
 
     /// <summary>
     /// Get all items of the specified type

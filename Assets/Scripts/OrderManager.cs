@@ -8,7 +8,7 @@ public class OrderManager : MonoBehaviour
     
     [SerializeField] private ProductDictionarySo buyableProducts;
     [SerializeField] private ProductDictionarySo sellableProducts;
-    [SerializeField] private List<ChestStation> chestStations;
+    [SerializeField] private List<SingleItemChestStation> chestStations;
     
     private void Awake()
     {

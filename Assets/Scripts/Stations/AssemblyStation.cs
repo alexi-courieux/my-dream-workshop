@@ -42,11 +42,15 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         if (Player.Instance.HandleSystem.HaveAnyItems())
         {
             if (_finalProduct is not null) return;
-            if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
+            if (Player.Instance.HandleSystem.HaveItems<FinalProduct>() 
+                && _items.Count > 0) return;
+            
+            if (!Player.Instance.HandleSystem.HaveItems<Product>()
+                && !Player.Instance.HandleSystem.HaveItems<FinalProduct>()) return;
             Item playerItem = Player.Instance.HandleSystem.GetItem();
             if (!HasAvailableSlot(playerItem)) return;
             
-            playerItem.SetParent<Product>(this);
+            playerItem.SetParent(this);
 
             CheckRecipes();
             _state = State.Idle;
@@ -58,14 +62,14 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         {
             if (_finalProduct is not null)
             {
-                _finalProduct.SetParent<Item>(Player.Instance.HandleSystem);
+                _finalProduct.SetParent(Player.Instance.HandleSystem);
                 return;
             }
 
             if (_items.Count <= 0) return;
             
             Item item = _items.Pop();
-            item.SetParent<Item>(Player.Instance.HandleSystem);
+            item.SetParent(Player.Instance.HandleSystem);
             _state = State.Idle;
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
@@ -169,17 +173,15 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         OnStopFocus?.Invoke(this, EventArgs.Empty);
     }
 
-    public void AddItem<T>(Item newItem) where T : Item
+    public void AddItem(Item newItem)
     {
-        if (typeof(T) == typeof(Product))
+        if (newItem is Product product)
         {
-            _items.Push(newItem as Product);
-            return;
+            _items.Push(product);
         }
-        else if (typeof(T) == typeof(FinalProduct))
+        else if (newItem is FinalProduct fp)
         {
-            _finalProduct = newItem as FinalProduct;
-            return;
+            _finalProduct = fp;
         }
     }
 
@@ -228,8 +230,11 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public bool HasAvailableSlot(Item item)
     {
-        if (item is not Product && item is not FinalProduct) return false;
-    
-        return _items.Count < _capacity;
+        return item switch
+        {
+            Product => _items.Count < _capacity,
+            FinalProduct => _finalProduct is null,
+            _ => false
+        };
     }
 }

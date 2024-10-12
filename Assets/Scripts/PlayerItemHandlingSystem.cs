@@ -20,7 +20,7 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
         backpackVisual.SetActive(false);
     }
 
-    public void AddItem<T>(Item newItem) where T : Item
+    public void AddItem(Item newItem)
     {
         if (isBackpackEquipped && newItem is Product newProduct)
         {

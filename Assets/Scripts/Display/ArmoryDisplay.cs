@@ -11,12 +11,10 @@ public class ArmoryDisplay : MonoBehaviour, IInteractable, IHandleItems
     [SerializeField] private Transform chestSlot;
     [SerializeField] private Transform pantsSlot;
     [SerializeField] private Transform bootSlot;
+    [SerializeField] private FinalProductSo.ItemType[] allowedItemTypes;
     private List<FinalProduct> _items;
-    private bool haveHelmet;
-    private bool haveChest;
-    private bool havePants;
-    private bool haveBoot;
     private List<FinalProductSo.ItemType> _itemTypes;
+    
 
     private void Awake()
         {
@@ -32,17 +30,17 @@ public class ArmoryDisplay : MonoBehaviour, IInteractable, IHandleItems
             if (playerItem is not FinalProduct fp) return;
             if (!HasAvailableSlot(playerItem)) return;
             
-            fp.SetParent<FinalProduct>(this);
+            fp.SetParent(this);
         }
         else
         {
             if (_items.Count <= 0) return;
             
             Item item = _items[0];
-            item.SetParent<Item>(Player.Instance.HandleSystem);
+            item.SetParent(Player.Instance.HandleSystem);
         }
     }
-        public void AddItem<T>(Item newItem) where T : Item
+        public void AddItem(Item newItem)
     {
         if (newItem is not FinalProduct fp)
         {
@@ -103,6 +101,8 @@ public class ArmoryDisplay : MonoBehaviour, IInteractable, IHandleItems
     public bool HasAvailableSlot(Item item)
     {
         if (item is not FinalProduct fp) return false;
+        if (allowedItemTypes.Length > 0 
+            && !allowedItemTypes.Contains(fp.FinalProductSo.itemType)) return false;
         return !_itemTypes.Contains(fp.FinalProductSo.itemType);
     }
 }

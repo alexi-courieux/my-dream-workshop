@@ -15,7 +15,7 @@ MonoBehaviour:
   inputs:
   - {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
   - {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
-  - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
+  - {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
   - {fileID: 11400000, guid: 0fc746cb698ee3b4d812ae2ebe246990, type: 2}
   output: {fileID: 11400000, guid: f5fd5a69cc94f9c498e75bc4fa72afe0, type: 2}
   hitToProcess: 10

@@ -13,7 +13,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
     {
         Transform itemTransform = Instantiate(itemPrefab);
         Item item = itemTransform.GetComponent<Item>();
-        item.SetParent<T>(parent);
+        item.SetParent(parent);
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
     /// <param name="targetParent">new parent</param>
     /// <returns>true if the parent have changed</returns>
     /// <exception cref="ArgumentException">The parent does not have available slot to take the item</exception>
-    public void SetParent<T>(IHandleItems targetParent) where T : Item
+    public void SetParent(IHandleItems targetParent)
     {
         if (targetParent is null)
         {
@@ -41,7 +41,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
         if (_parent is not null)
         {
             transform.parent = _parent.GetAvailableItemSlot(this);
-            _parent.AddItem<T>(this);
+            _parent.AddItem(this);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
         }
@@ -61,7 +61,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
         }
         else
         {
-            SetParent<Item>(Player.Instance.HandleSystem);
+            SetParent(Player.Instance.HandleSystem);
         }
     }
 

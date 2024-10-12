@@ -1,20 +1,21 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 public class ChestUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI countText;
-    [SerializeField] private ChestStation chestStation;
+    [FormerlySerializedAs("singleChestStation")] [FormerlySerializedAs("chestStation")] [SerializeField] private SingleItemChestStation singleItemChestStation;
     [SerializeField] private GameObject countTransform;
     [SerializeField] private Image productImage;
 
     private void Start()
     {
-        chestStation.OnFocus += ((sender, args) => ShowCount());
-        chestStation.OnStopFocus += ((sender, args) => HideCount());
-        chestStation.OnProductAmountChanged += ((sender, args) => UpdateVisuals());
-        productImage.sprite = chestStation.GetProductSo().sprite;
+        singleItemChestStation.OnFocus += ((sender, args) => ShowCount());
+        singleItemChestStation.OnStopFocus += ((sender, args) => HideCount());
+        singleItemChestStation.OnProductAmountChanged += ((sender, args) => UpdateVisuals());
+        productImage.sprite = singleItemChestStation.GetProductSo().sprite;
         HideCount();
     }
 
@@ -31,6 +32,6 @@ public class ChestUI : MonoBehaviour
     
     private void UpdateVisuals()
     {
-        countText.text = chestStation.GetProductAmount().ToString("D");
+        countText.text = singleItemChestStation.GetProductAmount().ToString("D");
     }
 }

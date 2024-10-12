@@ -35,7 +35,7 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
         if (HaveItems<Product>())
         {
             if (isPlayerHoldingProduct) return;
-            _product.SetParent<Item>(Player.Instance.HandleSystem);
+            _product.SetParent(Player.Instance.HandleSystem);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
@@ -47,7 +47,7 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
             
             _state = State.Idle;
             Item product = Player.Instance.HandleSystem.GetItem();
-            product.SetParent<Product>(this);
+            product.SetParent(this);
             CheckForRecipes();
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
@@ -95,14 +95,14 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
         }
     }
 
-    public void AddItem<T>(Item newItem) where T : Item
+    public void AddItem(Item newItem)
     {
-        if(typeof(T) != typeof(Product))
+        if(newItem is not Product product)
         {
             throw new Exception("This station can only hold products!");
         }
     
-        _product = newItem as Product;
+        _product = product;
     }
 
     public Item[] GetItems<T>() where T : Item

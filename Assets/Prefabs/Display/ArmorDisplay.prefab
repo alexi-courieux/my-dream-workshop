@@ -71,6 +71,7 @@ MonoBehaviour:
   chestSlot: {fileID: 2293531652925722681}
   pantsSlot: {fileID: 6828498910514273609}
   bootSlot: {fileID: 8612668077225762947}
+  allowedItemTypes: 00000000010000000200000003000000
 --- !u!1001 &7633693971771960582
 PrefabInstance:
   m_ObjectHideFlags: 0

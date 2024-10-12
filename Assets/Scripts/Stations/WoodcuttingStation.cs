@@ -67,7 +67,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         if (HaveItems<Product>())
         {
             if (isPlayerHoldingProduct) return;
-            _product.SetParent<Item>(Player.Instance.HandleSystem);
+            _product.SetParent(Player.Instance.HandleSystem);
             _state = State.Idle;
             OnStopProcessing?.Invoke(this, EventArgs.Empty);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
@@ -84,7 +84,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
                 Debug.LogWarning("Station can only hold products!");
                 return;
             }
-            product.SetParent<Product>(this);
+            product.SetParent(this);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
@@ -135,14 +135,14 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
     }
 
-    public void AddItem<T>(Item newItem) where T : Item
+    public void AddItem(Item newItem)
     {
-        if(typeof(T) != typeof(Product))
+        if(newItem is not Product product)
         {
             throw new Exception("This station can only hold products!");
         }
     
-        _product = newItem as Product;
+        _product = product;
     }
 
     public Item[] GetItems<T>() where T : Item
