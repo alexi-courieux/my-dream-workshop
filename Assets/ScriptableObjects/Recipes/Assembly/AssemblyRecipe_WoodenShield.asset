@@ -19,3 +19,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fc746cb698ee3b4d812ae2ebe246990, type: 2}
   output: {fileID: 11400000, guid: f5fd5a69cc94f9c498e75bc4fa72afe0, type: 2}
   hitToProcess: 10
+  buyPrice: 0
+  isUnlock: 1

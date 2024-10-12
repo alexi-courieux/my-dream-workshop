@@ -6,4 +6,6 @@ public class AssemblyRecipeSo : ScriptableObject
     public ProductSo[] inputs;
     public FinalProductSo output;
     public int hitToProcess;
+    public int buyPrice;
+    public bool isUnlock;
 }

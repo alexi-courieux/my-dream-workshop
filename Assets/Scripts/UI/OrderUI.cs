@@ -13,7 +13,7 @@ public class OrderUI : MonoBehaviour
     private void Awake()
     {
         orderSingleItemUITemplate.SetActive(false);
-        closeButton.onClick.AddListener(Hide);
+        //closeButton.onClick.AddListener(Hide);
     }
     
     private void EconomyManager_OnMoneyChanged(object sender, EventArgs e)
@@ -23,7 +23,7 @@ public class OrderUI : MonoBehaviour
 
     private void Start()
     {
-        Hide();
+        UpdateVisuals();
         EconomyManager.Instance.OnMoneyChanged += EconomyManager_OnMoneyChanged;
     }
 
