@@ -8,6 +8,7 @@ public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
     
     [SerializeField] private int price;
     [SerializeField] private GameObject[] stations;
+    [SerializeField] private BuyableStation[] buyableStationsToDestroy;
     [SerializeField] private ProductSo[] orders;
     [SerializeField] private RecipeSo[] recipes;
     [SerializeField] private RecipeSo[] buyableRecipes;
@@ -45,6 +46,10 @@ public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
         foreach (BuyableRecipeGroupSo recipeGroup in buyableRecipeGroups)
         {
             OrderManager.Instance.AddBuyableRecipeGroup(recipeGroup);
+        }
+        foreach (BuyableStation buyableStation in buyableStationsToDestroy)
+        {
+            buyableStation.DestroySelf();
         }
         DestroySelf();
     }
