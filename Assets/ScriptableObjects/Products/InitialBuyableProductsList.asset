@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93730e0c6127474aa7adbf36e4c3da17, type: 3}
-  m_Name: BuyableProductsList
+  m_Name: InitialBuyableProductsList
   m_EditorClassIdentifier: 
   products:
   - {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
-  - {fileID: 11400000, guid: 91d07c10f44b2d94bb0cc34b87049ee1, type: 2}
   - {fileID: 11400000, guid: d70e357cbcab53d408f3d68e9820e51e, type: 2}
   - {fileID: 11400000, guid: 0fc746cb698ee3b4d812ae2ebe246990, type: 2}

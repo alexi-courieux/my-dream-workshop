@@ -16,7 +16,6 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
     }
 
     [SerializeField] private Transform itemSlot;
-    [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private CastingRecipeSo _selectedRecipeSo;
     private CastingRecipeSo[] _availableRecipes;
     private Product _product;
@@ -100,7 +99,8 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
     }
     private void CheckForRecipes()
     {
-        _availableRecipes = recipesDictionarySo.castingRecipeSo.Where(r => r.input == _product.ProductSo).ToArray();
+        _availableRecipes = RecipeManager.Instance.GetRecipes<CastingRecipeSo>();
+        _availableRecipes = _availableRecipes.Where(r => r.input == _product.ProductSo).ToArray();
         if (_availableRecipes.Length > 0)
         {
             SelectRecipe(_availableRecipes[0]);

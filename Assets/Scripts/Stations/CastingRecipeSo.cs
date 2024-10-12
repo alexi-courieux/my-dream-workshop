@@ -1,9 +1,8 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CastingRecipe_new", menuName = "ScriptableObject/Recipe/Casting")]
-public class CastingRecipeSo : ScriptableObject
+public class CastingRecipeSo : RecipeSo
 {
     public ProductSo input;
-    public ProductSo output;
     public float timeToProcess;
 }

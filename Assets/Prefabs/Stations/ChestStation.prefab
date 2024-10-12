@@ -175,7 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4564176580187530620}
   - component: {fileID: 8206804326777997487}
-  - component: {fileID: 4098096939596482774}
+  - component: {fileID: 3984201582559704778}
   m_Layer: 6
   m_Name: ChestStation
   m_TagString: Untagged
@@ -221,7 +221,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &4098096939596482774
+--- !u!114 &3984201582559704778
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3420086584039388467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4faca71b52b645ff9030c7b22b2e3f56, type: 3}
+  m_Script: {fileID: 11500000, guid: 32ccc0dc806b4db469fb03487fbc4fca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   productSo: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 2679320063095548579}
-  singleItemChestStation: {fileID: 4098096939596482774}
+  singleItemChestStation: {fileID: 3984201582559704778}
   countTransform: {fileID: 5061959388043660401}
   productImage: {fileID: 5952250244661080657}
 --- !u!1 &7466442791457390075
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8af6d44957764c94d9302e45d0403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  singleItemChestStation: {fileID: 4098096939596482774}
+  singleItemChestStation: {fileID: 3984201582559704778}
   animator: {fileID: 4133809427396697967}
 --- !u!1001 &9144982502440344174
 PrefabInstance:

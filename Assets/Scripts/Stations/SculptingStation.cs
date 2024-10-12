@@ -16,7 +16,6 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     }
 
     [SerializeField] private Transform itemSlot;
-    [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private SculptingRecipeSo _anvilRecipeSo;
     private SculptingRecipeSo[] _availableRecipes;
     private Product _product;
@@ -84,7 +83,8 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     
     private void CheckForRecipes()
     {
-        _availableRecipes = recipesDictionarySo.sculptingRecipeSo.Where(r => r.input == _product.ProductSo).ToArray();
+        _availableRecipes = RecipeManager.Instance.GetRecipes<SculptingRecipeSo>();
+        _availableRecipes = _availableRecipes.Where(r => r.input == _product.ProductSo).ToArray();
         if (_availableRecipes.Length > 0)
         {
             SelectRecipe(_availableRecipes[0]);

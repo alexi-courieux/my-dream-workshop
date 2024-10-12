@@ -18,7 +18,6 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
     }
 
     [SerializeField] private Transform itemSlot;
-    [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private WoodcuttingRecipeSo _selectedRecipeSo;
     private WoodcuttingRecipeSo[] _availableRecipes;
     private Product _product;
@@ -110,7 +109,8 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
     }
     private void CheckForRecipes()
     {
-        _availableRecipes = recipesDictionarySo.woodcuttingRecipes.Where(r => r.input == _product.ProductSo).ToArray();
+        _availableRecipes = RecipeManager.Instance.GetRecipes<WoodcuttingRecipeSo>();
+        _availableRecipes = _availableRecipes.Where(r => r.input == _product.ProductSo).ToArray();
         if (_availableRecipes.Length > 0)
         {
             SelectRecipe(_availableRecipes[0]);

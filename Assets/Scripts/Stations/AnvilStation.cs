@@ -16,7 +16,6 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
     }
 
     [SerializeField] private Transform itemSlot;
-    [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private AnvilRecipeSo _anvilRecipeSo;
     private AnvilRecipeSo[] _availableRecipes;
     private Product _product;
@@ -84,7 +83,8 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
     
     private void CheckForRecipes()
     {
-        _availableRecipes = recipesDictionarySo.anvilRecipeSo.Where(r => r.input == _product.ProductSo).ToArray();
+        _availableRecipes = RecipeManager.Instance.GetRecipes<AnvilRecipeSo>();
+        _availableRecipes = _availableRecipes.Where(r => r.input == _product.ProductSo).ToArray();
         if (_availableRecipes.Length > 0)
         {
             SelectRecipe(_availableRecipes[0]);

@@ -1,24 +1,31 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
-public class TabsManager : MonoBehaviour
+public abstract class TabsManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] tabs;
     [SerializeField] private Button closeButton;
-    [SerializeField] private Image[] tabButtons;
+    [SerializeField] private Button[] tabButtons;
+    [SerializeField] private Image[] tabButtonBackgroundImages;
     [SerializeField] private Sprite inactiveTabBackground;
     [SerializeField] private Sprite activeTabBackground;
 
     private void Awake() {
-        foreach (GameObject gameObject in tabs)
+        foreach (GameObject go in tabs)
         {
-            gameObject.SetActive(false);
+            go.SetActive(false);
         }
         closeButton.onClick.AddListener(Hide);
+        for (int i = 0; i < tabButtons.Length; i++)
+        {
+            int buttonIndex = i;
+            tabButtons[i].onClick.AddListener(() => SwitchToTab(buttonIndex));
+        }
     }
 
-    private void Start()
+    protected void Start()
     {
         SwitchToTab(0);
         Hide();
@@ -39,17 +46,10 @@ public class TabsManager : MonoBehaviour
 
     private void SwitchToTab(int tabID)
     {
-        foreach (GameObject gameObject in tabs)
+        for (int i = 0; i < tabButtons.Length; i++)
         {
-            gameObject.SetActive(false);
+            tabs[i].SetActive(i == tabID);
+            tabButtonBackgroundImages[i].sprite = i == tabID ? activeTabBackground : inactiveTabBackground;
         }
-        tabs[tabID].SetActive(true);
-
-        foreach (Image image in tabButtons)
-        {
-            image.sprite = inactiveTabBackground;
-        }
-        tabButtons[tabID].sprite = activeTabBackground;
     }
-
 }

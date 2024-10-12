@@ -18,7 +18,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     [SerializeField] private Transform[] itemSlots;
     [SerializeField] private Transform finalProductSlot;
-    [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     
     private readonly StackList<Product> _items = new();
     private FinalProduct _finalProduct;
@@ -85,7 +84,8 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
             .Select(i => i.ProductSo)
             .OrderBy(i => i.itemName)
             .ToArray();
-        _availableRecipes = recipesDictionarySo.assemblyRecipeSo
+        _availableRecipes = RecipeManager.Instance.GetRecipes<AssemblyRecipeSo>();
+        _availableRecipes = _availableRecipes
             .Where(r =>
             {
                 ProductSo[] recipeInputs = r.inputs

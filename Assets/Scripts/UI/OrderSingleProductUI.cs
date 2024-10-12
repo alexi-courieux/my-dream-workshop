@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class OrderSingleItemUI : MonoBehaviour
+public class OrderSingleProductUI : MonoBehaviour
 {
     [SerializeField] private Image productImage;
     [SerializeField] private TextMeshProUGUI productNameText;
@@ -14,7 +14,7 @@ public class OrderSingleItemUI : MonoBehaviour
     {
         buyButton.onClick.AddListener(() =>
         {
-            OrderManager.Instance.Buy(productSo);
+            OrderManager.Instance.BuyProduct(productSo);
         });
     }
 

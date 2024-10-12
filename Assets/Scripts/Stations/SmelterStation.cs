@@ -16,7 +16,6 @@ public class SmelterStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
     }
 
     [SerializeField] private Transform itemSlot;
-    [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     private SmelterRecipeSo _selectedRecipeSo;
     private SmelterRecipeSo[] _availableRecipes;
     private Product _product;
@@ -104,7 +103,8 @@ public class SmelterStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
     }
     private void CheckForRecipes()
     {
-        _availableRecipes = recipesDictionarySo.smelterRecipeSo.Where(r => r.input == _product.ProductSo).ToArray();
+        _availableRecipes = RecipeManager.Instance.GetRecipes<SmelterRecipeSo>();
+        _availableRecipes = _availableRecipes.Where(r => r.input == _product.ProductSo).ToArray();
         if (_availableRecipes.Length > 0)
         {
             SelectRecipe(_availableRecipes[0]);

@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProductsList", menuName = "ScriptableObject/ProductsDictionary", order = 0)]
+[CreateAssetMenu(fileName = "ProductsList", menuName = "ScriptableObject/ProductsList", order = 0)]
 public class ProductDictionarySo : ScriptableObject
 {
     public ProductSo[] products;

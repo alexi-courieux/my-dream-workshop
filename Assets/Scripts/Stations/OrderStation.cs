@@ -2,11 +2,9 @@
 
 public class OrderStation : MonoBehaviour, IInteractable
 {
-    //[SerializeField] private OrderUI orderUI;
-    [SerializeField] private TabsManager tabsManager;
+    [SerializeField] private OrderUI orderUi;
     public void Interact()
     {
-        tabsManager.Show();
-        //orderUI.Show();
+        orderUi.Show();
     }
 }

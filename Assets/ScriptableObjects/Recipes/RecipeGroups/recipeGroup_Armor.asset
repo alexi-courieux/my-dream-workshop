@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb42ce484b9404cab5c06312e12a818, type: 3}
+  m_Name: recipeGroup_Armor
+  m_EditorClassIdentifier: 
+  recipes:
+  - {fileID: 11400000, guid: 0fa266cca24727a4d9b9c48bbe8d260f, type: 2}
+  - {fileID: 11400000, guid: 615d2e43aeef508428610823b911e775, type: 2}
+  - {fileID: 11400000, guid: 636167f9b657b4549b7a1d86b8cc1b5b, type: 2}
+  - {fileID: 11400000, guid: cf3ae3b4c7088b24e91cc27b0f0ad72a, type: 2}
+  - {fileID: 11400000, guid: 45ef90580f3e2994f9875516e4a3268e, type: 2}
+  price: 200
+  groupName: Iron Armor
