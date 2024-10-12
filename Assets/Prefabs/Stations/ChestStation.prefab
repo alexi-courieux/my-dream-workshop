@@ -197,6 +197,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6334464063626513489}
+  - {fileID: 7134793554574419670}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &8206804326777997487
@@ -318,7 +319,7 @@ RectTransform:
   m_Children:
   - {fileID: 1989307594337753711}
   - {fileID: 8103845293940376574}
-  m_Father: {fileID: 6334464063626513489}
+  m_Father: {fileID: 4564176580187530620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -401,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 2679320063095548579}
-  chestStation: {fileID: 4098096939596482774}
+  singleItemChestStation: {fileID: 4098096939596482774}
   countTransform: {fileID: 5061959388043660401}
   productImage: {fileID: 5952250244661080657}
 --- !u!1 &7466442791457390075
@@ -573,7 +574,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8746896883057950085}
-  - {fileID: 7134793554574419670}
   m_Father: {fileID: 4564176580187530620}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4133809427396697967
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8af6d44957764c94d9302e45d0403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chestStation: {fileID: 4098096939596482774}
+  singleItemChestStation: {fileID: 4098096939596482774}
   animator: {fileID: 4133809427396697967}
 --- !u!1001 &9144982502440344174
 PrefabInstance:

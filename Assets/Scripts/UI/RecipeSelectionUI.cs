@@ -28,9 +28,9 @@ namespace AshLight.BakerySim.UI
                 Debug.LogError("Station doesn't Implement IFocusable");
             }
             
-            if (station.TryGetComponent(out ISelectableRecipe SelectableRecipeStation))
+            if (station.TryGetComponent(out ISelectablProduct SelectableRecipeStation))
             {
-                SelectableRecipeStation.OnRecipeSelected += SelectableRecipeStation_OnRecipeSelected;
+                SelectableRecipeStation.OnProductSelected += SelectableRecipeStation_OnRecipeSelected;
             } else {
                 Debug.LogError("Station doesn't Implement ISelectableRecipe");
             }
@@ -46,10 +46,10 @@ namespace AshLight.BakerySim.UI
             Hide();
         }
     
-        private void SelectableRecipeStation_OnRecipeSelected(object sender, RecipeSelectedEventArgs e)
+        private void SelectableRecipeStation_OnRecipeSelected(object sender, SelectedProductEventArgs e)
         {
-            _selectedOutput = e.Output;
-            _availableRecipesCount = e.AvailableRecipesCount;
+            _selectedOutput = e.Product;
+            _availableRecipesCount = e.AvailableProductsCount;
             if (_selectedOutput is null)
             {
                 Hide();

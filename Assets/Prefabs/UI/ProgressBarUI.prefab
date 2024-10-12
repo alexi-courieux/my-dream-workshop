@@ -119,6 +119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasProgressGameObject: {fileID: 0}
   barImage: {fileID: 5340419158419672163}
+  hideOnMinAndMax: 1
 --- !u!114 &-1579423278398209393
 MonoBehaviour:
   m_ObjectHideFlags: 0

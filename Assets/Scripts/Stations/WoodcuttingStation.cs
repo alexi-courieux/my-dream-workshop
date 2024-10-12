@@ -2,12 +2,12 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableRecipe, IInteractablePrevious, IInteractableNext, IFocusable
+public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectablProduct, IInteractablePrevious, IInteractableNext, IFocusable
 {
     public event EventHandler OnProcessing;
     public event EventHandler OnStopProcessing;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public event EventHandler<RecipeSelectedEventArgs> OnRecipeSelected;
+    public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
 
@@ -50,7 +50,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
     private void Transform()
     {
         _product.DestroySelf();
-        Item.SpawnItem<Product>(_selectedRecipeSo.output.prefab, this);
+        Item.SpawnItem(_selectedRecipeSo.output.prefab, this);
         _state = State.Idle;
         CheckForRecipes();
         OnStopProcessing?.Invoke(this, EventArgs.Empty);
@@ -73,7 +73,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
-            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
+            OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, 0));
         }
         else
         {
@@ -126,13 +126,13 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         _selectedRecipeSo = recipe;
         _timeToProcessMax = recipe.timeToProcess;
         _timeToProcess = _timeToProcessMax;
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(recipe.output, 0));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(recipe.output, 0));
     }
     
     private void ClearRecipe()
     {
         _selectedRecipeSo = null;
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, 0));
     }
 
     public void AddItem(Item newItem)

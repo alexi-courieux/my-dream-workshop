@@ -100,7 +100,7 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
 
     private void Harvest()
     {
-        Item.SpawnItem<Product>(resourceNodeSo.product.prefab, Player.Instance.HandleSystem);
+        Item.SpawnItem(resourceNodeSo.product.prefab, Player.Instance.HandleSystem);
         resourceLeft--;
         if (resourceLeft <= 0)
         {

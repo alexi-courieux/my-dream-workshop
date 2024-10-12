@@ -1,84 +1,105 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-
-public class ChestStation : MonoBehaviour, IInteractable, IFocusable
+public class ChestStation : MonoBehaviour, IInteractable, IFocusable, IInteractablePrevious, IInteractableNext, IHasProgress,
+    ISelectablProduct
 {
-    
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
-    public event EventHandler OnProductAmountChanged;
-    
-    [SerializeField] private ProductSo productSo;
-    [SerializeField] private int productAmount = 1;
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+    public event EventHandler<SelectedProductEventArgs> OnProductSelected;
+
+    private const int Capacity = 10;
+
+    private List<ProductSo> _products;
+    private int _index;
+
+
+    private void Start()
+    {
+        _products = new List<ProductSo>();
+        _index = 0;
+    }
+
     public void Interact()
     {
-        if (!Player.Instance.HandleSystem.HaveAnyItems())
+        if (Player.Instance.HandleSystem.HaveAnyItems())
         {
-            // If player doesn't have any items, try to take from the chest
-            if (productAmount <= 0) return;
-            
-            Item.SpawnItem<Product>(productSo.prefab, Player.Instance.HandleSystem);
-            productAmount--;
-            OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
+            if (_products.Count >= Capacity) return;
+
+            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            if (playerItem is not Product
+                && playerItem is not FinalProduct) return;
+            switch (playerItem)
+            {
+                case Product product:
+                    _products.Add(product.ProductSo);
+                    break;
+                case FinalProduct finalProduct:
+                    _products.Add(finalProduct.FinalProductSo);
+                    break;
+            }
+            _index = _products.Count - 1;
+            SelectProduct();
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+            {
+                progressNormalized = (float) _products.Count / Capacity
+            });
+            playerItem.DestroySelf();
         }
         else
         {
-            // If player has items, try to put in the chest
-            Item playerItem = Player.Instance.HandleSystem.GetItem();
-            if (playerItem is not Product && playerItem is not FinalProduct) return;
-            ProductSo playerProductSo = null;
-            if (playerItem is Product product)
+            if (_products.Count <= 0) return;
+
+            ProductSo productSo = _products[_index];
+            Item.SpawnItem(productSo.prefab, Player.Instance.HandleSystem);
+            _products.RemoveAt(_index);
+            if (_index >= _products.Count)
             {
-                playerProductSo = product.ProductSo;
+                _index = _products.Count - 1;
             }
-            if (playerItem is FinalProduct finalProduct)
+            SelectProduct();
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
             {
-                playerProductSo = finalProduct.FinalProductSo;
-            }
-            
-            if (playerProductSo != productSo) return;
-            
-            productAmount++;
-            OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
-            playerItem.DestroySelf();
+                progressNormalized = (float) _products.Count / Capacity
+            });
         }
     }
+    public void InteractPrevious()
+    {
+        _index--;
+        if (_index < 0)
+        {
+            _index = _products.Count - 1;
+        }
+        SelectProduct();
+    }
+    public void InteractNext()
+    {
+        _index++;
+        if (_index >= _products.Count)
+        {
+            _index = 0;
+        }
+        SelectProduct();
+    }
     
+    private void SelectProduct()
+    {
+        if (_products.Count <= 0)
+        {
+            OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, 0));
+            return;
+        }
+        ProductSo productSo = _products[_index];
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(productSo, _products.Count));
+    }
     public void Focus()
     {
         OnFocus?.Invoke(this, EventArgs.Empty);
-        if (Player.Instance.HandleSystem.HaveBackpackItems())
-        {
-            // Try to fit backpack items in the chest
-            foreach (Item backpackItem in Player.Instance.HandleSystem.GetBackpackItems())
-            {
-                if (backpackItem is not Product product) continue;
-                if (product.ProductSo != productSo) continue;
-                
-                productAmount++;
-                OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
-                Player.Instance.HandleSystem.ClearItemFromBackpack(backpackItem);
-            }
-        }
     }
-    
     public void StopFocus()
     {
         OnStopFocus?.Invoke(this, EventArgs.Empty);
-    }
-
-    public int GetProductAmount()
-    {
-        return productAmount;
-    }
-    
-    public ProductSo GetProductSo()
-    {
-        return productSo;
-    }
-    public void AddProduct()
-    {
-        productAmount++;
-        OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
     }
 }

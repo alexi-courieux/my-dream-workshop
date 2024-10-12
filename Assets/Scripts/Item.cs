@@ -9,7 +9,7 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
     
     private IHandleItems _parent;
 
-    public static void SpawnItem<T>(Transform itemPrefab, IHandleItems parent) where T : Item
+    public static void SpawnItem(Transform itemPrefab, IHandleItems parent)
     {
         Transform itemTransform = Instantiate(itemPrefab);
         Item item = itemTransform.GetComponent<Item>();

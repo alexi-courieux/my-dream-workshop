@@ -17,7 +17,7 @@ public class SingleItemChestStation : MonoBehaviour, IInteractable, IFocusable
             // If player doesn't have any items, try to take from the chest
             if (productAmount <= 0) return;
             
-            Item.SpawnItem<Product>(productSo.prefab, Player.Instance.HandleSystem);
+            Item.SpawnItem(productSo.prefab, Player.Instance.HandleSystem);
             productAmount--;
             OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
         }

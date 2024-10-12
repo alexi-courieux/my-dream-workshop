@@ -8,7 +8,7 @@ public class OrderManager : MonoBehaviour
     
     [SerializeField] private ProductDictionarySo buyableProducts;
     [SerializeField] private ProductDictionarySo sellableProducts;
-    [SerializeField] private List<SingleItemChestStation> chestStations;
+    [SerializeField] private OrderChestStation chestStation;
     
     private void Awake()
     {
@@ -30,7 +30,7 @@ public class OrderManager : MonoBehaviour
         if (EconomyManager.Instance.GetMoney() < productSo.buyPrice) return;
         
         EconomyManager.Instance.RemoveMoney(productSo.buyPrice);
-        chestStations.FirstOrDefault(chest => chest.GetProductSo() == productSo)?.AddProduct();
+        chestStation.AddProduct(productSo);
     }
     
     public void Sell(ProductSo productSo)

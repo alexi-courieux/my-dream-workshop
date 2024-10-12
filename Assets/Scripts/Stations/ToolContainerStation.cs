@@ -7,6 +7,6 @@ public class ToolContainerStation : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (Player.Instance.HandleSystem.HaveAnyItems()) return;
-        Item.SpawnItem<Tool>(toolSo.prefab, Player.Instance.HandleSystem);
+        Item.SpawnItem(toolSo.prefab, Player.Instance.HandleSystem);
     }
 }

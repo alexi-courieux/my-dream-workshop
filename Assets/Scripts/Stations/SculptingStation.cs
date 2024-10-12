@@ -2,10 +2,10 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableRecipe, IInteractableNext, IInteractablePrevious, IFocusable
+public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectablProduct, IInteractableNext, IInteractablePrevious, IFocusable
 {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public event EventHandler<RecipeSelectedEventArgs> OnRecipeSelected;
+    public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
 
@@ -39,7 +39,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
-            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
+            OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, 0));
         }
         else
         {
@@ -77,7 +77,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     private void Transform()
     {
         _product.DestroySelf();
-        Item.SpawnItem<Product>(_anvilRecipeSo.output.prefab, this);
+        Item.SpawnItem(_anvilRecipeSo.output.prefab, this);
         CheckForRecipes();
         _state = State.Idle;
     }
@@ -193,12 +193,12 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     {
         _anvilRecipeSo = recipe;
         _hitToProcess = recipe.hitToProcess;
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_anvilRecipeSo.output, _availableRecipes.Length));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_anvilRecipeSo.output, _availableRecipes.Length));
     }
     
     private void ClearRecipe()
     {
         _anvilRecipeSo = null;
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, _availableRecipes.Length));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, _availableRecipes.Length));
     }
 }

@@ -3,10 +3,10 @@ using System;
 using System.Linq;
 using Utils;
 
-public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableRecipe, IInteractablePrevious, IInteractableNext, IFocusable
+public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectablProduct, IInteractablePrevious, IInteractableNext, IFocusable
 { 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-    public event EventHandler<RecipeSelectedEventArgs> OnRecipeSelected; 
+    public event EventHandler<SelectedProductEventArgs> OnProductSelected; 
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
 
@@ -108,13 +108,13 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     {
         _selectedRecipe = recipe;
         _hitToProcess = recipe.hitToProcess;
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(recipe.output, _availableRecipes.Length));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(recipe.output, _availableRecipes.Length));
     }
 
     private void ClearRecipe()
     {
         _selectedRecipe = null;
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, 0));
     }
 
     public void InteractAlt()
@@ -136,7 +136,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     private void Transform()
     {
         _items.ToList().ForEach(i => i.DestroySelf());
-        Item.SpawnItem<FinalProduct>(_selectedRecipe.output.prefab, this);
+        Item.SpawnItem(_selectedRecipe.output.prefab, this);
         ClearRecipe();
         _state = State.Idle;
     }

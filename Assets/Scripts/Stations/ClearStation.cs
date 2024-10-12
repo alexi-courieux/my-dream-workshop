@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
 using UnityEngine;
-public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInteractableAlt, IFocusable, IInteractableNext, IInteractablePrevious, ISelectableRecipe
+public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInteractableAlt, IFocusable, IInteractableNext, IInteractablePrevious, ISelectablProduct
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
-    public event EventHandler<RecipeSelectedEventArgs> OnRecipeSelected;
+    public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     [SerializeField] private Transform productSlot;
     [SerializeField] private Transform toolSlot;
@@ -57,7 +57,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         if(tool?.ToolSo != _selectedRecipe.tool) return;
     
         _product.DestroySelf();
-        Item.SpawnItem<Product>(_selectedRecipe.output.prefab, this);
+        Item.SpawnItem(_selectedRecipe.output.prefab, this);
     }
 
     public void Focus()
@@ -74,13 +74,13 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         {
             _recipes = null;
             _selectedRecipe = null;
-            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(null, 0));
+            OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, 0));
         }
         else
         {
             _recipes = CheckForRecipes(tool.ToolSo, _product.ProductSo);
             _selectedRecipe = _recipes.FirstOrDefault();
-            OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe?.output, _recipes.Length));
+            OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_selectedRecipe?.output, _recipes.Length));
         }
     }
 
@@ -108,7 +108,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
             index = 0;
         }
         _selectedRecipe = _recipes[index];
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe?.output, _recipes.Length));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_selectedRecipe?.output, _recipes.Length));
     }
 
     public void InteractPrevious()
@@ -121,7 +121,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
             index = _recipes.Length - 1;
         }
         _selectedRecipe = _recipes[index];
-        OnRecipeSelected?.Invoke(this, new RecipeSelectedEventArgs(_selectedRecipe?.output, _recipes.Length));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_selectedRecipe?.output, _recipes.Length));
     }
 
     public void StopFocus()
