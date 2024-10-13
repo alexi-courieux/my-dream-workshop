@@ -414,7 +414,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""1D Axis"",
+                    ""name"": ""DPad LR [Gamepad]"",
                     ""id"": ""3962ae73-c299-4005-acbc-2eb0d9e1bb08"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",

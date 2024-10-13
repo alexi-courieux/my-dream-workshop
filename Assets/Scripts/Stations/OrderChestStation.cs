@@ -28,7 +28,7 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
         _products.RemoveAt(_index);
         if (_index >= _products.Count)
         {
-            _index = _products.Count - 1;
+            _index = 0;
         }
         SelectProduct();
     }
