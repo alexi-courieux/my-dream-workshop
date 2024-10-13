@@ -10,5 +10,6 @@ namespace AshLight.BakerySim.ScriptableObjects
         public float timeToRegen;
         public int interactionCountToHarvest;
         public float timeBetweenInteractions;
+        public CapacitySo requiredCapacity;
     }
 }

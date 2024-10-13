@@ -13,6 +13,7 @@ public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
     [SerializeField] private RecipeSo[] recipes;
     [SerializeField] private RecipeSo[] buyableRecipes;
     [SerializeField] private BuyableRecipeGroupSo[] buyableRecipeGroups;
+    [SerializeField] private CapacitySo[] buyableCapacities;
 
     private void Start()
     {
@@ -50,6 +51,10 @@ public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
         foreach (BuyableStation buyableStation in buyableStationsToDestroy)
         {
             buyableStation.DestroySelf();
+        }
+        foreach (CapacitySo capacity in buyableCapacities)
+        {
+            OrderManager.Instance.AddBuyableCapacity(capacity);
         }
         DestroySelf();
     }

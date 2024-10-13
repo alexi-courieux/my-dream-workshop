@@ -14,6 +14,7 @@ public class OrderManager : MonoBehaviour
     private List<ProductSo> buyableProducts;
     private List<RecipeSo> buyableRecipes;
     private List<BuyableRecipeGroupSo> buyableRecipeGroups;
+    private List<CapacitySo> buyableCapacities;
     
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class OrderManager : MonoBehaviour
         buyableProducts = initialBuyableProducts.products.ToList();
         buyableRecipes = new List<RecipeSo>();
         buyableRecipeGroups = new List<BuyableRecipeGroupSo>();
+        buyableCapacities = new List<CapacitySo>();
     }
     
     public ProductSo[] GetBuyableProducts()
@@ -36,6 +38,11 @@ public class OrderManager : MonoBehaviour
     public BuyableRecipeGroupSo[] GetBuyableRecipeGroups()
     {
         return buyableRecipeGroups.ToArray();
+    }
+    
+    public CapacitySo[] GetBuyableCapacities()
+    {
+        return buyableCapacities.ToArray();
     }
     
     public void AddBuyableProduct(ProductSo productSo)
@@ -57,6 +64,13 @@ public class OrderManager : MonoBehaviour
         if(buyableRecipeGroups.Contains(buyableRecipeGroupSo)) return;
         
         buyableRecipeGroups.Add(buyableRecipeGroupSo);
+    }
+    
+    public void AddBuyableCapacity(CapacitySo capacitySo)
+    {
+        if(buyableCapacities.Contains(capacitySo)) return;
+        
+        buyableCapacities.Add(capacitySo);
     }
     
     public ProductDictionarySo GetSellableProducts()
@@ -91,6 +105,15 @@ public class OrderManager : MonoBehaviour
             RecipeManager.Instance.AddRecipe(recipe);
         }
         buyableRecipeGroups.Remove(recipeGroupSo);
+    }
+    
+    public void BuyCapacity(CapacitySo capacitySo)
+    {
+        if (EconomyManager.Instance.GetMoney() < capacitySo.price) return;
+        
+        EconomyManager.Instance.RemoveMoney(capacitySo.price);
+        CapacityManager.Instance.AddCapacity(capacitySo);
+        buyableCapacities.Remove(capacitySo);
     }
     
     public void Sell(ProductSo productSo)

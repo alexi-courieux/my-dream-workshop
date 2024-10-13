@@ -17,3 +17,4 @@ MonoBehaviour:
   timeToRegen: 90
   interactionCountToHarvest: 5
   timeBetweenInteractions: 0.5
+  requiredCapacity: {fileID: 11400000, guid: 56968134e919805458e3383261da8d8d, type: 2}
