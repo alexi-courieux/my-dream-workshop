@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class OrderCapacityUI : MonoBehaviour
@@ -34,6 +35,14 @@ public class OrderCapacityUI : MonoBehaviour
             GameObject orderSingleItemUI = Instantiate(orderSingleCapacityUITemplate, orderItemsParent);
             orderSingleItemUI.SetActive(true);
             orderSingleItemUI.GetComponent<OrderSingleCapacityUI>().UpdateVisual(capacity);
+        }
+        
+        foreach (Transform child in orderItemsParent)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                child.GetComponentInChildren<Button>().Select(); // TODO Allow the gamepad navigation but triggr the button, caused by the use of DefaultInputActions in EventSystem ?
+            }
         }
     }
 }

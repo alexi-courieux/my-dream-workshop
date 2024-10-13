@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class OrderRecipeUI : MonoBehaviour
 {
@@ -47,6 +49,14 @@ public class OrderRecipeUI : MonoBehaviour
             GameObject orderMultipleRecipeUI = Instantiate(orderMultipleRecipeUITemplate, orderItemsParent);
             orderMultipleRecipeUI.SetActive(true);
             orderMultipleRecipeUI.GetComponent<OrderMultipleRecipeUI>().UpdateVisual(recipeGroup);
+        }
+
+        foreach (Transform child in orderItemsParent)
+        {
+            if (child.gameObject.activeSelf)
+            {
+                child.GetComponentInChildren<Button>().Select(); // TODO Allow the gamepad navigation but trigger the button, caused by the use of DefaultInputActions in EventSystem ?
+            }
         }
     }
 }

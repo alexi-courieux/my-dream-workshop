@@ -11,6 +11,8 @@ public abstract class TabsManager : MonoBehaviour
     [SerializeField] private Sprite inactiveTabBackground;
     [SerializeField] private Sprite activeTabBackground;
 
+    private int currentTabIndex;
+    
     private void Awake() {
         foreach (GameObject go in tabs)
         {
@@ -26,29 +28,40 @@ public abstract class TabsManager : MonoBehaviour
 
     protected void Start()
     {
-        SwitchToTab(0);
+        currentTabIndex = 0;
+        SwitchToTab(currentTabIndex);
         Hide();
+
+        InputManager.Instance.OnMenuCancel += (_, _) => Hide();
+        InputManager.Instance.OnMenuPrevious += (_, _) => SwitchToTab(currentTabIndex - 1);
+        InputManager.Instance.OnMenuNext += (_, _) => SwitchToTab(currentTabIndex + 1);
     }
 
     public void Show()
     {
         if (gameObject.activeSelf) return;
         InputManager.Instance.DisableGameplayInput();
+        InputManager.Instance.EnableMenuInput();
         gameObject.SetActive(true);
     }
 
     private void Hide()
     {
         gameObject.SetActive(false);
+        InputManager.Instance.DisableMenuInput();
         InputManager.Instance.EnableGameplayInput();
     }
 
-    private void SwitchToTab(int tabID)
+    private void SwitchToTab(int newIndex)
     {
+        if (newIndex < 0) newIndex = tabs.Length - 1;
+        if (newIndex >= tabs.Length) newIndex = 0;
+        currentTabIndex = newIndex;
+        
         for (int i = 0; i < tabButtons.Length; i++)
         {
-            tabs[i].SetActive(i == tabID);
-            tabButtons[i].image.sprite = i == tabID ? activeTabBackground : inactiveTabBackground;
+            tabs[i].SetActive(i == newIndex);
+            tabButtons[i].image.sprite = i == newIndex ? activeTabBackground : inactiveTabBackground;
         }
     }
 }

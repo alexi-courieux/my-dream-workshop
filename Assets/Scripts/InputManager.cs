@@ -12,6 +12,10 @@ public class InputManager : MonoBehaviour
     public EventHandler OnNext;
     public EventHandler OnPrevious;
 
+    public EventHandler OnMenuCancel;
+    public EventHandler OnMenuNext;
+    public EventHandler OnMenuPrevious;
+
     private InputActions _inputActions;
 
     private void Awake()
@@ -24,6 +28,9 @@ public class InputManager : MonoBehaviour
         _inputActions.Player.InteractAlt.performed += InteractAlt_OnPerformed;
         _inputActions.Player.Pause.performed += Pause_OnPerformed;
         _inputActions.Player.PreviousNext.performed += PreviousNext_OnPerformed;
+        
+        _inputActions.Menu.Cancel.performed += MenuCancel_OnPerformed;
+        _inputActions.Menu.PreviousNext.performed += MenuPreviousNext_OnPerformed;
     }
 
     private void OnDestroy()
@@ -72,6 +79,23 @@ public class InputManager : MonoBehaviour
         }
     }
     
+    private void MenuCancel_OnPerformed(InputAction.CallbackContext obj)
+    {
+        OnMenuCancel?.Invoke(this, EventArgs.Empty);
+    }
+    
+    private void MenuPreviousNext_OnPerformed(InputAction.CallbackContext obj)
+    {
+        if (obj.ReadValue<float>() > 0)
+        {
+            OnMenuNext?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            OnMenuPrevious?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    
     public void DisableGameplayInput()
     {
         _inputActions.Player.Disable();
@@ -80,5 +104,15 @@ public class InputManager : MonoBehaviour
     public void EnableGameplayInput()
     {
         _inputActions.Player.Enable();
+    }
+    
+    public void EnableMenuInput()
+    {
+        _inputActions.Menu.Enable();
+    }
+    
+    public void DisableMenuInput()
+    {
+        _inputActions.Menu.Disable();
     }
 }
