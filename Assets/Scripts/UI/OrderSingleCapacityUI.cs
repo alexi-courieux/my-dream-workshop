@@ -27,4 +27,9 @@ public class OrderSingleCapacityUI : MonoBehaviour
         capacityNameText.text = newCapacitySo.capacityName;
         priceText.text = newCapacitySo.price.ToString("D");
     }
+
+    public void Select()
+    {
+        buyButton.Select();
+    }
 }

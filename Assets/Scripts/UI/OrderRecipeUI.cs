@@ -1,8 +1,10 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class OrderRecipeUI : MonoBehaviour
+public class OrderRecipeUI : MonoBehaviour, ITabElement
 {
     [SerializeField] private Transform orderItemsParent;
     [SerializeField] private GameObject orderSingleRecipeUITemplate;
@@ -14,19 +16,19 @@ public class OrderRecipeUI : MonoBehaviour
         orderMultipleRecipeUITemplate.SetActive(false);
     }
 
-    private void Start()
+    public void Show()
     {
+        gameObject.SetActive(true);
         UpdateVisuals();
     }
-
-    public void OnEnable()
+    
+    public void Hide()
     {
-        UpdateVisuals();
+        gameObject.SetActive(false);
     }
 
     public void UpdateVisuals()
     {
-        if (OrderManager.Instance is null) return;
         RecipeSo[] buyableRecipes = OrderManager.Instance.GetBuyableRecipes();
         BuyableRecipeGroupSo[] buyableRecipeGroups = OrderManager.Instance.GetBuyableRecipeGroups();
         
@@ -37,26 +39,38 @@ public class OrderRecipeUI : MonoBehaviour
             Destroy(child.gameObject);
         }
         
+        bool isFirst = true;
         foreach (RecipeSo recipe in buyableRecipes)
         {
             GameObject orderSingleRecipeUI = Instantiate(orderSingleRecipeUITemplate, orderItemsParent);
             orderSingleRecipeUI.SetActive(true);
-            orderSingleRecipeUI.GetComponent<OrderSingleRecipeUI>().UpdateVisual(recipe);
+            OrderSingleRecipeUI ui = orderSingleRecipeUI.GetComponent<OrderSingleRecipeUI>();
+            ui.UpdateVisual(recipe);
+            if (isFirst)
+            {
+                isFirst = false;
+                StartCoroutine(ActionAfterDelay(() => ui.Select(), 0.1f));
+            }
         }
         
         foreach (BuyableRecipeGroupSo recipeGroup in buyableRecipeGroups)
         {
             GameObject orderMultipleRecipeUI = Instantiate(orderMultipleRecipeUITemplate, orderItemsParent);
             orderMultipleRecipeUI.SetActive(true);
-            orderMultipleRecipeUI.GetComponent<OrderMultipleRecipeUI>().UpdateVisual(recipeGroup);
-        }
-
-        foreach (Transform child in orderItemsParent)
-        {
-            if (child.gameObject.activeSelf)
+            OrderMultipleRecipeUI ui = orderMultipleRecipeUI.GetComponent<OrderMultipleRecipeUI>();
+            ui.UpdateVisual(recipeGroup);
+            if (isFirst)
             {
-                child.GetComponentInChildren<Button>().Select(); // TODO Allow the gamepad navigation but trigger the button, caused by the use of DefaultInputActions in EventSystem ?
+                isFirst = false;
+                StartCoroutine(ActionAfterDelay(() => ui.Select(), 0.1f));
             }
         }
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+    
+    private IEnumerator ActionAfterDelay(Action action, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        action.Invoke();
     }
 }

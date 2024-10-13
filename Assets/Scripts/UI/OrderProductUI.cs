@@ -1,10 +1,10 @@
 using System;
-using TMPro;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class OrderProductUI : MonoBehaviour
+public class OrderProductUI : MonoBehaviour, ITabElement
 {
     [SerializeField] private Transform orderItemsParent;
     [SerializeField] private GameObject orderSingleItemUITemplate;
@@ -14,19 +14,19 @@ public class OrderProductUI : MonoBehaviour
         orderSingleItemUITemplate.SetActive(false);
     }
 
-    private void Start()
+    public void Show()
     {
+        gameObject.SetActive(true);
         UpdateVisuals();
     }
-
-    public void OnEnable()
+    
+    public void Hide()
     {
-        UpdateVisuals();
+        gameObject.SetActive(false);
     }
-
+    
     private void UpdateVisuals()
     {
-        if (OrderManager.Instance is null) return; //Quick fix for null reference exception
         ProductSo[] buyableProducts = OrderManager.Instance.GetBuyableProducts();
         
         foreach (Transform child in orderItemsParent)
@@ -35,19 +35,25 @@ public class OrderProductUI : MonoBehaviour
             Destroy(child.gameObject);
         }
         
+        bool isFirst = true;
         foreach (ProductSo product in buyableProducts)
         {
             GameObject orderSingleItemUI = Instantiate(orderSingleItemUITemplate, orderItemsParent);
             orderSingleItemUI.SetActive(true);
-            orderSingleItemUI.GetComponent<OrderSingleProductUI>().UpdateVisual(product);
-        }
-        
-        foreach (Transform child in orderItemsParent)
-        {
-            if (child.gameObject.activeSelf)
+            OrderSingleProductUI ui = orderSingleItemUI.GetComponent<OrderSingleProductUI>();
+            ui.UpdateVisual(product);
+            if (isFirst)
             {
-                child.GetComponentInChildren<Button>().Select(); // TODO Allow the gamepad navigation but trigger the button, caused by the use of DefaultInputActions in EventSystem ?
+                isFirst = false;
+                StartCoroutine(ActionAfterDelay(() => ui.Select(), 0.1f));
             }
         }
+        EventSystem.current.SetSelectedGameObject(null);
+    }
+    
+    private IEnumerator ActionAfterDelay(Action action, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        action.Invoke();
     }
 }

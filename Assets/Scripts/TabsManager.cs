@@ -1,5 +1,6 @@
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
@@ -12,24 +13,33 @@ public abstract class TabsManager : MonoBehaviour
     [SerializeField] private Sprite activeTabBackground;
 
     private int currentTabIndex;
+    private ITabElement[] tabElements;
     
     private void Awake() {
-        foreach (GameObject go in tabs)
-        {
-            go.SetActive(false);
-        }
         closeButton.onClick.AddListener(Hide);
         for (int i = 0; i < tabButtons.Length; i++)
         {
             int buttonIndex = i;
             tabButtons[i].onClick.AddListener(() => SwitchToTab(buttonIndex));
         }
+        tabElements = new ITabElement[tabs.Length];
+        
+        for (int i = 0; i < tabs.Length; i++)
+        {
+            if (tabs[i].TryGetComponent(out ITabElement tab))
+            {
+                tabElements[i] = tab;
+            }
+            else
+            {
+                throw new Exception($"Tab {tabs[i].name} does not implement ITabElement");
+            }
+        }
     }
 
     protected void Start()
     {
         currentTabIndex = 0;
-        SwitchToTab(currentTabIndex);
         Hide();
 
         InputManager.Instance.OnMenuCancel += (_, _) => Hide();
@@ -40,15 +50,17 @@ public abstract class TabsManager : MonoBehaviour
     public void Show()
     {
         if (gameObject.activeSelf) return;
+        gameObject.SetActive(true);
         InputManager.Instance.DisableGameplayInput();
         InputManager.Instance.EnableMenuInput();
-        gameObject.SetActive(true);
+        SwitchToTab(currentTabIndex);
     }
 
     private void Hide()
     {
         gameObject.SetActive(false);
         InputManager.Instance.DisableMenuInput();
+        EventSystem.current.SetSelectedGameObject(null);
         InputManager.Instance.EnableGameplayInput();
     }
 
@@ -60,7 +72,12 @@ public abstract class TabsManager : MonoBehaviour
         
         for (int i = 0; i < tabButtons.Length; i++)
         {
-            tabs[i].SetActive(i == newIndex);
+            if (i == newIndex)
+            {
+                tabElements[i].Show();
+            } else {
+                tabElements[i].Hide();
+            }
             tabButtons[i].image.sprite = i == newIndex ? activeTabBackground : inactiveTabBackground;
         }
     }

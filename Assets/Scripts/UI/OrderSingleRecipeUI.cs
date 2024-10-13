@@ -27,4 +27,9 @@ public class OrderSingleRecipeUI : MonoBehaviour
         productNameText.text = newRecipeSo.name;
         priceText.text = newRecipeSo.buyPrice.ToString("D");
     }
+    
+    public void Select()
+    {
+        buyButton.Select();
+    }
 }

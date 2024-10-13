@@ -46,4 +46,9 @@ public class OrderMultipleRecipeUI : MonoBehaviour
             orderSingleRecipeUI.GetComponent<OrderMultipleRecipeSingleUI>().UpdateVisual(recipe);
         }
     }
+    
+    public void Select()
+    {
+        buyButton.Select();
+    }
 }

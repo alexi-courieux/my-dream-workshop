@@ -25,4 +25,9 @@ public class OrderSingleProductUI : MonoBehaviour
         productNameText.text = newProductSo.name;
         priceText.text = newProductSo.buyPrice.ToString("D");
     }
+    
+    public void Select()
+    {
+        buyButton.Select();
+    }
 }
