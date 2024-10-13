@@ -8,7 +8,6 @@ public abstract class TabsManager : MonoBehaviour
     [SerializeField] private GameObject[] tabs;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button[] tabButtons;
-    [SerializeField] private Image[] tabButtonBackgroundImages;
     [SerializeField] private Sprite inactiveTabBackground;
     [SerializeField] private Sprite activeTabBackground;
 
@@ -49,7 +48,7 @@ public abstract class TabsManager : MonoBehaviour
         for (int i = 0; i < tabButtons.Length; i++)
         {
             tabs[i].SetActive(i == tabID);
-            tabButtonBackgroundImages[i].sprite = i == tabID ? activeTabBackground : inactiveTabBackground;
+            tabButtons[i].image.sprite = i == tabID ? activeTabBackground : inactiveTabBackground;
         }
     }
 }

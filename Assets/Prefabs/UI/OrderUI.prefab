@@ -2659,7 +2659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4552,7 +4552,7 @@ MonoBehaviour:
   capacityNameText: {fileID: 483478691572772744}
   priceText: {fileID: 240361790327480899}
   buyButton: {fileID: 7373033854636281426}
-  orderCapacityUI: {fileID: 0}
+  orderCapacityUI: {fileID: 8140196928191990299}
 --- !u!1 &7819647758848479722
 GameObject:
   m_ObjectHideFlags: 0

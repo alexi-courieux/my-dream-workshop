@@ -4976,18 +4976,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 798227402}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1635859082 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8140196928191990299, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1953506290}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e51396476754d76a23a4c5b84874735, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1650188332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5688,33 +5676,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2178810971024978955, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
+    - target: {fileID: 3929959332349467719, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
         type: 3}
-      propertyPath: orderCapacityUI
+      propertyPath: m_TargetGraphic
       value: 
-      objectReference: {fileID: 1635859082}
-    - target: {fileID: 5573792194218461450, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573792194218461450, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5573792194218461450, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6823116024083840603, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
         type: 3}
       propertyPath: m_Name
       value: OrderUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7567246079234385758, guid: 95b2dd2c40eff37499f867cb9fe5e7f5,
+        type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 782294432192124168, guid: 95b2dd2c40eff37499f867cb9fe5e7f5, type: 3}
+    - {fileID: 5742265211452755512, guid: 95b2dd2c40eff37499f867cb9fe5e7f5, type: 3}
+    - {fileID: 4017697012828073371, guid: 95b2dd2c40eff37499f867cb9fe5e7f5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95b2dd2c40eff37499f867cb9fe5e7f5, type: 3}
