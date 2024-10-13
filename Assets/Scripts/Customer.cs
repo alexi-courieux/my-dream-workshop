@@ -83,7 +83,7 @@ public class Customer : MonoBehaviour
     {
         if (!_checkoutStation.IsFirst(this)) return;
         
-        ProductSo[] sellableProducts = OrderManager.Instance.GetSellableProducts().products;
+        ProductSo[] sellableProducts = OrderManager.Instance.GetSellableProducts();
         _order = sellableProducts[UnityEngine.Random.Range(0, sellableProducts.Length)];
         OnOrder?.Invoke(this, EventArgs.Empty);
     }

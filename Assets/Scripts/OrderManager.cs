@@ -8,11 +8,12 @@ public class OrderManager : MonoBehaviour
     public static OrderManager Instance { get; private set; }
     
     [SerializeField] private ProductDictionarySo initialBuyableProducts;
-    [SerializeField] private ProductDictionarySo sellableProducts;
+    [SerializeField] private ProductDictionarySo initialSellableProductsList;
     [SerializeField] private OrderChestStation chestStation;
     
     private List<ProductSo> buyableProducts;
     private List<RecipeSo> buyableRecipes;
+    private List<ProductSo> sellableProducts;
     private List<BuyableRecipeGroupSo> buyableRecipeGroups;
     private List<CapacitySo> buyableCapacities;
     
@@ -20,6 +21,7 @@ public class OrderManager : MonoBehaviour
     {
         Instance = this;
         buyableProducts = initialBuyableProducts.products.ToList();
+        sellableProducts = initialSellableProductsList.products.ToList();
         buyableRecipes = new List<RecipeSo>();
         buyableRecipeGroups = new List<BuyableRecipeGroupSo>();
         buyableCapacities = new List<CapacitySo>();
@@ -73,9 +75,9 @@ public class OrderManager : MonoBehaviour
         buyableCapacities.Add(capacitySo);
     }
     
-    public ProductDictionarySo GetSellableProducts()
+    public ProductSo[] GetSellableProducts()
     {
-        return sellableProducts;
+        return sellableProducts.ToArray();
     }
     
     public void BuyProduct(ProductSo productSo)
@@ -93,6 +95,8 @@ public class OrderManager : MonoBehaviour
         EconomyManager.Instance.RemoveMoney(recipeSo.buyPrice);
         RecipeManager.Instance.AddRecipe(recipeSo);
         buyableRecipes.Remove(recipeSo);
+        if (recipeSo.output is FinalProductSo)
+            sellableProducts.Add(recipeSo.output);
     }
     
     public void BuyRecipeGroup(BuyableRecipeGroupSo recipeGroupSo)
@@ -103,6 +107,8 @@ public class OrderManager : MonoBehaviour
         foreach (RecipeSo recipe in recipeGroupSo.recipes)
         {
             RecipeManager.Instance.AddRecipe(recipe);
+            if (recipe.output is FinalProductSo)
+                sellableProducts.Add(recipe.output);
         }
         buyableRecipeGroups.Remove(recipeGroupSo);
     }
