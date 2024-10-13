@@ -25,6 +25,12 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
     private void Start()
     {
         _state = State.Idle;
+        OrderManager.Instance.OnRecipeBuy += OrderManager_OnRecipeBuy;
+    }
+
+    private void OrderManager_OnRecipeBuy(object sender, EventArgs e)
+    {
+        CheckForRecipes();
     }
 
     public void Interact()

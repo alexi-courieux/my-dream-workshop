@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -16,6 +17,8 @@ public class OrderManager : MonoBehaviour
     private List<ProductSo> sellableProducts;
     private List<BuyableRecipeGroupSo> buyableRecipeGroups;
     private List<CapacitySo> buyableCapacities;
+
+    public event EventHandler OnRecipeBuy;
     
     private void Awake()
     {
@@ -95,8 +98,11 @@ public class OrderManager : MonoBehaviour
         EconomyManager.Instance.RemoveMoney(recipeSo.buyPrice);
         RecipeManager.Instance.AddRecipe(recipeSo);
         buyableRecipes.Remove(recipeSo);
-        if (recipeSo.output is FinalProductSo)
+        if (recipeSo.output is FinalProductSo) 
+        {
             sellableProducts.Add(recipeSo.output);
+        }
+        OnRecipeBuy?.Invoke(this, EventArgs.Empty);
     }
     
     public void BuyRecipeGroup(BuyableRecipeGroupSo recipeGroupSo)
@@ -107,9 +113,12 @@ public class OrderManager : MonoBehaviour
         foreach (RecipeSo recipe in recipeGroupSo.recipes)
         {
             RecipeManager.Instance.AddRecipe(recipe);
-            if (recipe.output is FinalProductSo)
+            if (recipe.output is FinalProductSo) 
+            {
                 sellableProducts.Add(recipe.output);
+            }
         }
+        OnRecipeBuy?.Invoke(this, EventArgs.Empty);
         buyableRecipeGroups.Remove(recipeGroupSo);
     }
     
