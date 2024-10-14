@@ -8,13 +8,11 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
     [SerializeField] private Transform[] itemSlots;
     [SerializeField] private FinalProductSo.ItemType[] allowedItemTypes;
     private List<FinalProduct> _items;
-    private List<FinalProductSo.ItemType> _itemTypes;
     private int _capacity;
 
     private void Awake()
     {
         _items = new List<FinalProduct>();
-        _itemTypes = new List<FinalProductSo.ItemType>();
         _capacity = itemSlots.Length;
     }
     public void Interact()
@@ -39,10 +37,9 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
     {
         if (newItem is not FinalProduct fp)
         {
-            return;
+            throw new Exception("This station can only hold final products!");
         }
         _items.Add(fp);
-        _itemTypes.Add(fp.FinalProductSo.itemType);
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -56,7 +53,6 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
     {
         if (itemToClear is not FinalProduct fp) throw new Exception("This station can only hold final products!");
         _items.Remove(fp);
-        _itemTypes.Remove(fp.FinalProductSo.itemType);
     }
 
     public bool HaveItems<T>() where T : Item
@@ -77,14 +73,11 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
 
     public Transform GetAvailableItemSlot(Item item)
     {
-        if (item is not FinalProduct fp) return null;
-        switch (fp.FinalProductSo.itemType)
+        foreach (Transform itemSlot in itemSlots)
         {
-            case FinalProductSo.ItemType.Weapon:
-                return itemSlots[_items.Count];
-            default:
-                return null;
+            if (itemSlot.childCount <= 0) return itemSlot;
         }
+        throw new Exception("No available slot found!");
     }
 
     public bool HasAvailableSlot(Item item)
