@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c566eb015d12882408ad8378276dcfcf, type: 3}
   m_Name: CastingRecipe_IronBar
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: c4746e6b3f38d9745a5c179fce30f96a, type: 2}
   output: {fileID: 11400000, guid: 91d07c10f44b2d94bb0cc34b87049ee1, type: 2}
+  inputs:
+  - {fileID: 11400000, guid: c4746e6b3f38d9745a5c179fce30f96a, type: 2}
+  buyPrice: 0
+  input: {fileID: 11400000, guid: c4746e6b3f38d9745a5c179fce30f96a, type: 2}
   timeToProcess: 10

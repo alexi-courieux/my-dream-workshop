@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51663df6e3a6d8b45abd10642784e554, type: 3}
   m_Name: SculptingRecipe_WoodenBlade
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
   output: {fileID: 11400000, guid: 6caacc1111a0da741b034ab729dbdb08, type: 2}
+  inputs:
+  - {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
+  buyPrice: 0
+  input: {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
   hitToProcess: 8

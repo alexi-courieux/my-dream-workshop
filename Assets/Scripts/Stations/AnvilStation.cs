@@ -89,6 +89,8 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
     
     private void CheckForRecipes()
     {
+        if(_product is null) return;
+        
         _availableRecipes = RecipeManager.Instance.GetRecipes<AnvilRecipeSo>();
         _availableRecipes = _availableRecipes.Where(r => r.input == _product.ProductSo).ToArray();
         if (_availableRecipes.Length > 0)

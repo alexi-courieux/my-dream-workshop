@@ -80,6 +80,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RecipeBook"",
+                    ""type"": ""Button"",
+                    ""id"": ""648f9778-d187-41b9-92ea-d6e77867a653"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -445,6 +454,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Previous/Next"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39c874be-6584-4d9f-a187-f1ebe34a16bb"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RecipeBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""729325fb-f3c4-4fdb-a25b-e5999171873f"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RecipeBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -511,39 +542,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Scroll [Mouse]"",
-                    ""id"": ""381ede87-e876-4ee7-bb89-a727ceb0dc3c"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Previous/Next"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""8b000ff3-8971-467c-a04a-c624ea1969c0"",
-                    ""path"": ""<Mouse>/scroll/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Previous/Next"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""4105d45f-cbda-4ba1-9d4b-3757b45d1c4f"",
-                    ""path"": ""<Mouse>/scroll/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Previous/Next"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""WX [Keyboard]"",
@@ -734,6 +732,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_InteractAlt = m_Player.FindAction("InteractAlt", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_PreviousNext = m_Player.FindAction("Previous/Next", throwIfNotFound: true);
+        m_Player_RecipeBook = m_Player.FindAction("RecipeBook", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
@@ -813,6 +812,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_InteractAlt;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_PreviousNext;
+    private readonly InputAction m_Player_RecipeBook;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -823,6 +823,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @InteractAlt => m_Wrapper.m_Player_InteractAlt;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @PreviousNext => m_Wrapper.m_Player_PreviousNext;
+        public InputAction @RecipeBook => m_Wrapper.m_Player_RecipeBook;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -850,6 +851,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PreviousNext.started += instance.OnPreviousNext;
             @PreviousNext.performed += instance.OnPreviousNext;
             @PreviousNext.canceled += instance.OnPreviousNext;
+            @RecipeBook.started += instance.OnRecipeBook;
+            @RecipeBook.performed += instance.OnRecipeBook;
+            @RecipeBook.canceled += instance.OnRecipeBook;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -872,6 +876,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PreviousNext.started -= instance.OnPreviousNext;
             @PreviousNext.performed -= instance.OnPreviousNext;
             @PreviousNext.canceled -= instance.OnPreviousNext;
+            @RecipeBook.started -= instance.OnRecipeBook;
+            @RecipeBook.performed -= instance.OnRecipeBook;
+            @RecipeBook.canceled -= instance.OnRecipeBook;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -967,6 +974,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnInteractAlt(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnPreviousNext(InputAction.CallbackContext context);
+        void OnRecipeBook(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {

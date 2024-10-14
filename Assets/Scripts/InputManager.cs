@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     public EventHandler OnNext;
     public EventHandler OnPrevious;
 
+    public EventHandler OnRecipeBook;
+
     public EventHandler OnMenuCancel;
     public EventHandler OnMenuNext;
     public EventHandler OnMenuPrevious;
@@ -28,6 +30,7 @@ public class InputManager : MonoBehaviour
         _inputActions.Player.InteractAlt.performed += InteractAlt_OnPerformed;
         _inputActions.Player.Pause.performed += Pause_OnPerformed;
         _inputActions.Player.PreviousNext.performed += PreviousNext_OnPerformed;
+        _inputActions.Player.RecipeBook.performed += RecipeBook_OnPerformed;
         
         _inputActions.Menu.Cancel.performed += MenuCancel_OnPerformed;
         _inputActions.Menu.PreviousNext.performed += MenuPreviousNext_OnPerformed;
@@ -38,7 +41,11 @@ public class InputManager : MonoBehaviour
         _inputActions.Player.Interact.performed -= Interact_OnPerformed;
         _inputActions.Player.InteractAlt.performed -= InteractAlt_OnPerformed;
         _inputActions.Player.Pause.performed -= Pause_OnPerformed;
-
+        _inputActions.Player.PreviousNext.performed -= PreviousNext_OnPerformed;
+        
+        _inputActions.Menu.Cancel.performed -= MenuCancel_OnPerformed;
+        _inputActions.Menu.PreviousNext.performed -= MenuPreviousNext_OnPerformed;
+        
         _inputActions.Dispose();
     }
 
@@ -94,6 +101,11 @@ public class InputManager : MonoBehaviour
         {
             OnMenuPrevious?.Invoke(this, EventArgs.Empty);
         }
+    }
+    
+    private void RecipeBook_OnPerformed(InputAction.CallbackContext obj)
+    {
+        OnRecipeBook?.Invoke(this, EventArgs.Empty);
     }
     
     public void DisableGameplayInput()

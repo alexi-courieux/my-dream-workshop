@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f87d657e430e6c4b8ede8cd1db8474d, type: 3}
   m_Name: WoodcuttingRecipe_Plank
   m_EditorClassIdentifier: 
-  input: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
   output: {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
+  inputs:
+  - {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
+  buyPrice: 0
+  input: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
   timeToProcess: 5

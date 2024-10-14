@@ -41,10 +41,6 @@ public abstract class TabsManager : MonoBehaviour
     {
         currentTabIndex = 0;
         Hide();
-
-        InputManager.Instance.OnMenuCancel += (_, _) => Hide();
-        InputManager.Instance.OnMenuPrevious += (_, _) => SwitchToTab(currentTabIndex - 1);
-        InputManager.Instance.OnMenuNext += (_, _) => SwitchToTab(currentTabIndex + 1);
     }
 
     public void Show()
@@ -54,6 +50,10 @@ public abstract class TabsManager : MonoBehaviour
         InputManager.Instance.DisableGameplayInput();
         InputManager.Instance.EnableMenuInput();
         SwitchToTab(currentTabIndex);
+        
+        InputManager.Instance.OnMenuCancel += InputManager_OnMenuCancel;
+        InputManager.Instance.OnMenuPrevious += InputManager_OnMenuPrevious;
+        InputManager.Instance.OnMenuNext += InputManager_OnMenuNext;
     }
 
     private void Hide()
@@ -62,6 +62,25 @@ public abstract class TabsManager : MonoBehaviour
         InputManager.Instance.DisableMenuInput();
         EventSystem.current.SetSelectedGameObject(null);
         InputManager.Instance.EnableGameplayInput();
+        
+        InputManager.Instance.OnMenuCancel -= InputManager_OnMenuCancel;
+        InputManager.Instance.OnMenuPrevious -= InputManager_OnMenuPrevious;
+        InputManager.Instance.OnMenuNext -= InputManager_OnMenuNext;
+    }
+    
+    private void InputManager_OnMenuPrevious(object sender, EventArgs e)
+    {
+        SwitchToTab(currentTabIndex - 1);
+    }
+    
+    private void InputManager_OnMenuNext(object sender, EventArgs e)
+    {
+        SwitchToTab(currentTabIndex + 1);
+    }
+    
+    private void InputManager_OnMenuCancel(object sender, EventArgs e)
+    {
+        Hide();
     }
 
     private void SwitchToTab(int newIndex)

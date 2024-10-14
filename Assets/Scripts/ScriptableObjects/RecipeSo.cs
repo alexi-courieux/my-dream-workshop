@@ -3,5 +3,6 @@ using UnityEngine.Serialization;
 public abstract class RecipeSo : ScriptableObject
 {
     public ProductSo output;
-    [FormerlySerializedAs("price")] public int buyPrice;
+    public ProductSo[] inputs;
+    public int buyPrice;
 }

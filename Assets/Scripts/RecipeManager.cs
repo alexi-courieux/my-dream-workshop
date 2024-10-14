@@ -13,10 +13,6 @@ public class RecipeManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    private void Start()
-    {
         recipes = new List<RecipeSo>(initialRecipes.recipes);
     }
     
@@ -40,5 +36,10 @@ public class RecipeManager : MonoBehaviour
         }
 
         return recipesOfType.ToArray();
+    }
+    
+    public RecipeSo[] GetRecipes()
+    {
+        return recipes.ToArray();
     }
 }
