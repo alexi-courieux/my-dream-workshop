@@ -8317,8 +8317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlot: {fileID: 1080083057}
   backpackVisual: {fileID: 1938836550}
-  backpackProductDictionarySo: {fileID: 11400000, guid: ba3be261ca1293e4cb0b3a6374cbb504,
-    type: 2}
+  backpackProductDictionarySo: {fileID: 0}
 --- !u!114 &1927588505
 MonoBehaviour:
   m_ObjectHideFlags: 0

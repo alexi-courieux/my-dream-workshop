@@ -9,14 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenuScene.unity
     guid: 009207ae215a8664193c80c4d20d376d
   - enabled: 1
-    path: Assets/Scenes/AlexiScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
-    path: Assets/Scenes/NathanScene.unity
-    guid: 06558caa06a08624c85b5aaf2894efff
-  - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: f80b984fd89d7c941889516a6da8494a
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 66639b4a23dd1914c89037ffc09c573f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: d416cb6a5e514bd384693825796db86a,
       type: 3}
