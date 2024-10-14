@@ -11,11 +11,11 @@ public class RecipeBookUI : MonoBehaviour
     
     [SerializeField] private RecipeBookStationSingleUI stationButtonTemplate;
     [SerializeField] private Transform stationButtonsParent;
-    [SerializeField] private RecipeBookStationSo[] stations;
     
     [SerializeField] private TMP_Text currentStationName;
 
     private int currentStationIndex;
+    private RecipeBookStationSo[] stations;
     
     private void Awake()
     {
@@ -33,6 +33,7 @@ public class RecipeBookUI : MonoBehaviour
         Hide();
         
         InputManager.Instance.OnRecipeBook += InputManager_OnRecipeBook;
+        RecipeManager.Instance.OnStationUnlocked += RecipeManager_OnStationUnlocked;
     }
     
     private void InputManager_OnRecipeBook(object sender, EventArgs e)
@@ -45,6 +46,11 @@ public class RecipeBookUI : MonoBehaviour
         {
             Show();
         }
+    }
+    
+    private void RecipeManager_OnStationUnlocked(object sender, EventArgs e)
+    {
+        CreateStationButtons();
     }
     
     public void Show()
@@ -87,6 +93,15 @@ public class RecipeBookUI : MonoBehaviour
     
     private void CreateStationButtons()
     {
+        stations = RecipeManager.Instance.GetRecipeBookStations();
+        
+        foreach (Transform child in stationButtonsParent)
+        {
+            if (child == stationButtonTemplate.transform) continue;
+            
+            Destroy(child.gameObject);
+        }
+        
         foreach (RecipeBookStationSo station in stations)
         {
             RecipeBookStationSingleUI stationUI = Instantiate(stationButtonTemplate, stationButtonsParent);
@@ -116,7 +131,7 @@ public class RecipeBookUI : MonoBehaviour
         
         foreach (RecipeSo recipe in RecipeManager.Instance.GetRecipes())
         {
-            if (recipe.GetType() != selectedStation.recipeTypeSample.GetType()) continue;
+            if (recipe.GetType() != selectedStation.RecipeType) continue;
             
             RecipeBookSingleRecipeUI recipeUI = Instantiate(recipeTemplate, recipesParent);
             recipeUI.gameObject.SetActive(true);

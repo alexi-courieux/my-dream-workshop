@@ -2893,6 +2893,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialRecipes: {fileID: 11400000, guid: 5f157dbe9f261374ea876f3603771acd, type: 2}
+  initialUnlockedStationsSo:
+  - {fileID: 11400000, guid: 40bfd557f793eff4cbcfcba24531e4a5, type: 2}
+  - {fileID: 11400000, guid: 6d30767b8ec9a7046a7d561920ecd4dc, type: 2}
+  - {fileID: 11400000, guid: f55f468459f56d44da23928152246398, type: 2}
 --- !u!4 &719405863 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 186621203884497955, guid: 05f80ab8753fc2d49b5f6913fec6fc8e,
@@ -3626,6 +3630,23 @@ PrefabInstance:
       propertyPath: 'buyableStationsToDestroy.Array.data[0]'
       value: 
       objectReference: {fileID: 1550131838}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: stationsToUnlockInRecipeBook.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: 'stationsToUnlockInRecipeBook.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 72f749fac4749534bac18ecd12da9fc9,
+        type: 2}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: 'stationsToUnlockInRecipeBook.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b0e0fbe6b0329d94a9b61d281682e62d,
+        type: 2}
     - target: {fileID: 4041495569037888280, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3929,13 +3950,6 @@ MonoBehaviour:
   recipesParent: {fileID: 442608834}
   stationButtonTemplate: {fileID: 1671409477}
   stationButtonsParent: {fileID: 2028121417}
-  stations:
-  - {fileID: 11400000, guid: 40bfd557f793eff4cbcfcba24531e4a5, type: 2}
-  - {fileID: 11400000, guid: d5c3428b801a1bc4199184f897b8d583, type: 2}
-  - {fileID: 11400000, guid: b0e0fbe6b0329d94a9b61d281682e62d, type: 2}
-  - {fileID: 11400000, guid: f55f468459f56d44da23928152246398, type: 2}
-  - {fileID: 11400000, guid: 72f749fac4749534bac18ecd12da9fc9, type: 2}
-  - {fileID: 11400000, guid: 6d30767b8ec9a7046a7d561920ecd4dc, type: 2}
   currentStationName: {fileID: 1572472669}
 --- !u!1001 &976475844
 PrefabInstance:
@@ -6882,6 +6896,23 @@ PrefabInstance:
       propertyPath: 'buyableStationsToDestroy.Array.data[0]'
       value: 
       objectReference: {fileID: 816174149}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: stationsToUnlockInRecipeBook.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: 'stationsToUnlockInRecipeBook.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 72f749fac4749534bac18ecd12da9fc9,
+        type: 2}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: 'stationsToUnlockInRecipeBook.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b0e0fbe6b0329d94a9b61d281682e62d,
+        type: 2}
     - target: {fileID: 4041495569037888280, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9777,6 +9808,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}
+      propertyPath: recipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
       propertyPath: stations.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -9785,6 +9821,12 @@ PrefabInstance:
       propertyPath: 'orders.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 91d07c10f44b2d94bb0cc34b87049ee1,
+        type: 2}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: 'recipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a514653320cca0647b53612fdf5f51cf,
         type: 2}
     - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}
@@ -9831,9 +9873,25 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}
+      propertyPath: stationsToUnlock.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: buyableCapacities.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
       propertyPath: buyableRecipeGroups.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: 'stationsToUnlock.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d5c3428b801a1bc4199184f897b8d583,
+        type: 2}
     - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}
       propertyPath: 'buyableRecipeGroups.Array.data[0]'
@@ -9857,6 +9915,17 @@ PrefabInstance:
       propertyPath: 'buyableRecipeGroups.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: a5090d8625d67f74b84f65dd209c0902,
+        type: 2}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: stationsToUnlockInRecipeBook.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
+        type: 3}
+      propertyPath: 'stationsToUnlockInRecipeBook.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: d5c3428b801a1bc4199184f897b8d583,
         type: 2}
     - target: {fileID: 4041495569037888280, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}

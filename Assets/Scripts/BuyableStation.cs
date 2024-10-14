@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
 {
@@ -14,6 +15,7 @@ public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
     [SerializeField] private RecipeSo[] buyableRecipes;
     [SerializeField] private BuyableRecipeGroupSo[] buyableRecipeGroups;
     [SerializeField] private CapacitySo[] buyableCapacities;
+    [SerializeField] private RecipeBookStationSo[] stationsToUnlockInRecipeBook;
 
     private void Start()
     {
@@ -55,6 +57,10 @@ public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
         foreach (CapacitySo capacity in buyableCapacities)
         {
             OrderManager.Instance.AddBuyableCapacity(capacity);
+        }
+        foreach (RecipeBookStationSo station in stationsToUnlockInRecipeBook)
+        {
+            RecipeManager.Instance.AddRecipeBookStation(station);
         }
         DestroySelf();
     }
