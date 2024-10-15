@@ -8,6 +8,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler<ProductSo> OnProductCrafted;
 
     private enum State
     {
@@ -16,7 +17,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     }
 
     [SerializeField] private Transform itemSlot;
-    private SculptingRecipeSo _anvilRecipeSo;
+    private SculptingRecipeSo _recipeSo;
     private SculptingRecipeSo[] _availableRecipes;
     private Product _product;
     private int _hitToProcess;
@@ -57,13 +58,13 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
 
     public void InteractAlt()
     {
-        if (_anvilRecipeSo is null) return;
+        if (_recipeSo is null) return;
         
         if(_state == State.Idle) _state = State.Processing;
         
         _hitToProcess--;
         OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
-            progressNormalized = 1 - (float)_hitToProcess / _anvilRecipeSo.hitToProcess
+            progressNormalized = 1 - (float)_hitToProcess / _recipeSo.hitToProcess
         });
 
         if (_hitToProcess <= 0)
@@ -75,8 +76,9 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
 
     private void Transform()
     {
+        OnProductCrafted?.Invoke(this, _recipeSo.output);
         _product.DestroySelf();
-        Item.SpawnItem(_anvilRecipeSo.output.prefab, this);
+        Item.SpawnItem(_recipeSo.output.prefab, this);
         CheckForRecipes();
         _state = State.Idle;
     }
@@ -157,9 +159,9 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     public void InteractNext()
     {
         if (_state == State.Processing) return;
-        if (_anvilRecipeSo is null) return;
+        if (_recipeSo is null) return;
         
-        int index = Array.IndexOf(_availableRecipes, _anvilRecipeSo);
+        int index = Array.IndexOf(_availableRecipes, _recipeSo);
         index++;
         if (index >= _availableRecipes.Length)
         {
@@ -170,9 +172,9 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
     public void InteractPrevious()
     {
         if (_state == State.Processing) return;
-        if (_anvilRecipeSo is null) return;
+        if (_recipeSo is null) return;
         
-        int index = Array.IndexOf(_availableRecipes, _anvilRecipeSo);
+        int index = Array.IndexOf(_availableRecipes, _recipeSo);
         index--;
         if (index < 0)
         {
@@ -191,14 +193,14 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
 
     private void SelectRecipe(SculptingRecipeSo recipe)
     {
-        _anvilRecipeSo = recipe;
+        _recipeSo = recipe;
         _hitToProcess = recipe.hitToProcess;
-        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_anvilRecipeSo.output, _availableRecipes.Length));
+        OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_recipeSo.output, _availableRecipes.Length));
     }
     
     private void ClearRecipe()
     {
-        _anvilRecipeSo = null;
+        _recipeSo = null;
         OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, _availableRecipes.Length));
     }
 }

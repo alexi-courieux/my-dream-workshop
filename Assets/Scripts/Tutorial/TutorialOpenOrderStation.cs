@@ -18,11 +18,6 @@ public class TutorialOpenOrderStation : TutorialStep
         orderStationIndicator.SetActive(true);
         tutorialUI.setTutorialText("Interact with the order station in your workshop to buy some logs");
     }
-
-    public override void DestroySelf()
-    {
-        Destroy(this);
-    }
     
     private void OnDestroy()
     {
@@ -32,6 +27,7 @@ public class TutorialOpenOrderStation : TutorialStep
     private void OrderStation_OnInteract(object sender, System.EventArgs e)
     {
         orderStationIndicator.SetActive(false);
-        tutorialUI.CompleteTutorialStep(this);
+        tutorialUI.CompleteTutorialStep();
+        Destroy(this);
     }
 }

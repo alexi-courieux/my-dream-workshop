@@ -7,6 +7,7 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
+    public event EventHandler<ProductSo> OnProductTaken; 
 
     private List<ProductSo> _products;
     private int _index;
@@ -26,6 +27,7 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
         ProductSo productSo = _products[_index];
         Item.SpawnItem(productSo.prefab, Player.Instance.HandleSystem);
         _products.RemoveAt(_index);
+        OnProductTaken?.Invoke(this, productSo);
         if (_index >= _products.Count)
         {
             _index = 0;

@@ -21,6 +21,7 @@ public class TutorialUI : MonoBehaviour
         tutorialStepIndex = 0;
         keyTutorial.SetActive(true);
         InputManager.Instance.OnInteract += InputManager_OnInteract;
+        CustomerManager.Instance.DisableSpawning();
     }
 
     private void OnDestroy()
@@ -37,9 +38,8 @@ public class TutorialUI : MonoBehaviour
         tutorialSteps[tutorialStepIndex].Show();
     }
     
-    public void CompleteTutorialStep(TutorialStep step)
+    public void CompleteTutorialStep()
     {
-        step.DestroySelf();
         tutorialStepIndex++;
         if (tutorialStepIndex < tutorialSteps.Length)
         {

@@ -8,7 +8,8 @@ public class OrderManager : MonoBehaviour
 {
     public static OrderManager Instance { get; private set; }
     
-    public event EventHandler<ProductSo> OnProductBuy; 
+    public event EventHandler<ProductSo> OnProductBuy;
+    public event EventHandler OnSell;
     
     [SerializeField] private ProductDictionarySo initialBuyableProducts;
     [SerializeField] private ProductDictionarySo initialSellableProductsList;
@@ -138,5 +139,6 @@ public class OrderManager : MonoBehaviour
     public void Sell(ProductSo productSo)
     {
         EconomyManager.Instance.AddMoney(productSo.sellPrice);
+        OnSell?.Invoke(this, EventArgs.Empty);
     }
 }

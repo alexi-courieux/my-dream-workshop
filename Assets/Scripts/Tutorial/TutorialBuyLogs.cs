@@ -25,11 +25,7 @@ public class TutorialBuyLogs : TutorialStep
         logsBought++;
         if (logsBought < 3) return;
         
-        tutorialUI.CompleteTutorialStep(this);
-    }
-
-    public override void DestroySelf()
-    {
+        tutorialUI.CompleteTutorialStep();
         Destroy(this);
     }
     

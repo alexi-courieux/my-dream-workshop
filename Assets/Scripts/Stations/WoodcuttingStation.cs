@@ -10,6 +10,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler<ProductSo> OnProductCrafted; 
 
     private enum State
     {
@@ -48,6 +49,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
 
     private void Transform()
     {
+        OnProductCrafted?.Invoke(this, _selectedRecipeSo.output);
         _product.DestroySelf();
         Item.SpawnItem(_selectedRecipeSo.output.prefab, this);
         _state = State.Idle;

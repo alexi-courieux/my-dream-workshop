@@ -45,7 +45,6 @@ public abstract class TabsManager : MonoBehaviour
 
     public void Show()
     {
-        if (gameObject.activeSelf) return;
         gameObject.SetActive(true);
         InputManager.Instance.DisableGameplayInput();
         InputManager.Instance.EnableMenuInput();

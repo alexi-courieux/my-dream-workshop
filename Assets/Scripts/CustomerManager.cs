@@ -15,6 +15,7 @@ public class CustomerManager : MonoBehaviour
 
     private Customer[] _customers;
     private float _spawnTimer;
+    private bool _isSpawning;
 
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class CustomerManager : MonoBehaviour
 
     private void Start()
     {
+        _isSpawning = true;
         _customers = new Customer[CustomerLimit];
         for (int i = 0; i < CustomerLimit; i++)
         {
@@ -35,18 +37,13 @@ public class CustomerManager : MonoBehaviour
 
     private void Update()
     {
+        if (!_isSpawning) return;
+        
         _spawnTimer -= Time.deltaTime;
-        if (_spawnTimer <= 0)
-        {
-            _spawnTimer = UnityEngine.Random.Range(spawnIntervalMin, spawnIntervalMax);
-            SpawnCustomer();
-        }
-
-        // Test purpose
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            SpawnCustomer();
-        }
+        if (!(_spawnTimer <= 0)) return;
+        
+        _spawnTimer = UnityEngine.Random.Range(spawnIntervalMin, spawnIntervalMax);
+        SpawnCustomer();
     }
 
     private void SpawnCustomer()
@@ -75,5 +72,15 @@ public class CustomerManager : MonoBehaviour
     public static void Dispawn(Customer customer)
     {
         customer.gameObject.SetActive(false);
+    }
+    
+    public void EnableSpawning()
+    {
+        _isSpawning = true;
+    }
+    
+    public void DisableSpawning()
+    {
+        _isSpawning = false;
     }
 }

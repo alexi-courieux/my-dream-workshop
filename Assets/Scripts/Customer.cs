@@ -7,20 +7,20 @@ public class Customer : MonoBehaviour
     public event EventHandler OnOrder;
     public event EventHandler OnLeave;
     
-    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] protected NavMeshAgent agent;
     
     private Action _onDestinationReached;
     private Transform _destination;
-    private CheckoutStation _checkoutStation;
-    private ProductSo _order;
+    protected CheckoutStation CheckoutStation;
+    protected ProductSo Order;
 
     public void Initialize(CheckoutStation checkoutStation)
     {
         agent.Warp(CustomerManager.Instance.GetSpawnPoint().position);
         
-        _checkoutStation = checkoutStation;
+        CheckoutStation = checkoutStation;
         checkoutStation.Add(this);
-        MoveToThen(_checkoutStation.GetPosition(this), TryToOrder);
+        MoveToThen(CheckoutStation.GetPosition(this), TryToOrder);
         RegisterToCheckoutStation();
     }
     
@@ -34,12 +34,12 @@ public class Customer : MonoBehaviour
     
     private void RegisterToCheckoutStation()
     {
-        _checkoutStation.OnCustomerCheckout += CheckoutStation_OnCustomerCheckout;
+        CheckoutStation.OnCustomerCheckout += CheckoutStation_OnCustomerCheckout;
     }
     
     private void UnregisterFromCheckoutStation()
     {
-        _checkoutStation.OnCustomerCheckout -= CheckoutStation_OnCustomerCheckout;
+        CheckoutStation.OnCustomerCheckout -= CheckoutStation_OnCustomerCheckout;
     }
     
     private void CheckoutStation_OnCustomerCheckout(object sender, Customer customer)
@@ -54,7 +54,7 @@ public class Customer : MonoBehaviour
             });
             return;
         }
-        MoveToThen(_checkoutStation.GetPosition(this), TryToOrder);
+        MoveToThen(CheckoutStation.GetPosition(this), TryToOrder);
     }
     
     private void DestinationReached()
@@ -79,17 +79,18 @@ public class Customer : MonoBehaviour
         _onDestinationReached = onDestinationReached;
     }
 
-    private void TryToOrder()
+    protected void TryToOrder()
     {
-        if (!_checkoutStation.IsFirst(this)) return;
+        if (!CheckoutStation.IsFirst(this)) return;
         
         ProductSo[] sellableProducts = OrderManager.Instance.GetSellableProducts();
-        _order = sellableProducts[UnityEngine.Random.Range(0, sellableProducts.Length)];
+        Order = sellableProducts[UnityEngine.Random.Range(0, sellableProducts.Length)];
+        
         OnOrder?.Invoke(this, EventArgs.Empty);
     }
     
     public ProductSo GetOrder()
     {
-        return _order;
+        return Order;
     }
 }
