@@ -8,6 +8,8 @@ public class OrderManager : MonoBehaviour
 {
     public static OrderManager Instance { get; private set; }
     
+    public event EventHandler<ProductSo> OnProductBuy; 
+    
     [SerializeField] private ProductDictionarySo initialBuyableProducts;
     [SerializeField] private ProductDictionarySo initialSellableProductsList;
     [SerializeField] private OrderChestStation chestStation;
@@ -89,6 +91,8 @@ public class OrderManager : MonoBehaviour
         
         EconomyManager.Instance.RemoveMoney(productSo.buyPrice);
         chestStation.AddProduct(productSo);
+        
+        OnProductBuy?.Invoke(this, productSo);
     }
     
     public void BuyRecipe(RecipeSo recipeSo)
