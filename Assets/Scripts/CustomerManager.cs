@@ -4,7 +4,7 @@ using UnityEngine;
 public class CustomerManager : MonoBehaviour
 {
     public static CustomerManager Instance { get; private set; }
-    public const int CustomerLimit = 10;
+    private const int CustomerLimit = 3;
 
     [SerializeField] private GameObject customerPrefab;
     [SerializeField] private Transform spawnPoint;

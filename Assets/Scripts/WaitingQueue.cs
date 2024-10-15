@@ -40,6 +40,7 @@ public class WaitingQueue<T>
     public Transform GetPosition(T entity)
     {
         int index = _waitingEntities.IndexOf(entity);
+        if (index == -1) return null;
         return _waitingPositions[index];
     }
 

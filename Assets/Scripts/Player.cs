@@ -106,7 +106,7 @@ public class Player : MonoBehaviour
     private void Move()
     {
         Vector3 finalMovement = Vector3.zero;
-        Vector2 movementInput = InputManager.Instance.GetMovementVectorNormalized();
+        Vector2 movementInput = InputManager.Instance.GetMovementVectorNormalized() * -1;
         Vector3 moveDirection = new Vector3(movementInput.x, 0, movementInput.y);
         const float minimalMovementMagnitude = 0.1f;
         if (movementInput.magnitude >= minimalMovementMagnitude)
