@@ -19878,7 +19878,7 @@ PrefabInstance:
     - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}
       propertyPath: price
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3208812619383908816, guid: 45c92622cdfcc1b4dbdb95ca562e7482,
         type: 3}

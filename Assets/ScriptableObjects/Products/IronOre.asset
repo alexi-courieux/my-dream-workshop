@@ -15,5 +15,5 @@ MonoBehaviour:
   prefab: {fileID: 3908874931380198303, guid: 59398c13daebd5a40b25975a94c10bf2, type: 3}
   sprite: {fileID: 21300000, guid: 6f943853d00303a428f3ea1504c92276, type: 3}
   itemName: Iron Ore
-  buyPrice: 10
-  sellPrice: 8
+  buyPrice: 5
+  sellPrice: 3
