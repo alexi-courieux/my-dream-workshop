@@ -16,5 +16,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 5e72ba80b7072ee42b6bfd8f49f59448, type: 3}
   itemName: IronDualAxe
   buyPrice: 0
-  sellPrice: 55
+  sellPrice: 65
   itemType: 4

@@ -16,5 +16,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 81f1cb5a5e1bf074e85779ab166ab6d1, type: 3}
   itemName: WoodenShield
   buyPrice: 0
-  sellPrice: 45
+  sellPrice: 55
   itemType: 4

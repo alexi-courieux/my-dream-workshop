@@ -16,5 +16,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 506275eebff120d4eb00d83b4cad4ffd, type: 3}
   itemName: WoodenBow
   buyPrice: 0
-  sellPrice: 35
+  sellPrice: 45
   itemType: 4

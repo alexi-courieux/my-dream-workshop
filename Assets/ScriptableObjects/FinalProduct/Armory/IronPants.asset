@@ -16,5 +16,5 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: d61282722f6c31e47b8160b135c0eadc, type: 3}
   itemName: IronPants
   buyPrice: 0
-  sellPrice: 50
+  sellPrice: 70
   itemType: 2
