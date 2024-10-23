@@ -7,15 +7,15 @@ public class TutorialBuyLogs : TutorialStep
     
     private int logsBought;
     
-    private void Start()
-    {
-        gameObject.SetActive(true);
-    }
-    
     public override void Show()
     {
         tutorialUI.setTutorialText("Buy 3 logs.");
         OrderManager.Instance.OnProductBuy += OrderManager_OnProductBuy;
+    }
+    
+    public override void Hide()
+    {
+        
     }
     
     private void OrderManager_OnProductBuy(object sender, ProductSo e)

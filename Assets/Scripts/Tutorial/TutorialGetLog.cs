@@ -6,19 +6,18 @@ public class TutorialGetLog : TutorialStep
     [SerializeField] private ProductSo logProductSo;
     [SerializeField] private GameObject orderChestStationIndicator;
     
-    private void Start()
-    {
-        gameObject.SetActive(true);
-        orderChestStationIndicator.SetActive(false);
-    }
-    
     public override void Show()
     {
         orderChestStationIndicator.SetActive(true);
         tutorialUI.setTutorialText("Get one of the bought logs from the order chest near the window.");
         orderChestStation.OnProductTaken += OrderChestStation_OnProductTaken;
     }
-    
+
+    public override void Hide()
+    {
+        orderChestStationIndicator.SetActive(false);
+    }
+
     private void OrderChestStation_OnProductTaken(object sender, ProductSo e)
     {
         if (e != logProductSo) return;

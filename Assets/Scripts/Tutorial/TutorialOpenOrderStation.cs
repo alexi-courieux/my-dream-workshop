@@ -6,17 +6,16 @@ public class TutorialOpenOrderStation : TutorialStep
     
     [SerializeField] private OrderStation orderStation;
     
-    private void Start()
-    {
-        gameObject.SetActive(true);
-        orderStationIndicator.SetActive(false);
-    }
-    
     public override void Show()
     {
         orderStation.OnInteract += OrderStation_OnInteract;
         orderStationIndicator.SetActive(true);
         tutorialUI.setTutorialText("Interact with the order station in your workshop to buy some logs");
+    }
+    
+    public override void Hide()
+    {
+        orderStationIndicator.SetActive(false);
     }
     
     private void OnDestroy()

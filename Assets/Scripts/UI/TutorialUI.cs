@@ -16,6 +16,7 @@ public class TutorialUI : MonoBehaviour
         tutorialTextObject.SetActive(false);
         foreach (TutorialStep step in tutorialSteps)
         {
+            step.Hide();
             step.gameObject.SetActive(false);
         }
         tutorialStepIndex = 0;
