@@ -3,8 +3,9 @@
 public class SyncPosition : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    private void Update()
+    [SerializeField] private Vector3 offset;
+    private void LateUpdate()
     {
-        transform.position = target.position;
+        transform.position = target.position + offset;
     }
 }
