@@ -15,7 +15,7 @@ public abstract class TabsManager : MonoBehaviour
     private int currentTabIndex;
     private ITabElement[] tabElements;
     
-    private void Awake() {
+    protected void Awake() {
         closeButton.onClick.AddListener(Hide);
         for (int i = 0; i < tabButtons.Length; i++)
         {
