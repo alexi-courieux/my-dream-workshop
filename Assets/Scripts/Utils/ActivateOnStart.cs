@@ -3,7 +3,7 @@ public class ActivateOnStart : MonoBehaviour
 {
     [SerializeField] private GameObject[] objectsToActivate;
     
-    private void Start()
+    private void Awake()
     {
         foreach (GameObject obj in objectsToActivate)
         {
