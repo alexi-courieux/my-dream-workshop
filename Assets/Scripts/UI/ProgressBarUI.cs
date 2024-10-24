@@ -12,9 +12,15 @@ public class ProgressBarUI : MonoBehaviour
 
     private void Start() {
         hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
-
         hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
 
+        bool stationHandleFocus = hasProgressGameObject.TryGetComponent(out IFocusable focusableStation);
+        if (stationHandleFocus)
+        {
+            focusableStation.OnFocus += FocusableStation_OnFocus;
+            focusableStation.OnStopFocus += FocusableStation_OnStopFocus;
+        }
+        
         barImage.fillAmount = 0f;
 
         Hide();
@@ -32,6 +38,16 @@ public class ProgressBarUI : MonoBehaviour
         {
             Show();
         }
+    }
+    
+    private void FocusableStation_OnFocus(object sender, EventArgs e)
+    {
+        Show();
+    }
+    
+    private void FocusableStation_OnStopFocus(object sender, EventArgs e)
+    {
+        Hide();
     }
 
     private void Show() 

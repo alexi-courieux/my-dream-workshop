@@ -16,8 +16,6 @@ namespace AshLight.BakerySim.UI
 
         private void Awake()
         {
-            gameObject.SetActive(false);
-            
             if (station.TryGetComponent(out IFocusable focusableStation))
             {
                 focusableStation.OnFocus += FocusableStation_OnFocus;
@@ -35,7 +33,12 @@ namespace AshLight.BakerySim.UI
                 Debug.LogError("Station doesn't Implement ISelectableRecipe");
             }
         }
-    
+
+        private void Start()
+        {
+            Hide();
+        }
+
         private void FocusableStation_OnFocus(object sender, EventArgs e)
         {
             Show();
