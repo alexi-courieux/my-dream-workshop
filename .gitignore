@@ -10,6 +10,10 @@
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
+# Font SDF (commit them once)
+/[Aa]ssets/_[Aassets]/Fonts/Handlee-Regular SDF.asset
+/[Aa]ssets/_[Aassets]/Fonts/promptfont SDF.asset
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
