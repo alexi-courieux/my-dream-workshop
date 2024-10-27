@@ -9,6 +9,7 @@ public class ProgressBarUI : MonoBehaviour
     [SerializeField] private bool hideOnMinAndMax;
 
     private IHasProgress hasProgress;
+    private float progress;
 
     private void Start() {
         hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
@@ -28,16 +29,10 @@ public class ProgressBarUI : MonoBehaviour
 
     private void HasProgress_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {
-        barImage.fillAmount = e.progressNormalized;
+        progress = e.progressNormalized;
+        barImage.fillAmount = progress;
 
-        if (hideOnMinAndMax && e.progressNormalized == 0f || e.progressNormalized == 1f)
-        {
-            Hide();
-        }
-        else 
-        {
-            Show();
-        }
+        Show();
     }
     
     private void FocusableStation_OnFocus(object sender, EventArgs e)
@@ -52,6 +47,11 @@ public class ProgressBarUI : MonoBehaviour
 
     private void Show() 
     {
+        if (hideOnMinAndMax && (progress.Equals(0f) || progress.Equals(1f)))
+        {
+            Hide();
+            return;
+        }
         gameObject.SetActive(true);
     }
 
