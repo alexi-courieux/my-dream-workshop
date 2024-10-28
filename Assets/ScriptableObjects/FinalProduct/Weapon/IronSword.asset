@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7595b261424aaf54bbf4edc48fabebfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronSword
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: 33a8904d365bb1f4e84458f09c50070b, type: 3}
@@ -19,4 +19,3 @@ MonoBehaviour:
   sellPrice: 50
   types:
   - {fileID: 11400000, guid: 8b2b061104ee05645a9c7d5e35f5dde7, type: 2}
-  itemType: 4

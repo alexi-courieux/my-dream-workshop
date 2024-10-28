@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7595b261424aaf54bbf4edc48fabebfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: WoodenBow
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: bc236df04210f3e4a80d78bdd518d15a, type: 3}
@@ -19,4 +19,3 @@ MonoBehaviour:
   sellPrice: 45
   types:
   - {fileID: 11400000, guid: 4b4435a836ae43141a6dccb80a7c01fa, type: 2}
-  itemType: 4

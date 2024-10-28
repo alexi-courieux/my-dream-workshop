@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7595b261424aaf54bbf4edc48fabebfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronLegs
   m_EditorClassIdentifier: 
   prefab: {fileID: 3255530098180596297, guid: 258c63472563eac4c95a46f13e9b8397, type: 3}
@@ -19,4 +19,3 @@ MonoBehaviour:
   sellPrice: 70
   types:
   - {fileID: 11400000, guid: 2539ffef98b7e424dadb5b4efd192310, type: 2}
-  itemType: 2
