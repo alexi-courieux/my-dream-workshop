@@ -19,8 +19,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     [SerializeField] private Transform[] itemSlots;
     [SerializeField] private Transform finalProductSlot;
     
-    private readonly StackList<Product> _items = new();
-    private FinalProduct _finalProduct;
+    private readonly StackList<Product> _items = new StackList<Product>();
     private State _state;
     private AssemblyRecipeSo[] _availableRecipes;
     private AssemblyRecipeSo _selectedRecipe;
@@ -40,12 +39,10 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     {
         if (Player.Instance.HandleSystem.HaveAnyItems())
         {
-            if (_finalProduct is not null) return;
-            if (Player.Instance.HandleSystem.HaveItems<FinalProduct>() 
+            if (Player.Instance.HandleSystem.HaveItems<Product>() 
                 && _items.Count > 0) return;
             
-            if (!Player.Instance.HandleSystem.HaveItems<Product>()
-                && !Player.Instance.HandleSystem.HaveItems<FinalProduct>()) return;
+            if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
             Item playerItem = Player.Instance.HandleSystem.GetItem();
             if (!HasAvailableSlot(playerItem)) return;
             
@@ -59,12 +56,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         }
         else
         {
-            if (_finalProduct is not null)
-            {
-                _finalProduct.SetParent(Player.Instance.HandleSystem);
-                return;
-            }
-
             if (_items.Count <= 0) return;
             
             Item item = _items.Pop();
@@ -179,10 +170,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         {
             _items.Push(product);
         }
-        else if (newItem is FinalProduct fp)
-        {
-            _finalProduct = fp;
-        }
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -194,12 +181,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public void ClearItem(Item itemToClear)
     {
-        if (itemToClear is FinalProduct)
-        {
-            _finalProduct = null;
-            return;
-        }
-        
         _items.Remove(itemToClear as Product);
     }
 
@@ -217,15 +198,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public Transform GetAvailableItemSlot(Item newItem)
     {
-        if (newItem is Product)
-        {
-            return itemSlots[_items.Count];
-        }
-        if (newItem is FinalProduct)
-        {
-            return finalProductSlot;
-        }
-        return null;
+        return newItem is Product ? itemSlots[_items.Count] : null;
     }
 
     public bool HasAvailableSlot(Item item)
@@ -233,7 +206,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         return item switch
         {
             Product => _items.Count < _capacity,
-            FinalProduct => _finalProduct is null,
             _ => false
         };
     }
