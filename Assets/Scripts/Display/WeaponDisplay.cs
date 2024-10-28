@@ -6,13 +6,13 @@ using UnityEngine;
 public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
 {
     [SerializeField] private Transform[] itemSlots;
-    [SerializeField] private FinalProductSo.ItemType[] allowedItemTypes;
-    private List<FinalProduct> _items;
+    [SerializeField] private ProductTypeSo[] allowedProductTypes;
+    private List<Product> _items;
     private int _capacity;
 
     private void Awake()
     {
-        _items = new List<FinalProduct>();
+        _items = new List<Product>();
         _capacity = itemSlots.Length;
     }
     public void Interact()
@@ -20,10 +20,10 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
         if (Player.Instance.HandleSystem.HaveAnyItems())
         {
             Item playerItem = Player.Instance.HandleSystem.GetItem();
-            if (playerItem is not FinalProduct fp) return;
+            if (playerItem is not Product p) return;
             if (!HasAvailableSlot(playerItem)) return;
             
-            fp.SetParent(this);
+            p.SetParent(this);
         }
         else
         {
@@ -35,31 +35,31 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
     }
         public void AddItem(Item newItem)
     {
-        if (newItem is not FinalProduct fp)
+        if (newItem is not Product p)
         {
-            throw new Exception("This station can only hold final products!");
+            throw new Exception("This station can only hold products!");
         }
-        _items.Add(fp);
+        _items.Add(p);
     }
 
     public Item[] GetItems<T>() where T : Item
     {
-        if (typeof(T) != typeof(FinalProduct)) return null;
+        if (typeof(T) != typeof(Product)) return null;
         
         return _items.Cast<Item>().ToArray();
     }
 
     public void ClearItem(Item itemToClear)
     {
-        if (itemToClear is not FinalProduct fp) throw new Exception("This station can only hold final products!");
-        _items.Remove(fp);
+        if (itemToClear is not Product p) throw new Exception("This station can only hold products!");
+        _items.Remove(p);
     }
 
     public bool HaveItems<T>() where T : Item
     {
-        if (typeof(T) != typeof(FinalProduct))
+        if (typeof(T) != typeof(Product))
         {
-            Debug.LogWarning("This station can only hold final products!");
+            Debug.LogWarning("This station can only hold products!");
             return false;
         }
     
@@ -82,9 +82,9 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
 
     public bool HasAvailableSlot(Item item)
     {
-        if (item is not FinalProduct fp) return false;
-        if (allowedItemTypes.Length > 0 
-            && !allowedItemTypes.Contains(fp.FinalProductSo.itemType)) return false;
+        if (item is not Product p) return false;
+        if (allowedProductTypes.Length > 0
+            && !p.ProductSo.types.Any(type => allowedProductTypes.Contains(type))) return false;
         return _items.Count < _capacity;
     }
 
