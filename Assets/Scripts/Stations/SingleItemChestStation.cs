@@ -25,15 +25,11 @@ public class SingleItemChestStation : MonoBehaviour, IInteractable, IFocusable
         {
             // If player has items, try to put in the chest
             Item playerItem = Player.Instance.HandleSystem.GetItem();
-            if (playerItem is not Product && playerItem is not FinalProduct) return;
+            if (playerItem is not Product) return;
             ProductSo playerProductSo = null;
             if (playerItem is Product product)
             {
                 playerProductSo = product.ProductSo;
-            }
-            if (playerItem is FinalProduct finalProduct)
-            {
-                playerProductSo = finalProduct.FinalProductSo;
             }
             
             if (playerProductSo != productSo) return;

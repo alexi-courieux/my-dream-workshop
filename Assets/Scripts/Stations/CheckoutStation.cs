@@ -38,14 +38,14 @@ public class CheckoutStation : MonoBehaviour, IInteractable
     
     private void TryCompleteOrder()
     {
-        if (!Player.Instance.HandleSystem.HaveItems<FinalProduct>()) return;
+        if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
         
         Customer customer = _customerQueue.PeekFirst();
         if (_customerQueue.PeekFirst().GetOrder() is null) return;
 
-        FinalProduct playerProduct = Player.Instance.HandleSystem.GetItem<FinalProduct>();
+        Product playerProduct = Player.Instance.HandleSystem.GetItem<Product>();
         ProductSo order = customer.GetOrder();
-        if (order != playerProduct.FinalProductSo) return;
+        if (order != playerProduct.ProductSo) return;
         
         OrderManager.Instance.Sell(order);
         playerProduct.DestroySelf();

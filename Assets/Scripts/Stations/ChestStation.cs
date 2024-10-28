@@ -28,15 +28,11 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable, IInteracta
             if (_products.Count >= Capacity) return;
 
             Item playerItem = Player.Instance.HandleSystem.GetItem();
-            if (playerItem is not Product
-                && playerItem is not FinalProduct) return;
+            if (playerItem is not Product) return;
             switch (playerItem)
             {
                 case Product product:
                     _products.Add(product.ProductSo);
-                    break;
-                case FinalProduct finalProduct:
-                    _products.Add(finalProduct.FinalProductSo);
                     break;
             }
             _index = _products.Count - 1;
