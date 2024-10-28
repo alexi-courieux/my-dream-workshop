@@ -1,6 +1,6 @@
 ﻿using System;
 
-public interface ISelectablProduct
+public interface ISelectableProduct
 {
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
 }

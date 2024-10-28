@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 public class ChestStation : MonoBehaviour, IInteractable, IFocusable, IInteractablePrevious, IInteractableNext, IHasProgress,
-    ISelectablProduct
+    ISelectableProduct
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;

@@ -26,7 +26,7 @@ namespace AshLight.BakerySim.UI
                 Debug.LogError("Station doesn't Implement IFocusable");
             }
             
-            if (station.TryGetComponent(out ISelectablProduct SelectableRecipeStation))
+            if (station.TryGetComponent(out ISelectableProduct SelectableRecipeStation))
             {
                 SelectableRecipeStation.OnProductSelected += SelectableRecipeStation_OnRecipeSelected;
             } else {

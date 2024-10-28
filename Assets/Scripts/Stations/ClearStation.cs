@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
-public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInteractableAlt, IFocusable, IInteractableNext, IInteractablePrevious, ISelectablProduct
+public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInteractableAlt, IFocusable, IInteractableNext, IInteractablePrevious, ISelectableProduct
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
