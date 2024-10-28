@@ -12,7 +12,7 @@ public class ProductSo : ScriptableObject
     public string itemName;
     public int buyPrice;
     public int sellPrice;
-    public ProductType[] types;
+    public ProductTypeSo[] types;
 
     public override bool Equals(object other)
     {
@@ -33,14 +33,14 @@ public class ProductSo : ScriptableObject
 [CustomEditor(typeof(ProductSo), true)]
 public class ProductSoEditor : Editor
 {
-    private List<ProductType> availableTypes;
+    private List<ProductTypeSo> availableTypes;
     private bool[] selectedTypes = Array.Empty<bool>();
 
     private void OnEnable()
     {
-        string[] typesGuids = AssetDatabase.FindAssets($"t:{nameof(ProductType)}");
+        string[] typesGuids = AssetDatabase.FindAssets($"t:{nameof(ProductTypeSo)}");
         availableTypes = typesGuids
-            .Select(guid => AssetDatabase.LoadAssetAtPath<ProductType>(AssetDatabase.GUIDToAssetPath(guid)))
+            .Select(guid => AssetDatabase.LoadAssetAtPath<ProductTypeSo>(AssetDatabase.GUIDToAssetPath(guid)))
             .Where(type => type.assignable)
             .OrderBy(type => type.GetPath())
             .ToList();
@@ -59,7 +59,7 @@ public class ProductSoEditor : Editor
         // Display dropdown list for selecting tags
         EditorGUILayout.LabelField($"Available Tags ({availableTypes.Count}):");
 
-        HashSet<ProductType> displayedParents = new HashSet<ProductType>();
+        HashSet<ProductTypeSo> displayedParents = new HashSet<ProductTypeSo>();
         for (int i = 0; i < availableTypes.Count; i++)
         {
             if (availableTypes[i].parentType is not null && !displayedParents.Contains(availableTypes[i].parentType))
@@ -75,7 +75,7 @@ public class ProductSoEditor : Editor
             if (newSelected == selectedTypes[i]) continue;
 
             selectedTypes[i] = newSelected;
-            List<ProductType> selectedProductTypes = new List<ProductType>();
+            List<ProductTypeSo> selectedProductTypes = new List<ProductTypeSo>();
             for (int j = 0; j < selectedTypes.Length; j++)
             {
                 if (selectedTypes[j])
@@ -91,11 +91,11 @@ public class ProductSoEditor : Editor
         }
     }
 
-    private void DisplayParentHierarchy(ProductType parentType, HashSet<ProductType> displayedParents)
+    private void DisplayParentHierarchy(ProductTypeSo parentType, HashSet<ProductTypeSo> displayedParents)
     {
         if (parentType is null || displayedParents.Contains(parentType)) return;
 
-        List<ProductType> hierarchy = new List<ProductType>();
+        List<ProductTypeSo> hierarchy = new List<ProductTypeSo>();
         while (parentType is not null && !displayedParents.Contains(parentType))
         {
             hierarchy.Add(parentType);
@@ -106,7 +106,7 @@ public class ProductSoEditor : Editor
         hierarchy.Reverse();
         for (int i = 0; i < hierarchy.Count; i++)
         {
-            ProductType type = hierarchy[i];
+            ProductTypeSo type = hierarchy[i];
             int indentLevel = GetIndentLevel(type);
             string indent = new string(' ', indentLevel * 2); // Adjusted indentation
 
@@ -123,7 +123,7 @@ public class ProductSoEditor : Editor
         }
     }
 
-    private int GetIndentLevel(ProductType type)
+    private int GetIndentLevel(ProductTypeSo type)
     {
         int level = 0;
         while (type.parentType is not null)
