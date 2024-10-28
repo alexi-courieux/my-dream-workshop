@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: Iron Ore
   buyPrice: 5
   sellPrice: 3
+  types:
+  - {fileID: 11400000, guid: 7a4be0d1a8d2a45418f21ae439dd70f4, type: 2}

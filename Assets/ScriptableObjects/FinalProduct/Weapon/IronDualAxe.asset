@@ -17,4 +17,6 @@ MonoBehaviour:
   itemName: IronDualAxe
   buyPrice: 0
   sellPrice: 65
+  types:
+  - {fileID: 11400000, guid: c4eb672d2a58cfb418ea5a25012dade1, type: 2}
   itemType: 4

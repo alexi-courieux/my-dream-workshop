@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: FusionIron
   buyPrice: 0
   sellPrice: 0
+  types:
+  - {fileID: 11400000, guid: 02bbcadff42e07c4fb3286a76b99807e, type: 2}

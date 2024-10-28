@@ -17,4 +17,6 @@ MonoBehaviour:
   itemName: IronBoot
   buyPrice: 0
   sellPrice: 52
+  types:
+  - {fileID: 11400000, guid: 1a27f54d70884e4488b020cd584c918c, type: 2}
   itemType: 3

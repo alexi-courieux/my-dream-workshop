@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: Plank
   buyPrice: 0
   sellPrice: 5
+  types:
+  - {fileID: 11400000, guid: 1e042f43d68bc7b47b99ef65bb3486de, type: 2}

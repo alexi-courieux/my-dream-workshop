@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: Nails
   buyPrice: 10
   sellPrice: 10
+  types:
+  - {fileID: 11400000, guid: ea00ee7edc3431847ba33fe19a1576a7, type: 2}

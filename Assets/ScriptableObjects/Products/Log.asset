@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: Log
   buyPrice: 5
   sellPrice: 3
+  types:
+  - {fileID: 11400000, guid: 818a76e182420df4a89dba889461a332, type: 2}

@@ -17,3 +17,5 @@ MonoBehaviour:
   itemName: WoodenStick
   buyPrice: 0
   sellPrice: 7
+  types:
+  - {fileID: 11400000, guid: 58969ab9c4cfaa94d8496733e0d63b0c, type: 2}

@@ -17,4 +17,6 @@ MonoBehaviour:
   itemName: WoodenBow
   buyPrice: 0
   sellPrice: 45
+  types:
+  - {fileID: 11400000, guid: 4b4435a836ae43141a6dccb80a7c01fa, type: 2}
   itemType: 4

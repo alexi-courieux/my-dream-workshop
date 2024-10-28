@@ -17,4 +17,6 @@ MonoBehaviour:
   itemName: IronSword
   buyPrice: 0
   sellPrice: 50
+  types:
+  - {fileID: 11400000, guid: 8b2b061104ee05645a9c7d5e35f5dde7, type: 2}
   itemType: 4

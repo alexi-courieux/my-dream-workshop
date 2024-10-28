@@ -17,4 +17,6 @@ MonoBehaviour:
   itemName: WoodenShield
   buyPrice: 0
   sellPrice: 55
+  types:
+  - {fileID: 11400000, guid: 8cfd8212cdca203469f233a06bf1c3e5, type: 2}
   itemType: 4
