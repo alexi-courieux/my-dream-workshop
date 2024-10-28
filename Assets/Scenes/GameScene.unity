@@ -2476,26 +2476,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WoodcuttingStation
       objectReference: {fileID: 0}
-    - target: {fileID: 5808589924741446195, guid: 71e31a106a58fb14993f74c50ccd9ae3,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.6422906
-      objectReference: {fileID: 0}
-    - target: {fileID: 5808589924741446195, guid: 71e31a106a58fb14993f74c50ccd9ae3,
-        type: 3}
-      propertyPath: m_Center.x
-      value: -0.0015763566
-      objectReference: {fileID: 0}
-    - target: {fileID: 5808589924741446195, guid: 71e31a106a58fb14993f74c50ccd9ae3,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 0.87114525
-      objectReference: {fileID: 0}
-    - target: {fileID: 5808589924741446195, guid: 71e31a106a58fb14993f74c50ccd9ae3,
-        type: 3}
-      propertyPath: m_Center.z
-      value: 0.0043370575
-      objectReference: {fileID: 0}
     - target: {fileID: 8189339906586034208, guid: 71e31a106a58fb14993f74c50ccd9ae3,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -17227,7 +17207,6 @@ Transform:
   - {fileID: 781123892}
   - {fileID: 1108984738}
   - {fileID: 1534096567}
-  - {fileID: 523439528}
   - {fileID: 1480467506}
   - {fileID: 338453061}
   - {fileID: 385447139}
@@ -17239,6 +17218,7 @@ Transform:
   - {fileID: 902980635}
   - {fileID: 798227403}
   - {fileID: 1553281675}
+  - {fileID: 523439528}
   m_Father: {fileID: 58748741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1501594628
