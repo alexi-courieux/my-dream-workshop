@@ -14,14 +14,15 @@ public class ArmoryDisplay : MonoBehaviour, IInteractable, IHandleItems
     [SerializeField] private ProductTypeSo chestType;
     [SerializeField] private ProductTypeSo pantsType;
     [SerializeField] private ProductTypeSo bootType;
-    [SerializeField] private ProductTypeSo[] allowedProductTypes;
     private List<Product> _items;
     private List<ProductTypeSo> _itemTypes;
+    private ProductTypeSo[] _allowedProductTypes;
 
     private void Awake()
     {
         _items = new List<Product>();
         _itemTypes = new List<ProductTypeSo>();
+        _allowedProductTypes = new []{helmetType, chestType, pantsType, bootType};
     }
 
     public void Interact()
@@ -115,8 +116,9 @@ public class ArmoryDisplay : MonoBehaviour, IInteractable, IHandleItems
     public bool HasAvailableSlot(Item item)
     {
         if (item is not Product product) return false;
-        if (allowedProductTypes.Length > 0
-            && !product.ProductSo.types.Any(type => allowedProductTypes.Contains(type))) return false;
+        if (_allowedProductTypes.Length > 0
+            && !product.ProductSo.types.Any(type => _allowedProductTypes.Contains(type))) return false;
+        // NOTE: We assume no product can have more than one of the allowed types (i.e. helmet & chest)
         return !product.ProductSo.types.Any(type => _itemTypes.Contains(type));
     }
 }
