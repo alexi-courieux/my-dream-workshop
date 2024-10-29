@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7169447704c0640bd319092178cda1, type: 3}
   m_Name: AssemblyRecipe_IronBoot
   m_EditorClassIdentifier: 
+  output: {fileID: 11400000, guid: eab211bfc848aa34aab4f135b466c64e, type: 2}
   inputs:
   - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
   - {fileID: 11400000, guid: 47b62f86a6933254682ce4ab3c28c9db, type: 2}
-  output: {fileID: 11400000, guid: bb0b937d481c6784da2d98011ebf898f, type: 2}
-  hitToProcess: 8
   buyPrice: 0
-  isUnlock: 0
+  hitToProcess: 8

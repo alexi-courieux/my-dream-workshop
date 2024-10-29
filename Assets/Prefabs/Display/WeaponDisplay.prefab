@@ -134,7 +134,8 @@ MonoBehaviour:
   - {fileID: 8873207775733845087}
   - {fileID: 508763931839498035}
   - {fileID: 3249382935824301045}
-  allowedItemTypes: 04000000
+  allowedProductTypes:
+  - {fileID: 11400000, guid: 4dc9fadb3ec97654ea998d3340866d12, type: 2}
 --- !u!1 &2786456581909836336
 GameObject:
   m_ObjectHideFlags: 0

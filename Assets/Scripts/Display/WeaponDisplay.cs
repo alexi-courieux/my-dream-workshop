@@ -84,7 +84,7 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
     {
         if (item is not Product p) return false;
         if (allowedProductTypes.Length > 0
-            && !p.ProductSo.types.Any(type => allowedProductTypes.Contains(type))) return false;
+            && !allowedProductTypes.Any(t => p.ProductSo.types.Any(pt => pt.IsType(t)))) return false;
         return _items.Count < _capacity;
     }
 
