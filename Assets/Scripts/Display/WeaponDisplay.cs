@@ -19,7 +19,7 @@ public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
     {
         if (Player.Instance.HandleSystem.HaveAnyItems())
         {
-            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            Item playerItem = Player.Instance.HandleSystem.GetSelectedItem();
             if (playerItem is not Product p) return;
             if (!HasAvailableSlot(playerItem)) return;
             

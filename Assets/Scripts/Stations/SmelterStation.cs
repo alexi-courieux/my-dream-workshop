@@ -73,7 +73,7 @@ public class SmelterStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         else
         {
             if (!isPlayerHoldingProduct) return;
-            Item item = Player.Instance.HandleSystem.GetItem();
+            Item item = Player.Instance.HandleSystem.GetSelectedItem();
             if (item is not Product product)
             {
                 Debug.LogWarning("Station can only hold products!");

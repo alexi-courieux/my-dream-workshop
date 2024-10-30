@@ -51,7 +51,7 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
             if (!isPlayerHoldingProduct) return;
             
             _state = State.Idle;
-            Item product = Player.Instance.HandleSystem.GetItem();
+            Item product = Player.Instance.HandleSystem.GetSelectedItem();
             product.SetParent(this);
             CheckForRecipes();
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {

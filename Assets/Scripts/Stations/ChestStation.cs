@@ -27,7 +27,7 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable, IInteracta
         {
             if (_products.Count >= Capacity) return;
 
-            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            Item playerItem = Player.Instance.HandleSystem.GetSelectedItem();
             if (playerItem is not Product) return;
             switch (playerItem)
             {

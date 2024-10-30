@@ -29,7 +29,7 @@ public class ArmoryDisplay : MonoBehaviour, IInteractable, IHandleItems
     {
         if (Player.Instance.HandleSystem.HaveAnyItems())
         {
-            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            Item playerItem = Player.Instance.HandleSystem.GetSelectedItem();
             if (playerItem is not Product product) return;
             if (!HasAvailableSlot(playerItem)) return;
 

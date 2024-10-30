@@ -24,7 +24,7 @@ public class SingleItemChestStation : MonoBehaviour, IInteractable, IFocusable
         else
         {
             // If player has items, try to put in the chest
-            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            Item playerItem = Player.Instance.HandleSystem.GetSelectedItem();
             if (playerItem is not Product) return;
             ProductSo playerProductSo = null;
             if (playerItem is Product product)

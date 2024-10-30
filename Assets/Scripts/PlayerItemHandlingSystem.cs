@@ -4,66 +4,87 @@ using UnityEngine;
 
 public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
 {
-    private const int BackpackSlots = 10;
+    private const int BackpackSlots = 8;
+    private const int DefaultSlots = 2;
     
     [SerializeField] private Transform itemSlot;
     [SerializeField] private GameObject backpackVisual;
     [SerializeField] private ProductDictionarySo backpackProductDictionarySo;
     
-    private Item item;
-    private bool isBackpackEquipped;
-    private Item[] backpackItems;
+    private Item[] items;
+    private ProductInventory productInventory;
+    private int selectedSlotIndex;
+
+    private void Awake()
+    {
+        productInventory = new ProductInventory(DefaultSlots, 1);
+        items = new Item[DefaultSlots];
+        selectedSlotIndex = 0;
+    }
 
     private void Start()
     {
-        backpackItems = Array.Empty<Item>();
         backpackVisual.SetActive(false);
     }
 
     public void AddItem(Item newItem)
     {
-        if (isBackpackEquipped && newItem is Product newProduct)
+        if (newItem is not Product product)
         {
-            ProductSo productSo = newProduct.ProductSo;
-            if (backpackItems.Length < BackpackSlots && backpackProductDictionarySo.products.Contains(productSo))
-            {
-                newProduct.DestroySelf();
-                backpackItems = backpackItems.Append(newProduct).ToArray();
-                return;
-            }
+            // TODO Player must be able to handle items, not only products
+            Debug.LogError("Trying to add an item that is not a product");
+            return;
+        }
+        if (!productInventory.CanAddItem(product.ProductSo)) throw new Exception("Trying to add an item but no available slots");
+        
+        var selectedSlot = productInventory.GetSlot(selectedSlotIndex);
+        if (selectedSlot is null)
+        {
+            // Add item to selected slot
+            productInventory.AddItem(selectedSlotIndex, product.ProductSo, 1);
+            items[selectedSlotIndex] = product;
+            RefreshItemVisuals();
+            return;
         }
         
-        item = newItem;
+        // Add item to first available slot
+        productInventory.TryAddItem(product.ProductSo, 1);
+        int itemSlotIndex = productInventory.GetItemSlot(product.ProductSo);
+        items[itemSlotIndex] = product;
+        RefreshItemVisuals();
     }
 
     public Item[] GetItems<T>() where T : Item
     {
-        return new[] {item};
+        return items.Where(item => item is T).ToArray();
     }
 
-    public Item GetItem()
+    public Item GetSelectedItem()
     {
-        return item;
+        return items[selectedSlotIndex];
     }
     
     public T GetItem<T>() where T : Item
     {
-        return item as T;
+        return items[selectedSlotIndex] as T;
     }
 
     public void ClearItem(Item itemToClear)
     {
-        item = null;
+        Product product = itemToClear as Product;
+        items[selectedSlotIndex] = null;
+        productInventory.RemoveItem(product!.ProductSo, 1);
+        RefreshItemVisuals();
     }
 
     public bool HaveItems<T>() where T : Item
     {
-        return item is T;
+        return items.Any(item => item is T);
     }
 
     public bool HaveAnyItems()
     {
-        return item is not null;
+        return productInventory.GetItems().Count > 0;
     }
 
     public Transform GetAvailableItemSlot(Item newItem)
@@ -73,33 +94,46 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
 
     public bool HasAvailableSlot(Item newItem)
     {
-        return item is null;
+        if (newItem is not Product product) return false;
+        return productInventory.CanAddItem(product.ProductSo);
     }
     
     public bool HaveBackpackItems()
     {
-        return isBackpackEquipped && backpackItems.Length > 0;
+        return false; // TODO Remove
     }
     
     public Item[] GetBackpackItems()
     {
-        return backpackItems;
+        return null; // TODO Remove
     }
     
     public void ClearItemFromBackpack(Item itemToClear)
     {
-        backpackItems = backpackItems.Where(bItem => bItem != itemToClear).ToArray();
+        return; // TODO Remove
     }
     
     public void EquipBackpack()
     {
-        isBackpackEquipped = true;
         backpackVisual.SetActive(true);
+        productInventory.AddSlots(BackpackSlots);
     }
     
     public void UnequipBackpack()
     {
-        isBackpackEquipped = false;
         backpackVisual.SetActive(false);
+    }
+    
+    public ProductInventory GetProductInventory()
+    {
+        return productInventory;
+    }
+    
+    private void RefreshItemVisuals()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            //items[i]?.gameObject.SetActive(i == selectedSlotIndex);
+        }
     }
 }

@@ -73,7 +73,7 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         else
         {
             if (!isPlayerHoldingProduct) return;
-            Item item = Player.Instance.HandleSystem.GetItem();
+            Item item = Player.Instance.HandleSystem.GetSelectedItem();
             if (item is not Product product) return;
             product.SetParent(this);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
