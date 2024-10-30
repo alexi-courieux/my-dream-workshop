@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
 {
+    public event EventHandler OnSlotSelected;
+    
     private const int BackpackSlots = 8;
     private const int DefaultSlots = 2;
     
@@ -14,6 +16,8 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     private Item[] items;
     private ProductInventory productInventory;
     private int selectedSlotIndex;
+    
+    public int SelectedSlotIndex => selectedSlotIndex;
 
     private void Awake()
     {
@@ -25,6 +29,24 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     private void Start()
     {
         backpackVisual.SetActive(false);
+        InputManager.Instance.OnNextSlot += InputManager_OnNextSlot;
+        InputManager.Instance.OnPreviousSlot += InputManager_OnPreviousSlot;
+    }
+    
+    private void InputManager_OnNextSlot(object sender, EventArgs e)
+    {
+        if (selectedSlotIndex == items.Length - 1) selectedSlotIndex = 0;
+        selectedSlotIndex++;
+        RefreshItemVisuals();
+        OnSlotSelected?.Invoke(this, EventArgs.Empty);
+    }
+    
+    private void InputManager_OnPreviousSlot(object sender, EventArgs e)
+    {
+        if (selectedSlotIndex == 0) selectedSlotIndex = items.Length - 1;
+        selectedSlotIndex--;
+        RefreshItemVisuals();
+        OnSlotSelected?.Invoke(this, EventArgs.Empty);
     }
 
     public void AddItem(Item newItem)

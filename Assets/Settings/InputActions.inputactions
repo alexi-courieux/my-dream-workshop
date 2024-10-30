@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "PreviousSlot/NextSlot",
+                    "type": "Button",
+                    "id": "caca1518-2e5a-4fcc-92f6-41548e7ddf1a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "RecipeBook",
                     "type": "Button",
                     "id": "648f9778-d187-41b9-92ea-d6e77867a653",
@@ -302,39 +311,6 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "Scroll [Mouse]",
-                    "id": "495409ee-e65c-4afb-b49d-4da3ac5038f3",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Previous/Next",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "2680f266-070e-4c46-b343-f51b44605424",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Previous/Next",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "b1a98889-2aca-4618-a24b-981ea8ed4208",
-                    "path": "<Mouse>/scroll/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Previous/Next",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "WX [Keyboard]",
                     "id": "4f12ded8-4d5a-4791-8171-dc1bdef6a296",
                     "path": "1DAxis",
@@ -360,39 +336,6 @@
                     "name": "positive",
                     "id": "42235391-fa51-4b32-895b-4ef8595be491",
                     "path": "<Keyboard>/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Previous/Next",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "LB/RB [Gamepad]",
-                    "id": "bd27ba35-4abd-43f4-a07f-547a49d8a4a9",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Previous/Next",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "e45e80c6-0fdd-42d6-99a0-93387d55f28d",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Previous/Next",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "6d484b36-237f-4ecd-8dce-4415fbb6d0d3",
-                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -430,6 +373,105 @@
                     "processors": "",
                     "groups": "",
                     "action": "Previous/Next",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Scroll [Mouse]",
+                    "id": "2e0c4e47-dbee-45d4-931c-0e44dccafd77",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "091c05cf-0096-498a-8bfb-7109ea82b175",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "9445e550-6afe-4da1-ac14-18925f77e3f2",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Arrows LR [Keyboard]",
+                    "id": "257e923d-0cf5-4921-8744-ab9e2e701531",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "952e8e70-a0be-44e9-95b4-38d931e012f4",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "0333b6cc-c6b8-475c-a8d4-a3e384b3906f",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "LB/RB [Gamepad]",
+                    "id": "61b9e1fe-fefe-477a-853a-948a83153d35",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "91b44543-a6e5-48ae-8d2e-b94c09fe6f2c",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "97b5a2d4-7c36-438b-bb64-0adeb64cb8cc",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousSlot/NextSlot",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },

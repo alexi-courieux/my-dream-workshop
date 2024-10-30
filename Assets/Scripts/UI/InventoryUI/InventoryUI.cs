@@ -68,7 +68,7 @@ public class InventoryUI : MonoBehaviour
             slot.gameObject.SetActive(true);
             var item = productInventory.GetSlot(i);
             slot.SetItem(item);
-            slot.UpdateVisuals();
+            slot.UpdateVisuals(i);
         }
     }
 }

@@ -19,6 +19,13 @@ public class PlayerInventoryUI : MonoBehaviour
         productInventory.OnItemAdded += ProductInventory_OnItemAdded;
         productInventory.OnItemRemoved += ProductInventory_OnItemRemoved;
         productInventory.OnSlotAmountChanged += ProductInventory_OnSlotAmountChanged;
+        
+        Player.Instance.HandleSystem.OnSlotSelected += PlayerHandleSystem_OnSlotSelected;
+        UpdateVisuals();
+    }
+    
+    private void PlayerHandleSystem_OnSlotSelected(object sender, EventArgs e)
+    {
         UpdateVisuals();
     }
     
@@ -48,9 +55,9 @@ public class PlayerInventoryUI : MonoBehaviour
         for(int i =0; i < productInventory.GetSlotAmount(); i++)
         {
             InventorySlotUI slot = Instantiate(inventorySlotPrefab, slotsParent);
-            SlotInventoryItem<ProductSo> item = productInventory.GetSlot(i);
+            var item = productInventory.GetSlot(i);
             slot.SetItem(item);
-            slot.UpdateVisuals();
+            slot.UpdateVisuals(i);
             slot.gameObject.SetActive(true);
         }
     }
