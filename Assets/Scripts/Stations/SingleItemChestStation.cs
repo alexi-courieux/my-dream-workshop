@@ -12,9 +12,9 @@ public class SingleItemChestStation : MonoBehaviour, IInteractable, IFocusable
     [SerializeField] private int productAmount = 1;
     public void Interact()
     {
-        if (!Player.Instance.HandleSystem.HaveAnyItems())
+        if (!Player.Instance.HandleSystem.HaveAnyItemSelected())
         {
-            // If player doesn't have any items, try to take from the chest
+            // If player doesn't have any items in his hands, try to take from the chest
             if (productAmount <= 0) return;
             
             Item.SpawnItem(productSo.prefab, Player.Instance.HandleSystem);
@@ -25,14 +25,8 @@ public class SingleItemChestStation : MonoBehaviour, IInteractable, IFocusable
         {
             // If player has items, try to put in the chest
             Item playerItem = Player.Instance.HandleSystem.GetSelectedItem();
-            if (playerItem is not Product) return;
-            ProductSo playerProductSo = null;
-            if (playerItem is Product product)
-            {
-                playerProductSo = product.ProductSo;
-            }
-            
-            if (playerProductSo != productSo) return;
+            if (playerItem is not Product playerProduct) return;
+            if (!playerProduct.ProductSo.Equals(productSo))  return;
             
             productAmount++;
             OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
@@ -71,10 +65,5 @@ public class SingleItemChestStation : MonoBehaviour, IInteractable, IFocusable
     public ProductSo GetProductSo()
     {
         return productSo;
-    }
-    public void AddProduct()
-    {
-        productAmount++;
-        OnProductAmountChanged?.Invoke(this, EventArgs.Empty);
     }
 }

@@ -37,9 +37,9 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public void Interact()
     {
-        if (Player.Instance.HandleSystem.HaveAnyItems())
+        if (Player.Instance.HandleSystem.HaveAnyItemSelected())
         {
-            if (!Player.Instance.HandleSystem.HaveItems<Product>()) return;
+            if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
             Item playerItem = Player.Instance.HandleSystem.GetSelectedItem();
             if (!HasAvailableSlot(playerItem)) return;
             

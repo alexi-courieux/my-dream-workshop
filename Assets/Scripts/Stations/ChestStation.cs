@@ -23,7 +23,7 @@ public class ChestStation : MonoBehaviour, IInteractable, IFocusable, IInteracta
 
     public void Interact()
     {
-        if (Player.Instance.HandleSystem.HaveAnyItems())
+        if (Player.Instance.HandleSystem.HaveAnyItemSelected())
         {
             if (_products.Count >= Capacity) return;
 

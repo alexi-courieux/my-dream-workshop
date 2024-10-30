@@ -123,7 +123,7 @@ public abstract class SlotInventory<T>: IInventory<T>
     
     public int GetItemSlot(T item)
     {
-        return Array.IndexOf(ItemSlots, item);
+        return Array.FindIndex(ItemSlots, slot => slot is not null && slot.Item.Equals(item));
     }
     
     protected void SortItems(Func<KeyValuePair<T, int>, object> keySelector, bool ascending = true)

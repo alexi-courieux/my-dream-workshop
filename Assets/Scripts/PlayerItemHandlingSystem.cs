@@ -81,10 +81,20 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     {
         return items.Any(item => item is T);
     }
+    
+    public bool HaveItemSelected<T>() where T : Item
+    {
+        return items[selectedSlotIndex] is T;
+    }
 
     public bool HaveAnyItems()
     {
         return productInventory.GetItems().Count > 0;
+    }
+    
+    public bool HaveAnyItemSelected()
+    {
+        return items[selectedSlotIndex] != null;
     }
 
     public Transform GetAvailableItemSlot(Item newItem)
@@ -133,7 +143,7 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     {
         for (int i = 0; i < items.Length; i++)
         {
-            //items[i]?.gameObject.SetActive(i == selectedSlotIndex);
+            items[i]?.gameObject.SetActive(i == selectedSlotIndex);
         }
     }
 }
