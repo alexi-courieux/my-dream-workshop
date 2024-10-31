@@ -135,21 +135,6 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
         return itemInventory.CanAddItem(product.ProductSo);
     }
     
-    public bool HaveBackpackItems()
-    {
-        return false; // TODO Remove
-    }
-    
-    public Item[] GetBackpackItems()
-    {
-        return null; // TODO Remove
-    }
-    
-    public void ClearItemFromBackpack(Item itemToClear)
-    {
-        return; // TODO Remove
-    }
-    
     public void EquipBackpack()
     {
         backpackVisual.SetActive(true);
