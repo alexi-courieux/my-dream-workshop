@@ -158,7 +158,8 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
         backpackVisual.SetActive(false);
         for (int i =0; i < itemInventory.GetSlotAmount(); i++)
         {
-            ItemSo itemSo = itemInventory.GetSlot(i).Item;
+            ItemSo itemSo = itemInventory.GetSlot(i)?.Item;
+            if (itemSo is null) continue;
             bool found = false;
             for (int j = i; j < items.Length && !found; j++)
             {
@@ -170,8 +171,8 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
                     continue;
                 }
                 if (!product.ProductSo.Equals(itemSo)) continue;
-                items[i] = item;
                 items[j] = null;
+                items[i] = item;
                 found = true;
             }
         }
