@@ -7,8 +7,8 @@ public class TrashStation : MonoBehaviour, IInteractable
 
         public void Interact()
         {
-            if (!Player.Instance.HandleSystem.HaveAnyItems()) return;
-            Player.Instance.HandleSystem.GetItem().DestroySelf();
+            if (!Player.Instance.HandleSystem.HaveAnyItemSelected()) return;
+            Player.Instance.HandleSystem.GetSelectedItem().DestroySelf();
             OnUse?.Invoke(this, EventArgs.Empty);
         }
     }

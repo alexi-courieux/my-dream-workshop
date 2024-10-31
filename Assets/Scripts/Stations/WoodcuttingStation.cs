@@ -63,11 +63,12 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
 
     public void Interact()
     {
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItems<Product>();
+        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
+        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItemSelected<Product>();
         
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingProduct) return;
+            if (isPlayerHoldingSomething) return;
             _product.SetParent(Player.Instance.HandleSystem);
             _state = State.Idle;
             OnStopProcessing?.Invoke(this, EventArgs.Empty);
@@ -79,7 +80,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         else
         {
             if (!isPlayerHoldingProduct) return;
-            Item item = Player.Instance.HandleSystem.GetItem();
+            Item item = Player.Instance.HandleSystem.GetSelectedItem();
             if (item is not Product product)
             {
                 Debug.LogWarning("Station can only hold products!");

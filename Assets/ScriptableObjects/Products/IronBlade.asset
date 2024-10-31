@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronBlade
   m_EditorClassIdentifier: 
+  id: Iron Blade
   prefab: {fileID: 3908874931380198303, guid: 1d20e8ad2144f4748a8fe4bf1734f54d, type: 3}
   sprite: {fileID: 21300000, guid: 815edd16f7509d540a773da9f98b0916, type: 3}
-  itemName: IronBlade
-  buyPrice: 0
-  sellPrice: 15
   types:
   - {fileID: 11400000, guid: ea00ee7edc3431847ba33fe19a1576a7, type: 2}
+  buyPrice: 0
+  sellPrice: 15

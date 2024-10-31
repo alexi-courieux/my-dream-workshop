@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: Rope
   m_EditorClassIdentifier: 
+  id: Rope
   prefab: {fileID: 1708182585262796304, guid: 88f0f976d19acf84295a209d756a00ae, type: 3}
   sprite: {fileID: 21300000, guid: cea7196dd4f9b81449d1217aa8c6af91, type: 3}
-  itemName: Rope
+  types:
+  - {fileID: 11400000, guid: bdf57a692a45bad4ca5dddcc9ef88eda, type: 2}
   buyPrice: 8
   sellPrice: 8

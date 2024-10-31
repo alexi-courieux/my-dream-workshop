@@ -11,6 +11,8 @@ public class InputManager : MonoBehaviour
     public EventHandler OnPause;
     public EventHandler OnNext;
     public EventHandler OnPrevious;
+    public event EventHandler OnNextSlot;
+    public event EventHandler OnPreviousSlot;
 
     public EventHandler OnRecipeBook;
 
@@ -31,6 +33,7 @@ public class InputManager : MonoBehaviour
         _inputActions.Player.Pause.performed += Pause_OnPerformed;
         _inputActions.Player.PreviousNext.performed += PreviousNext_OnPerformed;
         _inputActions.Player.RecipeBook.performed += RecipeBook_OnPerformed;
+        _inputActions.Player.PreviousSlotNextSlot.performed += PreviousSlotNextSlot_OnPerformed;
         
         _inputActions.Menu.Cancel.performed += MenuCancel_OnPerformed;
         _inputActions.Menu.PreviousNext.performed += MenuPreviousNext_OnPerformed;
@@ -42,6 +45,8 @@ public class InputManager : MonoBehaviour
         _inputActions.Player.InteractAlt.performed -= InteractAlt_OnPerformed;
         _inputActions.Player.Pause.performed -= Pause_OnPerformed;
         _inputActions.Player.PreviousNext.performed -= PreviousNext_OnPerformed;
+        _inputActions.Player.RecipeBook.performed -= RecipeBook_OnPerformed;
+        _inputActions.Player.PreviousSlotNextSlot.performed -= PreviousSlotNextSlot_OnPerformed;
         
         _inputActions.Menu.Cancel.performed -= MenuCancel_OnPerformed;
         _inputActions.Menu.PreviousNext.performed -= MenuPreviousNext_OnPerformed;
@@ -83,6 +88,18 @@ public class InputManager : MonoBehaviour
         else
         {
             OnPrevious?.Invoke(this, EventArgs.Empty);
+        }
+    }
+    
+    private void PreviousSlotNextSlot_OnPerformed(InputAction.CallbackContext obj)
+    {
+        if (obj.ReadValue<float>() > 0)
+        {
+            OnNextSlot?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            OnPreviousSlot?.Invoke(this, EventArgs.Empty);
         }
     }
     

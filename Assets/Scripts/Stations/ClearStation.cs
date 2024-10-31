@@ -16,17 +16,17 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
 
     public void Interact()
     {
-        if (Player.Instance.HandleSystem.HaveAnyItems())
+        if (Player.Instance.HandleSystem.HaveAnyItemSelected())
         {
-            if (Player.Instance.HandleSystem.HaveItems<Product>())
+            if (Player.Instance.HandleSystem.HaveItemSelected<Product>())
             {
                 if (HaveItems<Product>()) return;
-                Player.Instance.HandleSystem.GetItem().SetParent(this);
+                Player.Instance.HandleSystem.GetSelectedItem().SetParent(this);
             }
-            else if (Player.Instance.HandleSystem.HaveItems<Tool>())
+            else if (Player.Instance.HandleSystem.HaveItemSelected<Tool>())
             {
                 if (HaveItems<Tool>()) return;
-                Player.Instance.HandleSystem.GetItem().SetParent(this);
+                Player.Instance.HandleSystem.GetSelectedItem().SetParent(this);
             }
             else
             {
@@ -89,7 +89,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         if(Player.Instance.HandleSystem.HaveItems<Tool>())
         {
             // We try to use tool holded by player in priority
-            return Player.Instance.HandleSystem.GetItem() as Tool;
+            return Player.Instance.HandleSystem.GetSelectedItem() as Tool;
         }
         else
         {

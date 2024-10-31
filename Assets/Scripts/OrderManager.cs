@@ -13,6 +13,7 @@ public class OrderManager : MonoBehaviour
     
     [SerializeField] private ProductDictionarySo initialBuyableProducts;
     [SerializeField] private ProductDictionarySo initialSellableProductsList;
+    [SerializeField] private ItemTypeSo sellableType;
     [SerializeField] private OrderChestStation chestStation;
     
     private List<ProductSo> buyableProducts;
@@ -103,7 +104,7 @@ public class OrderManager : MonoBehaviour
         EconomyManager.Instance.RemoveMoney(recipeSo.buyPrice);
         RecipeManager.Instance.AddRecipe(recipeSo);
         buyableRecipes.Remove(recipeSo);
-        if (recipeSo.output is FinalProductSo) 
+        if (recipeSo.output.IsType(sellableType)) 
         {
             sellableProducts.Add(recipeSo.output);
         }
@@ -118,7 +119,7 @@ public class OrderManager : MonoBehaviour
         foreach (RecipeSo recipe in recipeGroupSo.recipes)
         {
             RecipeManager.Instance.AddRecipe(recipe);
-            if (recipe.output is FinalProductSo) 
+            if (recipe.output.IsType(sellableType)) 
             {
                 sellableProducts.Add(recipe.output);
             }

@@ -71,7 +71,15 @@ MonoBehaviour:
   chestSlot: {fileID: 2293531652925722681}
   pantsSlot: {fileID: 6828498910514273609}
   bootSlot: {fileID: 8612668077225762947}
-  allowedItemTypes: 00000000010000000200000003000000
+  helmetType: {fileID: 11400000, guid: 6daf5fa150765194fb3aee3c77a2427a, type: 2}
+  chestType: {fileID: 11400000, guid: 64890031a77b4d2458771545760e3178, type: 2}
+  pantsType: {fileID: 11400000, guid: 2539ffef98b7e424dadb5b4efd192310, type: 2}
+  bootType: {fileID: 11400000, guid: 1a27f54d70884e4488b020cd584c918c, type: 2}
+  allowedProductTypes:
+  - {fileID: 11400000, guid: 1a27f54d70884e4488b020cd584c918c, type: 2}
+  - {fileID: 11400000, guid: 64890031a77b4d2458771545760e3178, type: 2}
+  - {fileID: 11400000, guid: 6daf5fa150765194fb3aee3c77a2427a, type: 2}
+  - {fileID: 11400000, guid: 2539ffef98b7e424dadb5b4efd192310, type: 2}
 --- !u!1001 &7633693971771960582
 PrefabInstance:
   m_ObjectHideFlags: 0

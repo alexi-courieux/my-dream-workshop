@@ -21,7 +21,7 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
 
     public void Interact()
     {
-        if (Player.Instance.HandleSystem.HaveAnyItems()) return;
+        if (Player.Instance.HandleSystem.HaveAnyItemSelected()) return;
         if (_products.Count <= 0) return;
 
         ProductSo productSo = _products[_index];

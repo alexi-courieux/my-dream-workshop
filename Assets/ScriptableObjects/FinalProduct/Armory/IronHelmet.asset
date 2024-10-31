@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7595b261424aaf54bbf4edc48fabebfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronHelmet
   m_EditorClassIdentifier: 
+  id: Iron Helmet
   prefab: {fileID: 3255530098180596297, guid: 255272e3957edbd4fb1a047f52270848, type: 3}
   sprite: {fileID: 21300000, guid: 701c8c8e951339d48bf629652af6984f, type: 3}
-  itemName: IronHelmet
-  buyPrice: 0
-  sellPrice: 50
   types:
   - {fileID: 11400000, guid: 6daf5fa150765194fb3aee3c77a2427a, type: 2}
-  itemType: 0
+  - {fileID: 11400000, guid: a2b6bbe6ac225914db6b6f2f07d8b5a8, type: 2}
+  buyPrice: 0
+  sellPrice: 50

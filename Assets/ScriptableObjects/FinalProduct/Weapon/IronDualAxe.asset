@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7595b261424aaf54bbf4edc48fabebfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronDualAxe
   m_EditorClassIdentifier: 
+  id: Iron Dual Axe
   prefab: {fileID: 3255530098180596297, guid: aba3cea4613e7cf4395d3a85481c343a, type: 3}
   sprite: {fileID: 21300000, guid: 5e72ba80b7072ee42b6bfd8f49f59448, type: 3}
-  itemName: IronDualAxe
-  buyPrice: 0
-  sellPrice: 65
   types:
   - {fileID: 11400000, guid: c4eb672d2a58cfb418ea5a25012dade1, type: 2}
-  itemType: 4
+  - {fileID: 11400000, guid: a2b6bbe6ac225914db6b6f2f07d8b5a8, type: 2}
+  buyPrice: 0
+  sellPrice: 65

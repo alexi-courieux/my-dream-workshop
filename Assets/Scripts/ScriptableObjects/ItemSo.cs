@@ -4,21 +4,24 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Product", menuName = "ScriptableObject/Product")]
-public class ProductSo : ScriptableObject
+[CreateAssetMenu(fileName = "Item_new", menuName = "ScriptableObject/Item")]
+public class ItemSo : ScriptableObject
 {
+    public string id;
     public Transform prefab;
     public Sprite sprite;
-    public string itemName;
-    public int buyPrice;
-    public int sellPrice;
-    public ProductType[] types;
-
+    public ItemTypeSo[] types;
+    
+    public bool IsType(ItemTypeSo type)
+    {
+        return types.Any(t => t.IsType(type));
+    }
+    
     public override bool Equals(object other)
     {
         if (other is ProductSo product)
         {
-            return product.itemName == itemName;
+            return product.id == id;
         }
 
         return false;
@@ -26,21 +29,21 @@ public class ProductSo : ScriptableObject
     
     public override int GetHashCode()
     {
-        return itemName.GetHashCode();
+        return id.GetHashCode();
     }
 }
 
-[CustomEditor(typeof(ProductSo), true)]
-public class ProductSoEditor : Editor
+[CustomEditor(typeof(ItemSo), true)]
+public class ItemSoEditor : Editor
 {
-    private List<ProductType> availableTypes;
+    private List<ItemTypeSo> availableTypes;
     private bool[] selectedTypes = Array.Empty<bool>();
 
     private void OnEnable()
     {
-        string[] typesGuids = AssetDatabase.FindAssets($"t:{nameof(ProductType)}");
+        string[] typesGuids = AssetDatabase.FindAssets($"t:{nameof(ItemTypeSo)}");
         availableTypes = typesGuids
-            .Select(guid => AssetDatabase.LoadAssetAtPath<ProductType>(AssetDatabase.GUIDToAssetPath(guid)))
+            .Select(guid => AssetDatabase.LoadAssetAtPath<ItemTypeSo>(AssetDatabase.GUIDToAssetPath(guid)))
             .Where(type => type.assignable)
             .OrderBy(type => type.GetPath())
             .ToList();
@@ -51,7 +54,7 @@ public class ProductSoEditor : Editor
     public override void OnInspectorGUI()
     {
         // Get the target object
-        ProductSo productSo = (ProductSo)target;
+        ItemSo itemSo = (ProductSo)target;
 
         // Draw default inspector
         DrawDefaultInspector();
@@ -59,7 +62,7 @@ public class ProductSoEditor : Editor
         // Display dropdown list for selecting tags
         EditorGUILayout.LabelField($"Available Tags ({availableTypes.Count}):");
 
-        HashSet<ProductType> displayedParents = new HashSet<ProductType>();
+        HashSet<ItemTypeSo> displayedParents = new HashSet<ItemTypeSo>();
         for (int i = 0; i < availableTypes.Count; i++)
         {
             if (availableTypes[i].parentType is not null && !displayedParents.Contains(availableTypes[i].parentType))
@@ -68,14 +71,22 @@ public class ProductSoEditor : Editor
             }
 
             int indentLevel = GetIndentLevel(availableTypes[i]);
-            string indent = new string(' ', indentLevel * 2 - 2); // Adjusted indentation
+            string indent = new string(' ', Math.Max(indentLevel * 2 - 2, 0)); // Adjusted indentation
             string label = indent + availableTypes[i].typeName;
+            if (indentLevel is 0)
+            {
+                // Assignable with no parent
+                Color color = new Color(1f, 0f, 0f, 0.2f);
+                Rect rect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
+                EditorGUI.DrawRect(rect, color);
+                EditorGUI.LabelField(rect, label);
+            }
             bool newSelected = EditorGUILayout.ToggleLeft(label, selectedTypes[i]);
 
             if (newSelected == selectedTypes[i]) continue;
 
             selectedTypes[i] = newSelected;
-            List<ProductType> selectedProductTypes = new List<ProductType>();
+            List<ItemTypeSo> selectedProductTypes = new List<ItemTypeSo>();
             for (int j = 0; j < selectedTypes.Length; j++)
             {
                 if (selectedTypes[j])
@@ -83,19 +94,19 @@ public class ProductSoEditor : Editor
                     selectedProductTypes.Add(availableTypes[j]);
                 }
             }
-            productSo.types = selectedProductTypes.ToArray();
+            itemSo.types = selectedProductTypes.ToArray();
 
             // Apply changes and save asset
-            EditorUtility.SetDirty(productSo);
+            EditorUtility.SetDirty(itemSo);
             AssetDatabase.SaveAssets();
         }
     }
 
-    private void DisplayParentHierarchy(ProductType parentType, HashSet<ProductType> displayedParents)
+    private void DisplayParentHierarchy(ItemTypeSo parentType, HashSet<ItemTypeSo> displayedParents)
     {
         if (parentType is null || displayedParents.Contains(parentType)) return;
 
-        List<ProductType> hierarchy = new List<ProductType>();
+        List<ItemTypeSo> hierarchy = new List<ItemTypeSo>();
         while (parentType is not null && !displayedParents.Contains(parentType))
         {
             hierarchy.Add(parentType);
@@ -106,7 +117,7 @@ public class ProductSoEditor : Editor
         hierarchy.Reverse();
         for (int i = 0; i < hierarchy.Count; i++)
         {
-            ProductType type = hierarchy[i];
+            ItemTypeSo type = hierarchy[i];
             int indentLevel = GetIndentLevel(type);
             string indent = new string(' ', indentLevel * 2); // Adjusted indentation
 
@@ -123,7 +134,7 @@ public class ProductSoEditor : Editor
         }
     }
 
-    private int GetIndentLevel(ProductType type)
+    private int GetIndentLevel(ItemTypeSo type)
     {
         int level = 0;
         while (type.parentType is not null)

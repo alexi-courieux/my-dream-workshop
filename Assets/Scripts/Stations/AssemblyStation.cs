@@ -19,8 +19,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     [SerializeField] private Transform[] itemSlots;
     [SerializeField] private Transform finalProductSlot;
     
-    private readonly StackList<Product> _items = new();
-    private FinalProduct _finalProduct;
+    private readonly StackList<Product> _items = new StackList<Product>();
     private State _state;
     private AssemblyRecipeSo[] _availableRecipes;
     private AssemblyRecipeSo _selectedRecipe;
@@ -38,15 +37,10 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public void Interact()
     {
-        if (Player.Instance.HandleSystem.HaveAnyItems())
+        if (Player.Instance.HandleSystem.HaveAnyItemSelected())
         {
-            if (_finalProduct is not null) return;
-            if (Player.Instance.HandleSystem.HaveItems<FinalProduct>() 
-                && _items.Count > 0) return;
-            
-            if (!Player.Instance.HandleSystem.HaveItems<Product>()
-                && !Player.Instance.HandleSystem.HaveItems<FinalProduct>()) return;
-            Item playerItem = Player.Instance.HandleSystem.GetItem();
+            if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
+            Item playerItem = Player.Instance.HandleSystem.GetSelectedItem();
             if (!HasAvailableSlot(playerItem)) return;
             
             playerItem.SetParent(this);
@@ -59,12 +53,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         }
         else
         {
-            if (_finalProduct is not null)
-            {
-                _finalProduct.SetParent(Player.Instance.HandleSystem);
-                return;
-            }
-
             if (_items.Count <= 0) return;
             
             Item item = _items.Pop();
@@ -82,14 +70,14 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         ProductSo[] productsSo = GetItems<Product>()
             .Cast<Product>()
             .Select(i => i.ProductSo)
-            .OrderBy(i => i.itemName)
+            .OrderBy(i => i.id)
             .ToArray();
         _availableRecipes = RecipeManager.Instance.GetRecipes<AssemblyRecipeSo>();
         _availableRecipes = _availableRecipes
             .Where(r =>
             {
                 ProductSo[] recipeInputs = r.inputs
-                    .OrderBy(i => i.itemName)
+                    .OrderBy(i => i.id)
                     .ToArray();
                 return productsSo.SequenceEqual(recipeInputs);
             })
@@ -179,10 +167,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         {
             _items.Push(product);
         }
-        else if (newItem is FinalProduct fp)
-        {
-            _finalProduct = fp;
-        }
     }
 
     public Item[] GetItems<T>() where T : Item
@@ -194,12 +178,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public void ClearItem(Item itemToClear)
     {
-        if (itemToClear is FinalProduct)
-        {
-            _finalProduct = null;
-            return;
-        }
-        
         _items.Remove(itemToClear as Product);
     }
 
@@ -217,15 +195,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
 
     public Transform GetAvailableItemSlot(Item newItem)
     {
-        if (newItem is Product)
-        {
-            return itemSlots[_items.Count];
-        }
-        if (newItem is FinalProduct)
-        {
-            return finalProductSlot;
-        }
-        return null;
+        return newItem is Product ? itemSlots[_items.Count] : null;
     }
 
     public bool HasAvailableSlot(Item item)
@@ -233,7 +203,6 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         return item switch
         {
             Product => _items.Count < _capacity,
-            FinalProduct => _finalProduct is null,
             _ => false
         };
     }

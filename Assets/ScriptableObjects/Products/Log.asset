@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: Log
   m_EditorClassIdentifier: 
+  id: Log
   prefab: {fileID: 1708182585262796304, guid: 8a44b8a707207024d8d290057575678a, type: 3}
   sprite: {fileID: 21300000, guid: efb7455ed3de48f418721790b230f347, type: 3}
-  itemName: Log
-  buyPrice: 5
-  sellPrice: 3
   types:
   - {fileID: 11400000, guid: 818a76e182420df4a89dba889461a332, type: 2}
+  buyPrice: 5
+  sellPrice: 3

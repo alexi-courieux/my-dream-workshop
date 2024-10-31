@@ -35,11 +35,11 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
 
     public void Interact()
     {
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItems<Product>();
+        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
         
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingProduct) return;
+            if (isPlayerHoldingSomething) return;
             _product.SetParent(Player.Instance.HandleSystem);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
@@ -48,10 +48,11 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
         }
         else
         {
-            if (!isPlayerHoldingProduct) return;
+            if (!isPlayerHoldingSomething) return;
+            if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
             
             _state = State.Idle;
-            Item product = Player.Instance.HandleSystem.GetItem();
+            Item product = Player.Instance.HandleSystem.GetSelectedItem();
             product.SetParent(this);
             CheckForRecipes();
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {

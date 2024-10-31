@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: Plank
   m_EditorClassIdentifier: 
+  id: Plank
   prefab: {fileID: 1708182585262796304, guid: 11172af7f346d56488b7338a880cdea4, type: 3}
   sprite: {fileID: 21300000, guid: 2db3541730f8c2e49bb55e5bb29bcfc6, type: 3}
-  itemName: Plank
-  buyPrice: 0
-  sellPrice: 5
   types:
   - {fileID: 11400000, guid: 1e042f43d68bc7b47b99ef65bb3486de, type: 2}
+  buyPrice: 0
+  sellPrice: 5

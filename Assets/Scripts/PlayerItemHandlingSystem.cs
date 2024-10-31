@@ -4,66 +4,119 @@ using UnityEngine;
 
 public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
 {
-    private const int BackpackSlots = 10;
+    public event EventHandler OnSlotSelected;
+    
+    private const int BackpackSlots = 8;
+    private const int DefaultSlots = 2;
     
     [SerializeField] private Transform itemSlot;
     [SerializeField] private GameObject backpackVisual;
     [SerializeField] private ProductDictionarySo backpackProductDictionarySo;
     
-    private Item item;
-    private bool isBackpackEquipped;
-    private Item[] backpackItems;
+    private Item[] items;
+    private ItemInventory itemInventory;
+    private int selectedSlotIndex;
+    
+    public int SelectedSlotIndex => selectedSlotIndex;
+
+    private void Awake()
+    {
+        itemInventory = new ItemInventory(DefaultSlots, 1);
+        items = new Item[DefaultSlots];
+        selectedSlotIndex = 0;
+    }
 
     private void Start()
     {
-        backpackItems = Array.Empty<Item>();
         backpackVisual.SetActive(false);
+        InputManager.Instance.OnNextSlot += InputManager_OnNextSlot;
+        InputManager.Instance.OnPreviousSlot += InputManager_OnPreviousSlot;
+    }
+    
+    private void InputManager_OnNextSlot(object sender, EventArgs e)
+    {
+        selectedSlotIndex++;
+        if (selectedSlotIndex >= items.Length) selectedSlotIndex = 0;
+        RefreshItemVisuals();
+        OnSlotSelected?.Invoke(this, EventArgs.Empty);
+    }
+    
+    private void InputManager_OnPreviousSlot(object sender, EventArgs e)
+    {
+        selectedSlotIndex--;
+        if (selectedSlotIndex < 0) selectedSlotIndex = items.Length - 1;
+        RefreshItemVisuals();
+        OnSlotSelected?.Invoke(this, EventArgs.Empty);
     }
 
     public void AddItem(Item newItem)
     {
-        if (isBackpackEquipped && newItem is Product newProduct)
+        if (newItem is not Product product)
         {
-            ProductSo productSo = newProduct.ProductSo;
-            if (backpackItems.Length < BackpackSlots && backpackProductDictionarySo.products.Contains(productSo))
-            {
-                newProduct.DestroySelf();
-                backpackItems = backpackItems.Append(newProduct).ToArray();
-                return;
-            }
+            // TODO Player must be able to handle items, not only products
+            Debug.LogError("Trying to add an item that is not a product");
+            return;
+        }
+        if (!itemInventory.CanAddItem(product.ProductSo)) throw new Exception("Trying to add an item but no available slots");
+        
+        var selectedSlot = itemInventory.GetSlot(selectedSlotIndex);
+        if (selectedSlot is null)
+        {
+            // Add item to selected slot
+            itemInventory.AddItem(selectedSlotIndex, product.ProductSo, 1);
+            items[selectedSlotIndex] = product;
+            RefreshItemVisuals();
+            return;
         }
         
-        item = newItem;
+        // Add item to first available slot
+        itemInventory.TryAddItem(product.ProductSo, 1);
+        int itemSlotIndex = itemInventory.GetItemSlot(product.ProductSo);
+        items[itemSlotIndex] = product;
+        RefreshItemVisuals();
     }
 
     public Item[] GetItems<T>() where T : Item
     {
-        return new[] {item};
+        return items.Where(item => item is T).ToArray();
     }
 
-    public Item GetItem()
+    public Item GetSelectedItem()
     {
-        return item;
+        return items[selectedSlotIndex];
     }
     
     public T GetItem<T>() where T : Item
     {
-        return item as T;
+        return items[selectedSlotIndex] as T;
     }
 
     public void ClearItem(Item itemToClear)
     {
-        item = null;
+        Product product = itemToClear as Product;
+        items[selectedSlotIndex] = null;
+        itemInventory.RemoveItem(product!.ProductSo, 1, selectedSlotIndex);
+        RefreshItemVisuals();
     }
 
     public bool HaveItems<T>() where T : Item
     {
-        return item is T;
+        return items.Any(item => item is T);
+    }
+    
+    public bool HaveItemSelected<T>() where T : Item
+    {
+        return items[selectedSlotIndex] is T;
     }
 
     public bool HaveAnyItems()
     {
-        return item is not null;
+        return itemInventory.GetItems().Count > 0;
+    }
+    
+    public bool HaveAnyItemSelected()
+    {
+        return items[selectedSlotIndex] != null;
     }
 
     public Transform GetAvailableItemSlot(Item newItem)
@@ -73,33 +126,72 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
 
     public bool HasAvailableSlot(Item newItem)
     {
-        return item is null;
+        if (newItem is not Product product) return false;
+        return itemInventory.CanAddItem(product.ProductSo);
     }
     
     public bool HaveBackpackItems()
     {
-        return isBackpackEquipped && backpackItems.Length > 0;
+        return false; // TODO Remove
     }
     
     public Item[] GetBackpackItems()
     {
-        return backpackItems;
+        return null; // TODO Remove
     }
     
     public void ClearItemFromBackpack(Item itemToClear)
     {
-        backpackItems = backpackItems.Where(bItem => bItem != itemToClear).ToArray();
+        return; // TODO Remove
     }
     
     public void EquipBackpack()
     {
-        isBackpackEquipped = true;
         backpackVisual.SetActive(true);
+        itemInventory.AddSlots(BackpackSlots);
+        Array.Resize(ref items, items.Length + BackpackSlots);
     }
     
-    public void UnequipBackpack()
+    public bool UnequipBackpack()
     {
-        isBackpackEquipped = false;
+        if (!itemInventory.TryRemoveSlots(BackpackSlots)) return false;
         backpackVisual.SetActive(false);
+        for (int i =0; i < itemInventory.GetSlotAmount(); i++)
+        {
+            ItemSo itemSo = itemInventory.GetSlot(i).Item;
+            bool found = false;
+            for (int j = i; j < items.Length && !found; j++)
+            {
+                Item item = items[j];
+                if (item is null) continue;
+                if (item is not Product product)
+                {
+                    Debug.LogError("Inventory doesn't handle non-product items correctly yet!");
+                    continue;
+                }
+                if (!product.ProductSo.Equals(itemSo)) continue;
+                items[i] = item;
+                items[j] = null;
+                found = true;
+            }
+        }
+        Array.Resize(ref items, items.Length - BackpackSlots);
+        selectedSlotIndex = Mathf.Min(selectedSlotIndex, items.Length - 1);
+        RefreshItemVisuals();
+        OnSlotSelected?.Invoke(this, EventArgs.Empty);
+        return true;
+    }
+    
+    public ItemInventory GetProductInventory()
+    {
+        return itemInventory;
+    }
+    
+    private void RefreshItemVisuals()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            items[i]?.gameObject.SetActive(i == selectedSlotIndex);
+        }
     }
 }

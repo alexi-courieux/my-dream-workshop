@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: Plate
   m_EditorClassIdentifier: 
+  id: Plate
   prefab: {fileID: 3908874931380198303, guid: 8fa6b6dc204751941b735fbc7fa8e40c, type: 3}
   sprite: {fileID: 21300000, guid: 5772fcb870316aa40be2e90a62422917, type: 3}
-  itemName: Plate
-  buyPrice: 0
-  sellPrice: 10
   types:
   - {fileID: 11400000, guid: ea00ee7edc3431847ba33fe19a1576a7, type: 2}
+  buyPrice: 0
+  sellPrice: 10
