@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EconomyManager : MonoBehaviour
 {
-    private const int StartingMoney = 1000;
+    private const int StartingMoney = 100;
     
     public static EconomyManager Instance { get; private set; }
     
