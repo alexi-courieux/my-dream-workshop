@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProductType", menuName = "ScriptableObject/ProductType")]
-public class ProductTypeSo : ScriptableObject
+[CreateAssetMenu(fileName = "ItemType", menuName = "ScriptableObject/ItemType")]
+public class ItemTypeSo : ScriptableObject
 {
     public string typeName;
-    public ProductTypeSo parentType;
+    public ItemTypeSo parentType;
     public bool assignable = true;
     
-    public bool IsType(ProductTypeSo type)
+    public bool IsType(ItemTypeSo type)
     {
         if (type == this) return true;
         if (parentType is null) return false;

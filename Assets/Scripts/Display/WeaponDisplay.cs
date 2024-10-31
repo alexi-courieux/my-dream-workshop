@@ -6,7 +6,7 @@ using UnityEngine;
 public class WeaponDisplay : MonoBehaviour, IInteractable, IHandleItems
 {
     [SerializeField] private Transform[] itemSlots;
-    [SerializeField] private ProductTypeSo[] allowedProductTypes;
+    [SerializeField] private ItemTypeSo[] allowedProductTypes;
     private List<Product> _items;
     private int _capacity;
 

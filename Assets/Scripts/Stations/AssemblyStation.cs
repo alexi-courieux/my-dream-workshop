@@ -70,14 +70,14 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         ProductSo[] productsSo = GetItems<Product>()
             .Cast<Product>()
             .Select(i => i.ProductSo)
-            .OrderBy(i => i.itemName)
+            .OrderBy(i => i.id)
             .ToArray();
         _availableRecipes = RecipeManager.Instance.GetRecipes<AssemblyRecipeSo>();
         _availableRecipes = _availableRecipes
             .Where(r =>
             {
                 ProductSo[] recipeInputs = r.inputs
-                    .OrderBy(i => i.itemName)
+                    .OrderBy(i => i.id)
                     .ToArray();
                 return productsSo.SequenceEqual(recipeInputs);
             })

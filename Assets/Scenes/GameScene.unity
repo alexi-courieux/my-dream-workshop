@@ -22256,6 +22256,7 @@ MonoBehaviour:
     type: 2}
   initialSellableProductsList: {fileID: 11400000, guid: 79146b6357ddfbd4cb9d01baaeae8453,
     type: 2}
+  sellableType: {fileID: 11400000, guid: a2b6bbe6ac225914db6b6f2f07d8b5a8, type: 2}
   chestStation: {fileID: 9145434804217874957}
 --- !u!4 &2029444170
 Transform:
@@ -22971,7 +22972,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.86983037, b: 0.76100004, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

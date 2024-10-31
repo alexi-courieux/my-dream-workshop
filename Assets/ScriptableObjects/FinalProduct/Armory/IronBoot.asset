@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronBoot
   m_EditorClassIdentifier: 
+  id: Iron Boots
   prefab: {fileID: 3255530098180596297, guid: b6e5e436cacd2174795a567d81091296, type: 3}
   sprite: {fileID: 21300000, guid: 1232b4251095b144fa2f21632012c082, type: 3}
-  itemName: Iron Boots
-  buyPrice: 0
-  sellPrice: 52
   types:
   - {fileID: 11400000, guid: 1a27f54d70884e4488b020cd584c918c, type: 2}
+  - {fileID: 11400000, guid: a2b6bbe6ac225914db6b6f2f07d8b5a8, type: 2}
+  buyPrice: 0
+  sellPrice: 52

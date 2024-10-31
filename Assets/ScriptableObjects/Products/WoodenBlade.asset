@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: WoodenBlade
   m_EditorClassIdentifier: 
+  id: Wood Blade
   prefab: {fileID: 3908874931380198303, guid: 38bc8ce972872db428be134f90bb6b2a, type: 3}
   sprite: {fileID: 21300000, guid: 5ba280e68d047a44a9957df3be7fbb3e, type: 3}
-  itemName: WoodenBlade
-  buyPrice: 0
-  sellPrice: 10
   types:
   - {fileID: 11400000, guid: 58969ab9c4cfaa94d8496733e0d63b0c, type: 2}
+  buyPrice: 0
+  sellPrice: 10

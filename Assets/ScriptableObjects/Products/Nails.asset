@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: Nails
   m_EditorClassIdentifier: 
+  id: Nails
   prefab: {fileID: 3908874931380198303, guid: eae96b0b51b32c04bb2aeb0b0d9b089d, type: 3}
   sprite: {fileID: 21300000, guid: 7d9543cbdde22bf4490f0dd3c03d87c0, type: 3}
-  itemName: Nails
-  buyPrice: 10
-  sellPrice: 10
   types:
   - {fileID: 11400000, guid: ea00ee7edc3431847ba33fe19a1576a7, type: 2}
+  buyPrice: 10
+  sellPrice: 10

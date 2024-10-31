@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronSword
   m_EditorClassIdentifier: 
+  id: Iron Sword
   prefab: {fileID: 3255530098180596297, guid: 33a8904d365bb1f4e84458f09c50070b, type: 3}
   sprite: {fileID: 21300000, guid: 2688c4768ac23914ca8dddeaddb114d2, type: 3}
-  itemName: IronSword
-  buyPrice: 0
-  sellPrice: 50
   types:
   - {fileID: 11400000, guid: 8b2b061104ee05645a9c7d5e35f5dde7, type: 2}
+  - {fileID: 11400000, guid: a2b6bbe6ac225914db6b6f2f07d8b5a8, type: 2}
+  buyPrice: 0
+  sellPrice: 50

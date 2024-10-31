@@ -10,18 +10,18 @@ public class ArmoryDisplay : MonoBehaviour, IInteractable, IHandleItems
     [SerializeField] private Transform chestSlot;
     [SerializeField] private Transform pantsSlot;
     [SerializeField] private Transform bootSlot;
-    [SerializeField] private ProductTypeSo helmetType;
-    [SerializeField] private ProductTypeSo chestType;
-    [SerializeField] private ProductTypeSo pantsType;
-    [SerializeField] private ProductTypeSo bootType;
+    [SerializeField] private ItemTypeSo helmetType;
+    [SerializeField] private ItemTypeSo chestType;
+    [SerializeField] private ItemTypeSo pantsType;
+    [SerializeField] private ItemTypeSo bootType;
     private List<Product> _items;
-    private List<ProductTypeSo> _itemTypes;
-    private ProductTypeSo[] _allowedProductTypes;
+    private List<ItemTypeSo> _itemTypes;
+    private ItemTypeSo[] _allowedProductTypes;
 
     private void Awake()
     {
         _items = new List<Product>();
-        _itemTypes = new List<ProductTypeSo>();
+        _itemTypes = new List<ItemTypeSo>();
         _allowedProductTypes = new []{helmetType, chestType, pantsType, bootType};
     }
 

@@ -13,13 +13,13 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Transform slotsParent;
     [SerializeField] private InventorySlotUI inventorySlotPrefab;
     
-    private ProductInventory productInventory;
+    private ItemInventory itemInventory;
 
     private void Awake()
     {
-        sortCategoryButton.onClick.AddListener(() => productInventory.SortItemsByTags());
-        sortNameButton.onClick.AddListener(() => productInventory.SortItemsByName());
-        sortAmountButton.onClick.AddListener(() => productInventory.SortItemsByAmount());
+        sortCategoryButton.onClick.AddListener(() => itemInventory.SortItemsByTags());
+        sortNameButton.onClick.AddListener(() => itemInventory.SortItemsByName());
+        sortAmountButton.onClick.AddListener(() => itemInventory.SortItemsByAmount());
         searchInputField.onValueChanged.AddListener(Search);
         eraseSearchButton.onClick.AddListener(() => searchInputField.text = "");
     }
@@ -32,7 +32,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Search(string search)
     {
-        int[] indexes = productInventory.Search(search);
+        int[] indexes = itemInventory.Search(search);
         foreach (Transform child in slotsParent)
         {
             child.gameObject.SetActive(false);
@@ -43,9 +43,9 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void Show(ProductInventory inventory)
+    public void Show(ItemInventory inventory)
     {
-        productInventory = inventory;
+        itemInventory = inventory;
         UpdateVisuals();
         gameObject.SetActive(true);
     }
@@ -62,11 +62,11 @@ public class InventoryUI : MonoBehaviour
             if (child == inventorySlotPrefab.transform) continue;
             Destroy(child.gameObject);
         }
-        for (int i = 0; i < productInventory.GetSlotAmount(); i++)
+        for (int i = 0; i < itemInventory.GetSlotAmount(); i++)
         {
             InventorySlotUI slot = Instantiate(inventorySlotPrefab, slotsParent);
             slot.gameObject.SetActive(true);
-            var item = productInventory.GetSlot(i);
+            var item = itemInventory.GetSlot(i);
             slot.SetItem(item);
             slot.UpdateVisuals(i);
         }

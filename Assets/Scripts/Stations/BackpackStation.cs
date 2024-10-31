@@ -22,9 +22,9 @@ public class BackpackStation : MonoBehaviour, IInteractable
         }
         else
         {
+            if(!Player.Instance.HandleSystem.UnequipBackpack()) return;
             OnBackpackPut?.Invoke(this, EventArgs.Empty);
             stationHasBackpack = true;
-            Player.Instance.HandleSystem.UnequipBackpack();
         }
     }
 }

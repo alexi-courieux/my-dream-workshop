@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronGuard
   m_EditorClassIdentifier: 
+  id: Iron Guard
   prefab: {fileID: 3908874931380198303, guid: 5ee9221c5566f4347be5f3f5690aaa67, type: 3}
   sprite: {fileID: 21300000, guid: d2292e790d7912343a139386be30f78c, type: 3}
-  itemName: IronGuard
-  buyPrice: 0
-  sellPrice: 12
   types:
   - {fileID: 11400000, guid: ea00ee7edc3431847ba33fe19a1576a7, type: 2}
+  buyPrice: 0
+  sellPrice: 12

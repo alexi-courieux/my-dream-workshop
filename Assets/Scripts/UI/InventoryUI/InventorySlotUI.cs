@@ -9,27 +9,19 @@ public class InventorySlotUI : MonoBehaviour
     [SerializeField] private Transform defaultBackground;
     [SerializeField] private Transform selectedBackground;
     
-    private SlotInventoryItem<ProductSo> item;
+    private SlotInventoryItem<ItemSo> item;
 
-    private void Start()
-    {
-        defaultBackground.gameObject.SetActive(true);
-        selectedBackground.gameObject.SetActive(false);
-    }
-
-    public void SetItem(SlotInventoryItem<ProductSo> i)
+    public void SetItem(SlotInventoryItem<ItemSo> i)
     {
         item = i;
     }
     
-    public void SetSelected(bool selected)
+    public void UpdateVisuals(int slotIndex)
     {
+        bool selected = slotIndex == Player.Instance.HandleSystem.SelectedSlotIndex;
         defaultBackground.gameObject.SetActive(!selected);
         selectedBackground.gameObject.SetActive(selected);
-    }
-    
-    public void UpdateVisuals(int index)
-    {
+        
         if (item is null)
         {
             productImage.enabled = false;
@@ -41,7 +33,5 @@ public class InventorySlotUI : MonoBehaviour
         productImage.sprite = item.Item.sprite;
         amountText.enabled = item.Amount > 1;
         amountText.text = $"{item.Amount:D}";
-        
-        SetSelected(index == Player.Instance.HandleSystem.SelectedSlotIndex);
     }
 }

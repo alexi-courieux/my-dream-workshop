@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
-public class ProductInventory : SlotInventory<ProductSo>
+public class ItemInventory : SlotInventory<ItemSo>
 {
-    public ProductInventory(int slotAmount, int maxAmountPerSlot = -1) : base(slotAmount, maxAmountPerSlot)
+    public ItemInventory(int slotAmount, int maxAmountPerSlot = -1) : base(slotAmount, maxAmountPerSlot)
     {
     }
 
     public void SortItemsByName(bool ascending = true)
     {
-        SortItems(x => x.Key.itemName, ascending);
+        SortItems(x => x.Key.id, ascending);
     }
 
     public void SortItemsByTags(bool ascending = true)
@@ -24,7 +24,7 @@ public class ProductInventory : SlotInventory<ProductSo>
     public int[] Search(string search)
     {
         var items = GetItems().Where(x => 
-            x.Key.itemName.Contains(search) 
+            x.Key.id.Contains(search) 
             || x.Key.types.Any(tag => tag.GetPath().Contains(search))).ToArray();
         return items.Select(x => Array.IndexOf(ItemSlots, x.Key)).ToArray();
     }

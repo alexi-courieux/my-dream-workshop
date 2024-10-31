@@ -24,6 +24,11 @@ public abstract class SlotInventory<T>: IInventory<T>
             .Where(slot => slot != null)
             .ToDictionary(slot => slot.Item, slot => slot.Amount);
     }
+
+    public SlotInventoryItem<T>[] GetItemSlots()
+    {
+        return ItemSlots;
+    }
     
     public bool TryAddItem(T item, int amount)
     {
@@ -63,13 +68,18 @@ public abstract class SlotInventory<T>: IInventory<T>
         return ItemSlots.Any(slot => slot.Item.Equals(item) && slot.Amount < _maxAmountPerSlot);
     }
     
-    public void RemoveItem(T item, int amount)
+    public void RemoveItem(T item, int amount, int index)
     {
-        if (item is null || amount <= 0) return;
-        
-        int index = Array.FindIndex(ItemSlots, slot => slot is not null && slot.Item.Equals(item));
-        if (index < 0) return; // Item not in inventory
-        
+        if (item is null || amount <= 0) throw new Exception("Item or amount invalid");
+        if (index > ItemSlots.Length) throw new Exception("Index out of range");
+        if (index is not -1 && !item.Equals(ItemSlots[index].Item)) throw new Exception("Item not in specified index");
+
+        if (index is -1)
+        {
+            index = Array.FindIndex(ItemSlots, slot => slot is not null && slot.Item.Equals(item));
+            if (index < 0) return; // Item not in inventory
+        }
+
         ItemSlots[index].Amount -= amount;
         if (ItemSlots[index].Amount > 0) {
             // Item still in inventory
@@ -79,6 +89,11 @@ public abstract class SlotInventory<T>: IInventory<T>
         
         ItemSlots[index] = default; // Remove item from inventory
         OnItemRemoved?.Invoke(this, EventArgs.Empty);
+    }
+    
+    public void RemoveItem(T item, int amount)
+    {
+        RemoveItem(item, amount, -1);
     }
     
     public bool ContainsItem(T item, int amount = 1)

@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronBar
   m_EditorClassIdentifier: 
+  id: Iron Bar
   prefab: {fileID: 3908874931380198303, guid: 581c358530be69b43af16eda897d3f0c, type: 3}
   sprite: {fileID: 21300000, guid: 468ef090fe66db644b65fe7fa548ee69, type: 3}
-  itemName: IronBar
-  buyPrice: 8
-  sellPrice: 5
   types:
   - {fileID: 11400000, guid: ea00ee7edc3431847ba33fe19a1576a7, type: 2}
+  buyPrice: 8
+  sellPrice: 5

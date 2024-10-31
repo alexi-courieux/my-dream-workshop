@@ -6,7 +6,7 @@ public class PlayerInventoryUI : MonoBehaviour
     [SerializeField] private InventorySlotUI inventorySlotPrefab;
     [SerializeField] private Transform slotsParent;
     
-    private ProductInventory productInventory;
+    private ItemInventory itemInventory;
     
     private void Awake()
     {
@@ -15,10 +15,10 @@ public class PlayerInventoryUI : MonoBehaviour
 
     private void Start()
     {
-        productInventory = Player.Instance.HandleSystem.GetProductInventory();
-        productInventory.OnItemAdded += ProductInventory_OnItemAdded;
-        productInventory.OnItemRemoved += ProductInventory_OnItemRemoved;
-        productInventory.OnSlotAmountChanged += ProductInventory_OnSlotAmountChanged;
+        itemInventory = Player.Instance.HandleSystem.GetProductInventory();
+        itemInventory.OnItemAdded += ItemInventory_OnItemAdded;
+        itemInventory.OnItemRemoved += ItemInventory_OnItemRemoved;
+        itemInventory.OnSlotAmountChanged += ItemInventory_OnSlotAmountChanged;
         
         Player.Instance.HandleSystem.OnSlotSelected += PlayerHandleSystem_OnSlotSelected;
         UpdateVisuals();
@@ -29,17 +29,17 @@ public class PlayerInventoryUI : MonoBehaviour
         UpdateVisuals();
     }
     
-    private void ProductInventory_OnSlotAmountChanged(object sender, EventArgs e)
+    private void ItemInventory_OnSlotAmountChanged(object sender, EventArgs e)
     {
         UpdateVisuals();
     }
     
-    private void ProductInventory_OnItemRemoved(object sender, EventArgs e)
+    private void ItemInventory_OnItemRemoved(object sender, EventArgs e)
     {
         UpdateVisuals();
     }
     
-    private void ProductInventory_OnItemAdded(object sender, EventArgs e)
+    private void ItemInventory_OnItemAdded(object sender, EventArgs e)
     {
         UpdateVisuals();
     }
@@ -52,10 +52,10 @@ public class PlayerInventoryUI : MonoBehaviour
             Destroy(child.gameObject);
         }
         
-        for(int i =0; i < productInventory.GetSlotAmount(); i++)
+        for(int i =0; i < itemInventory.GetSlotAmount(); i++)
         {
             InventorySlotUI slot = Instantiate(inventorySlotPrefab, slotsParent);
-            var item = productInventory.GetSlot(i);
+            var item = itemInventory.GetSlot(i);
             slot.SetItem(item);
             slot.UpdateVisuals(i);
             slot.gameObject.SetActive(true);

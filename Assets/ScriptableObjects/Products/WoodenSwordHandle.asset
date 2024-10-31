@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: WoodenSwordHandle
   m_EditorClassIdentifier: 
+  id: Wood Sword Handle
   prefab: {fileID: 3908874931380198303, guid: 0af777003ad8631459cd9ea8d302917e, type: 3}
   sprite: {fileID: 21300000, guid: 91806d66ece2d7d4aa9065c010bce0fb, type: 3}
-  itemName: WoodenSwordHandle
-  buyPrice: 0
-  sellPrice: 7
   types:
   - {fileID: 11400000, guid: 58969ab9c4cfaa94d8496733e0d63b0c, type: 2}
+  buyPrice: 0
+  sellPrice: 7

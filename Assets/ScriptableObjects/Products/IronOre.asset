@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa662752fbc4fadb1816d654302bc65, type: 3}
   m_Name: IronOre
   m_EditorClassIdentifier: 
+  id: Iron Ore
   prefab: {fileID: 3908874931380198303, guid: 59398c13daebd5a40b25975a94c10bf2, type: 3}
   sprite: {fileID: 21300000, guid: 6f943853d00303a428f3ea1504c92276, type: 3}
-  itemName: Iron Ore
-  buyPrice: 5
-  sellPrice: 3
   types:
   - {fileID: 11400000, guid: 7a4be0d1a8d2a45418f21ae439dd70f4, type: 2}
+  buyPrice: 5
+  sellPrice: 3
