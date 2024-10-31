@@ -33,6 +33,7 @@ public class ItemSo : ScriptableObject
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ItemSo), true)]
 public class ItemSoEditor : Editor
 {
@@ -150,3 +151,4 @@ public class ItemSoEditor : Editor
         return availableTypes.Max(type => GetIndentLevel(type));
     }
 }
+#endif
