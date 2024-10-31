@@ -119,6 +119,11 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
         return items[selectedSlotIndex] != null;
     }
 
+    public bool HaveSpace(ItemSo itemToAdd)
+    {
+        return itemInventory.CanAddItem(itemToAdd);
+    }
+
     public Transform GetAvailableItemSlot(Item newItem)
     {
         return itemSlot;

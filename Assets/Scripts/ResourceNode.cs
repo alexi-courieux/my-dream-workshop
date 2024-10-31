@@ -65,7 +65,7 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
         if (timeBeforeNextInteraction > 0) return;
         if (resourceNodeSo.requiredCapacity is not null 
             && !CapacityManager.Instance.GetCapacities().Contains(resourceNodeSo.requiredCapacity)) return;
-        if(Player.Instance.HandleSystem.HaveAnyItems()) return;
+        if(!Player.Instance.HandleSystem.HaveSpace(resourceNodeSo.product)) return;
         timeBeforeNextInteraction = resourceNodeSo.timeBetweenInteractions;
         OnHarvesting?.Invoke(this, EventArgs.Empty);
     }
