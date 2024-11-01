@@ -9,7 +9,6 @@ public class TutorialCraftSwordHandle : TutorialStep
     
     public override void Show()
     {
-        tutorialUI.setTutorialText("A client came and is asking for a wood sword. Craft a sword handle at the sculpting station using the plank. Select the recipe with 'previous'(Z) and 'next'(X) and press 'Use'(F) until the process is completed.");
         stationIndicator.SetActive(true);
         sculptingStation.OnProductCrafted += SculptingStationOnProductCraft;
     }
@@ -25,8 +24,7 @@ public class TutorialCraftSwordHandle : TutorialStep
      
         OrderManager.Instance.BuyRecipeGroup(recipesAfterCompletion);
         stationIndicator.SetActive(false);
-        tutorialUI.CompleteTutorialStep();
-        Destroy(this);
+        Complete();
     }
     
     private void OnDestroy()

@@ -9,7 +9,6 @@ public class TutorialCraftSword : TutorialStep
     
     public override void Show()
     {
-        tutorialUI.setTutorialText("Craft the sword at the assembly table and sell it. You can see the recipe in the recipe book (TAB).");
         stationIndicator.SetActive(true);
         OrderManager.Instance.OnSell += OrderManagerOnSell;
     }
@@ -28,8 +27,7 @@ public class TutorialCraftSword : TutorialStep
         }
         
         stationIndicator.SetActive(false);
-        tutorialUI.CompleteTutorialStep();
-        Destroy(this);
+        Complete();
     }
     
     private void OnDestroy()

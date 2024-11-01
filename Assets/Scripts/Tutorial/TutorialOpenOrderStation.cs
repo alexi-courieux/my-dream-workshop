@@ -10,7 +10,7 @@ public class TutorialOpenOrderStation : TutorialStep
     {
         orderStation.OnInteract += OrderStation_OnInteract;
         orderStationIndicator.SetActive(true);
-        tutorialUI.setTutorialText("Interact with the order station in your workshop to buy some logs");
+        
     }
     
     public override void Hide()
@@ -26,7 +26,6 @@ public class TutorialOpenOrderStation : TutorialStep
     private void OrderStation_OnInteract(object sender, System.EventArgs e)
     {
         orderStationIndicator.SetActive(false);
-        tutorialUI.CompleteTutorialStep();
-        Destroy(this);
+        Complete();
     }
 }

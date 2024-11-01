@@ -9,7 +9,6 @@ public class TutorialBuyLogs : TutorialStep
     
     public override void Show()
     {
-        tutorialUI.setTutorialText("Buy 3 logs.");
         OrderManager.Instance.OnProductBuy += OrderManager_OnProductBuy;
     }
     
@@ -25,8 +24,7 @@ public class TutorialBuyLogs : TutorialStep
         logsBought++;
         if (logsBought < 3) return;
         
-        tutorialUI.CompleteTutorialStep();
-        Destroy(this);
+        Complete();
     }
     
     private void OnDestroy()

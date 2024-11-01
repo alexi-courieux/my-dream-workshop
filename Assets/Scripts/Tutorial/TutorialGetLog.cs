@@ -9,7 +9,6 @@ public class TutorialGetLog : TutorialStep
     public override void Show()
     {
         orderChestStationIndicator.SetActive(true);
-        tutorialUI.setTutorialText("Get one of the bought logs from the order chest near the window.");
         orderChestStation.OnProductTaken += OrderChestStation_OnProductTaken;
     }
 
@@ -21,10 +20,9 @@ public class TutorialGetLog : TutorialStep
     private void OrderChestStation_OnProductTaken(object sender, ProductSo e)
     {
         if (e != logProductSo) return;
-        
-        tutorialUI.CompleteTutorialStep();
+
         orderChestStationIndicator.SetActive(false);
-        Destroy(this);
+        Complete();
     }
     
     private void OnDestroy()
