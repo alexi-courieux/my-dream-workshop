@@ -29,6 +29,7 @@ public class TutorialUI : MonoBehaviour
 
     private void Show(string tutorialName, string tutorialDesc)
     {
+        StopCoroutine(HidePanel());
         tutorialPanelAnimator.SetTrigger("start");
         tutorialPanel.SetActive(true);
         tutorialNameText.text = tutorialName;
@@ -43,7 +44,7 @@ public class TutorialUI : MonoBehaviour
     private IEnumerator HidePanel()
     {
         tutorialPanelAnimator.SetTrigger("end");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         tutorialPanel.SetActive(false);
     }
 }
