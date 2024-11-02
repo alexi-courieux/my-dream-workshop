@@ -1455,7 +1455,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorialNameText: {fileID: 1978556105}
   tutorialDescText: {fileID: 1000335567}
-  tutorialTextObject: {fileID: 1203978923}
+  tutorialPanel: {fileID: 1203978923}
+  tutorialPanelAnimator: {fileID: 1203978925}
 --- !u!1 &172510060
 GameObject:
   m_ObjectHideFlags: 0
@@ -5307,6 +5308,7 @@ MonoBehaviour:
   - {fileID: 675793401}
   - {fileID: 1450390597}
   - {fileID: 162181564}
+  tutorialStepDelay: 1
 --- !u!4 &523439528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8189339906586034208, guid: 71e31a106a58fb14993f74c50ccd9ae3,
@@ -13214,6 +13216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203978924}
+  - component: {fileID: 1203978925}
   m_Layer: 5
   m_Name: TutorialPanel
   m_TagString: Untagged
@@ -13238,9 +13241,31 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: -4, y: -100}
   m_SizeDelta: {x: 500, y: 200}
   m_Pivot: {x: 0, y: 1}
+--- !u!95 &1203978925
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203978923}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a5483f401088fa048bae4436aaa9f1c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1204905450
 GameObject:
   m_ObjectHideFlags: 0

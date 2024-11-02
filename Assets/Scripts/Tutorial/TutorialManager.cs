@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public struct TutorialStepStartEvent
@@ -11,9 +12,11 @@ public class TutorialManager : MonoBehaviour
     public static TutorialManager Instance { get; private set; }
 
     public event EventHandler<TutorialStepStartEvent> OnStepStart;
+    public event EventHandler OnStepEnd;
     
     [SerializeField] private GameObject keyTutorial;
     [SerializeField] private TutorialStep[] tutorialSteps;
+    [SerializeField] private float tutorialStepDelay = 0.8f;
     private int tutorialStepIndex;
 
     private void Awake()
@@ -59,14 +62,21 @@ public class TutorialManager : MonoBehaviour
     
     public void CompleteTutorialStep()
     {
+        OnStepEnd?.Invoke(this, EventArgs.Empty);
         tutorialStepIndex++;
         if (tutorialStepIndex < tutorialSteps.Length)
         {
-            SetupTutorialStep();
+            StartCoroutine(StartNextStep());
         }
         else
         {
             gameObject.SetActive(false);
         }
+    }
+    
+    private IEnumerator StartNextStep()
+    {
+        yield return new WaitForSeconds(tutorialStepDelay);
+        SetupTutorialStep();
     }
 }
