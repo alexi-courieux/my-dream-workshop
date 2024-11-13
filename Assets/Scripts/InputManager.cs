@@ -30,10 +30,11 @@ public class InputManager : MonoBehaviour
 
         _inputActions.Player.Interact.performed += Interact_OnPerformed;
         _inputActions.Player.InteractAlt.performed += InteractAlt_OnPerformed;
-        _inputActions.Player.Pause.performed += Pause_OnPerformed;
         _inputActions.Player.PreviousNext.performed += PreviousNext_OnPerformed;
-        _inputActions.Player.RecipeBook.performed += RecipeBook_OnPerformed;
         _inputActions.Player.PreviousSlotNextSlot.performed += PreviousSlotNextSlot_OnPerformed;
+        
+        _inputActions.MenuTransitions.Pause.performed += Pause_OnPerformed;
+        _inputActions.MenuTransitions.RecipeBook.performed += RecipeBook_OnPerformed;
         
         _inputActions.Menu.Cancel.performed += MenuCancel_OnPerformed;
         _inputActions.Menu.PreviousNext.performed += MenuPreviousNext_OnPerformed;
@@ -43,10 +44,11 @@ public class InputManager : MonoBehaviour
     {
         _inputActions.Player.Interact.performed -= Interact_OnPerformed;
         _inputActions.Player.InteractAlt.performed -= InteractAlt_OnPerformed;
-        _inputActions.Player.Pause.performed -= Pause_OnPerformed;
         _inputActions.Player.PreviousNext.performed -= PreviousNext_OnPerformed;
-        _inputActions.Player.RecipeBook.performed -= RecipeBook_OnPerformed;
         _inputActions.Player.PreviousSlotNextSlot.performed -= PreviousSlotNextSlot_OnPerformed;
+        
+        _inputActions.MenuTransitions.RecipeBook.performed -= RecipeBook_OnPerformed;
+        _inputActions.MenuTransitions.Pause.performed -= Pause_OnPerformed;
         
         _inputActions.Menu.Cancel.performed -= MenuCancel_OnPerformed;
         _inputActions.Menu.PreviousNext.performed -= MenuPreviousNext_OnPerformed;

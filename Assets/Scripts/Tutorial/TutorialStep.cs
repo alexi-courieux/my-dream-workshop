@@ -4,6 +4,7 @@ public abstract class TutorialStep : MonoBehaviour
 {
     [SerializeField] private string tutorialName;
     [SerializeField] private string tutorialText;
+    [SerializeField] private Transform objective;
     
     public abstract void Show();
     public abstract void Hide();
@@ -21,5 +22,10 @@ public abstract class TutorialStep : MonoBehaviour
     public string GetTutorialText()
     {
         return tutorialText;
+    }
+    
+    public Transform GetObjective()
+    {
+        return objective;
     }
 }

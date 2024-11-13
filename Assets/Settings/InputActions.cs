@@ -64,15 +64,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""45127ade-3922-4426-a5cc-3955e70036ef"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Previous/Next"",
                     ""type"": ""Button"",
                     ""id"": ""e23b2448-dfd5-4999-b0b2-2dac1f978c91"",
@@ -85,15 +76,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""PreviousSlot/NextSlot"",
                     ""type"": ""Button"",
                     ""id"": ""caca1518-2e5a-4fcc-92f6-41548e7ddf1a"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RecipeBook"",
-                    ""type"": ""Button"",
-                    ""id"": ""648f9778-d187-41b9-92ea-d6e77867a653"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -230,28 +212,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""InteractAlt"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""59104d3f-0244-40b9-b534-e70a40f60632"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""68e53c3a-4bdc-4116-99ac-1e51369620d6"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -496,28 +456,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""PreviousSlot/NextSlot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""39c874be-6584-4d9f-a187-f1ebe34a16bb"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RecipeBook"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""729325fb-f3c4-4fdb-a25b-e5999171873f"",
-                    ""path"": ""<Gamepad>/select"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""RecipeBook"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -762,6 +700,76 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""MenuTransitions"",
+            ""id"": ""9d196519-f891-4c0c-a238-a1fbe06312ea"",
+            ""actions"": [
+                {
+                    ""name"": ""RecipeBook"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ede8967-8ddc-499b-be45-d7163dcba14b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""57cb7197-087e-4709-adfe-090c91539a6b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""aa74d233-d20e-4bd8-bcaf-7931f314ba89"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RecipeBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2bbaf779-09db-4d3a-9a8c-bb1e23fe70de"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RecipeBook"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a60423c9-f0dd-4e9a-85d7-127fde50581d"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45458919-9a3a-45fd-826a-d1b9fcf402bb"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -772,22 +780,25 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_InteractAlt = m_Player.FindAction("InteractAlt", throwIfNotFound: true);
-        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_PreviousNext = m_Player.FindAction("Previous/Next", throwIfNotFound: true);
         m_Player_PreviousSlotNextSlot = m_Player.FindAction("PreviousSlot/NextSlot", throwIfNotFound: true);
-        m_Player_RecipeBook = m_Player.FindAction("RecipeBook", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
         m_Menu_PreviousNext = m_Menu.FindAction("Previous/Next", throwIfNotFound: true);
         m_Menu_Submit = m_Menu.FindAction("Submit", throwIfNotFound: true);
         m_Menu_Move = m_Menu.FindAction("Move", throwIfNotFound: true);
+        // MenuTransitions
+        m_MenuTransitions = asset.FindActionMap("MenuTransitions", throwIfNotFound: true);
+        m_MenuTransitions_RecipeBook = m_MenuTransitions.FindAction("RecipeBook", throwIfNotFound: true);
+        m_MenuTransitions_Pause = m_MenuTransitions.FindAction("Pause", throwIfNotFound: true);
     }
 
     ~@InputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Menu.enabled, "This will cause a leak and performance issues, InputActions.Menu.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_MenuTransitions.enabled, "This will cause a leak and performance issues, InputActions.MenuTransitions.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -853,10 +864,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_InteractAlt;
-    private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_PreviousNext;
     private readonly InputAction m_Player_PreviousSlotNextSlot;
-    private readonly InputAction m_Player_RecipeBook;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -865,10 +874,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @InteractAlt => m_Wrapper.m_Player_InteractAlt;
-        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @PreviousNext => m_Wrapper.m_Player_PreviousNext;
         public InputAction @PreviousSlotNextSlot => m_Wrapper.m_Player_PreviousSlotNextSlot;
-        public InputAction @RecipeBook => m_Wrapper.m_Player_RecipeBook;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -890,18 +897,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractAlt.started += instance.OnInteractAlt;
             @InteractAlt.performed += instance.OnInteractAlt;
             @InteractAlt.canceled += instance.OnInteractAlt;
-            @Pause.started += instance.OnPause;
-            @Pause.performed += instance.OnPause;
-            @Pause.canceled += instance.OnPause;
             @PreviousNext.started += instance.OnPreviousNext;
             @PreviousNext.performed += instance.OnPreviousNext;
             @PreviousNext.canceled += instance.OnPreviousNext;
             @PreviousSlotNextSlot.started += instance.OnPreviousSlotNextSlot;
             @PreviousSlotNextSlot.performed += instance.OnPreviousSlotNextSlot;
             @PreviousSlotNextSlot.canceled += instance.OnPreviousSlotNextSlot;
-            @RecipeBook.started += instance.OnRecipeBook;
-            @RecipeBook.performed += instance.OnRecipeBook;
-            @RecipeBook.canceled += instance.OnRecipeBook;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -918,18 +919,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractAlt.started -= instance.OnInteractAlt;
             @InteractAlt.performed -= instance.OnInteractAlt;
             @InteractAlt.canceled -= instance.OnInteractAlt;
-            @Pause.started -= instance.OnPause;
-            @Pause.performed -= instance.OnPause;
-            @Pause.canceled -= instance.OnPause;
             @PreviousNext.started -= instance.OnPreviousNext;
             @PreviousNext.performed -= instance.OnPreviousNext;
             @PreviousNext.canceled -= instance.OnPreviousNext;
             @PreviousSlotNextSlot.started -= instance.OnPreviousSlotNextSlot;
             @PreviousSlotNextSlot.performed -= instance.OnPreviousSlotNextSlot;
             @PreviousSlotNextSlot.canceled -= instance.OnPreviousSlotNextSlot;
-            @RecipeBook.started -= instance.OnRecipeBook;
-            @RecipeBook.performed -= instance.OnRecipeBook;
-            @RecipeBook.canceled -= instance.OnRecipeBook;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1017,16 +1012,68 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // MenuTransitions
+    private readonly InputActionMap m_MenuTransitions;
+    private List<IMenuTransitionsActions> m_MenuTransitionsActionsCallbackInterfaces = new List<IMenuTransitionsActions>();
+    private readonly InputAction m_MenuTransitions_RecipeBook;
+    private readonly InputAction m_MenuTransitions_Pause;
+    public struct MenuTransitionsActions
+    {
+        private @InputActions m_Wrapper;
+        public MenuTransitionsActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @RecipeBook => m_Wrapper.m_MenuTransitions_RecipeBook;
+        public InputAction @Pause => m_Wrapper.m_MenuTransitions_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_MenuTransitions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuTransitionsActions set) { return set.Get(); }
+        public void AddCallbacks(IMenuTransitionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MenuTransitionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MenuTransitionsActionsCallbackInterfaces.Add(instance);
+            @RecipeBook.started += instance.OnRecipeBook;
+            @RecipeBook.performed += instance.OnRecipeBook;
+            @RecipeBook.canceled += instance.OnRecipeBook;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+        }
+
+        private void UnregisterCallbacks(IMenuTransitionsActions instance)
+        {
+            @RecipeBook.started -= instance.OnRecipeBook;
+            @RecipeBook.performed -= instance.OnRecipeBook;
+            @RecipeBook.canceled -= instance.OnRecipeBook;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+        }
+
+        public void RemoveCallbacks(IMenuTransitionsActions instance)
+        {
+            if (m_Wrapper.m_MenuTransitionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMenuTransitionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MenuTransitionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MenuTransitionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MenuTransitionsActions @MenuTransitions => new MenuTransitionsActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnInteractAlt(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
         void OnPreviousNext(InputAction.CallbackContext context);
         void OnPreviousSlotNextSlot(InputAction.CallbackContext context);
-        void OnRecipeBook(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
@@ -1034,5 +1081,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnPreviousNext(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
+    }
+    public interface IMenuTransitionsActions
+    {
+        void OnRecipeBook(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

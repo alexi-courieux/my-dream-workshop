@@ -6,6 +6,7 @@ public struct TutorialStepStartEvent
 {
     public string TutorialName;
     public string TutorialText;
+    public Transform? Objective;
 }
 public class TutorialManager : MonoBehaviour
 { 
@@ -55,7 +56,8 @@ public class TutorialManager : MonoBehaviour
         OnStepStart?.Invoke(this, new TutorialStepStartEvent
         {
             TutorialName = step.GetTutorialName(),
-            TutorialText = step.GetTutorialText()
+            TutorialText = step.GetTutorialText(),
+            Objective = step.GetObjective()
         });
         step.Show();
     }

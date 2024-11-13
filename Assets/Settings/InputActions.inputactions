@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "45127ade-3922-4426-a5cc-3955e70036ef",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Previous/Next",
                     "type": "Button",
                     "id": "e23b2448-dfd5-4999-b0b2-2dac1f978c91",
@@ -63,15 +54,6 @@
                     "name": "PreviousSlot/NextSlot",
                     "type": "Button",
                     "id": "caca1518-2e5a-4fcc-92f6-41548e7ddf1a",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RecipeBook",
-                    "type": "Button",
-                    "id": "648f9778-d187-41b9-92ea-d6e77867a653",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -208,28 +190,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "InteractAlt",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "59104d3f-0244-40b9-b534-e70a40f60632",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "68e53c3a-4bdc-4116-99ac-1e51369620d6",
-                    "path": "<Gamepad>/start",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -474,28 +434,6 @@
                     "action": "PreviousSlot/NextSlot",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "39c874be-6584-4d9f-a187-f1ebe34a16bb",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RecipeBook",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "729325fb-f3c4-4fdb-a25b-e5999171873f",
-                    "path": "<Gamepad>/select",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RecipeBook",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -736,6 +674,76 @@
                     "processors": "",
                     "groups": "",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "MenuTransitions",
+            "id": "9d196519-f891-4c0c-a238-a1fbe06312ea",
+            "actions": [
+                {
+                    "name": "RecipeBook",
+                    "type": "Button",
+                    "id": "8ede8967-8ddc-499b-be45-d7163dcba14b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "57cb7197-087e-4709-adfe-090c91539a6b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "aa74d233-d20e-4bd8-bcaf-7931f314ba89",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RecipeBook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bbaf779-09db-4d3a-9a8c-bb1e23fe70de",
+                    "path": "<Gamepad>/select",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RecipeBook",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a60423c9-f0dd-4e9a-85d7-127fde50581d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45458919-9a3a-45fd-826a-d1b9fcf402bb",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
