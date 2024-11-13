@@ -6,7 +6,7 @@ public struct TutorialStepStartEvent
 {
     public string TutorialName;
     public string TutorialText;
-    public Transform? Objective;
+    public Transform Objective;
 }
 public class TutorialManager : MonoBehaviour
 { 
@@ -30,7 +30,6 @@ public class TutorialManager : MonoBehaviour
         tutorialStepIndex = 0;
         foreach (TutorialStep step in tutorialSteps)
         {
-            step.Hide();
             step.gameObject.SetActive(false);
         }
         keyTutorial.SetActive(true);
@@ -53,13 +52,13 @@ public class TutorialManager : MonoBehaviour
     public void SetupTutorialStep()
     {
         TutorialStep step = tutorialSteps[tutorialStepIndex];
+        step.Initialise();
         OnStepStart?.Invoke(this, new TutorialStepStartEvent
         {
             TutorialName = step.GetTutorialName(),
             TutorialText = step.GetTutorialText(),
             Objective = step.GetObjective()
         });
-        step.Show();
     }
     
     public void CompleteTutorialStep()
@@ -68,17 +67,11 @@ public class TutorialManager : MonoBehaviour
         tutorialStepIndex++;
         if (tutorialStepIndex < tutorialSteps.Length)
         {
-            StartCoroutine(StartNextStep());
+            SetupTutorialStep();
         }
         else
         {
             gameObject.SetActive(false);
         }
-    }
-    
-    private IEnumerator StartNextStep()
-    {
-        yield return new WaitForSeconds(tutorialStepDelay);
-        SetupTutorialStep();
     }
 }

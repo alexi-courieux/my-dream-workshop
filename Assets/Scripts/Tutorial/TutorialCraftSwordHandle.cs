@@ -4,18 +4,11 @@ public class TutorialCraftSwordHandle : TutorialStep
 {
     [SerializeField] private SculptingStation sculptingStation;
     [SerializeField] private ProductSo swordHandleProductSo;
-    [SerializeField] private GameObject stationIndicator;
     [SerializeField] private BuyableRecipeGroupSo recipesAfterCompletion;
     
-    public override void Show()
+    public override void Initialise()
     {
-        stationIndicator.SetActive(true);
         sculptingStation.OnProductCrafted += SculptingStationOnProductCraft;
-    }
-
-    public override void Hide()
-    {
-        stationIndicator.SetActive(false);
     }
 
     private void SculptingStationOnProductCraft(object sender, ProductSo e)
@@ -23,7 +16,6 @@ public class TutorialCraftSwordHandle : TutorialStep
         if (e != swordHandleProductSo) return;
      
         OrderManager.Instance.BuyRecipeGroup(recipesAfterCompletion);
-        stationIndicator.SetActive(false);
         Complete();
     }
     

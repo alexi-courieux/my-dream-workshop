@@ -4,24 +4,16 @@ public class TutorialCraftPlanks : TutorialStep
 {
     [SerializeField] private WoodcuttingStation woodcuttingStation;
     [SerializeField] private ProductSo plankProductSo;
-    [SerializeField] private GameObject woodcuttingStationIndicator;
-    
-    public override void Show()
+       
+    public override void Initialise()
     {
-        woodcuttingStationIndicator.SetActive(true);
         woodcuttingStation.OnProductCrafted += WoodcuttingStation_OnProductCraft;
-    }
-
-    public override void Hide()
-    {
-        woodcuttingStationIndicator.SetActive(false);
     }
 
     private void WoodcuttingStation_OnProductCraft(object sender, ProductSo e)
     {
         if (e != plankProductSo) return;
      
-        woodcuttingStationIndicator.SetActive(false);
         Complete();
     }
     

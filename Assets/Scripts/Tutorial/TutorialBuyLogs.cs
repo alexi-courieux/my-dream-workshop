@@ -7,14 +7,9 @@ public class TutorialBuyLogs : TutorialStep
     
     private int logsBought;
     
-    public override void Show()
+    public override void Initialise()
     {
         OrderManager.Instance.OnProductBuy += OrderManager_OnProductBuy;
-    }
-    
-    public override void Hide()
-    {
-        
     }
     
     private void OrderManager_OnProductBuy(object sender, ProductSo e)

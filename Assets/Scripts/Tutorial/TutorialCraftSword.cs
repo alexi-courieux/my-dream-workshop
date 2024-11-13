@@ -3,19 +3,12 @@ using UnityEngine.Serialization;
 
 public class TutorialCraftSword : TutorialStep
 {
-    [SerializeField] private GameObject stationIndicator;
     [SerializeField] private BuyableRecipeGroupSo recipesAfterCompletion;
     [SerializeField] private ProductSo[] orderablesAfterCompletion;
     
-    public override void Show()
+    public override void Initialise()
     {
-        stationIndicator.SetActive(true);
         OrderManager.Instance.OnSell += OrderManagerOnSell;
-    }
-
-    public override void Hide()
-    {
-        stationIndicator.SetActive(false);
     }
 
     private void OrderManagerOnSell(object sender, System.EventArgs e)
@@ -26,7 +19,6 @@ public class TutorialCraftSword : TutorialStep
             OrderManager.Instance.AddBuyableProduct(productSo);
         }
         
-        stationIndicator.SetActive(false);
         Complete();
     }
     

@@ -6,8 +6,7 @@ public abstract class TutorialStep : MonoBehaviour
     [SerializeField] private string tutorialText;
     [SerializeField] private Transform objective;
     
-    public abstract void Show();
-    public abstract void Hide();
+    public abstract void Initialise();
     protected void Complete()
     {
         TutorialManager.Instance.CompleteTutorialStep();
