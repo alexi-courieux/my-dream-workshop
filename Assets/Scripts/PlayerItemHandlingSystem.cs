@@ -6,8 +6,8 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
 {
     public event EventHandler OnSlotSelected;
     
-    private const int BackpackSlots = 8;
-    private const int DefaultSlots = 2;
+    private const int BackpackSlots = 7;
+    private const int DefaultSlots = 3;
     
     [SerializeField] private Transform itemSlot;
     [SerializeField] private GameObject backpackVisual;
