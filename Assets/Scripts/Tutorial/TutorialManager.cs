@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 public struct TutorialStepStartEvent
@@ -7,6 +6,7 @@ public struct TutorialStepStartEvent
     public string TutorialName;
     public string TutorialText;
     public Transform Objective;
+    public Vector3 PointerOffset;
 }
 public class TutorialManager : MonoBehaviour
 { 
@@ -17,7 +17,6 @@ public class TutorialManager : MonoBehaviour
     
     [SerializeField] private GameObject keyTutorial;
     [SerializeField] private TutorialStep[] tutorialSteps;
-    [SerializeField] private float tutorialStepDelay = 0.8f;
     private int tutorialStepIndex;
 
     private void Awake()
@@ -57,7 +56,8 @@ public class TutorialManager : MonoBehaviour
         {
             TutorialName = step.GetTutorialName(),
             TutorialText = step.GetTutorialText(),
-            Objective = step.GetObjective()
+            Objective = step.GetObjective(),
+            PointerOffset = step.GetPointerOffset()
         });
     }
     

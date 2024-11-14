@@ -15,21 +15,18 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] private RectTransform movingPointer;
     [SerializeField] private float pointerOffset = 2;
     [SerializeField] private Transform playerTransform;
-    [SerializeField] private float pointerLerpDuration = 10f;
+    [SerializeField] private float pointerMoveSpeed = 10f;
     [SerializeField] private float playerNearDistance = 1f;
-    [SerializeField] private Transform staticPointerPrefab;
-    [SerializeField] private float staticPointerHeightOffset = 3.5f;
+    [SerializeField] private Transform staticPointer;
     
     private bool isPointerActive;
     private bool isPlayerNearTarget;
     private Transform targetTransform;
-    private Transform staticPointerInstance;
     private Camera mainCamera;
 
     private void Awake()
     {
         mainCamera = Camera.main;
-        staticPointerInstance = Instantiate(staticPointerPrefab, Vector3.zero, Quaternion.identity, null);
     }
 
     private void Start()
@@ -75,7 +72,7 @@ public class TutorialUI : MonoBehaviour
         Vector3 clampedPosition = playerTransform.position + direction.normalized * clampedDistance;
         Vector3 targetScreenPosition = mainCamera.WorldToScreenPoint(clampedPosition);
 
-        movingPointer.position = Vector3.Lerp(movingPointer.position, targetScreenPosition, Time.deltaTime * pointerLerpDuration);
+        movingPointer.position = Vector3.Lerp(movingPointer.position, targetScreenPosition, Time.deltaTime * pointerMoveSpeed);
 
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
         angle = (angle + 180) % 360;
@@ -99,17 +96,17 @@ public class TutorialUI : MonoBehaviour
         tutorialDescText.text = e.TutorialText;
         if (e.Objective is not null)
         {
-            ShowPointer(e.Objective);
+            ShowPointer(e.Objective, e.PointerOffset);
         }
     }
     
-    private void ShowPointer(Transform target)
+    private void ShowPointer(Transform target, Vector3 offset)
     {
         targetTransform = target;
         isPointerActive = true;
         isPlayerNearTarget = true; // to force update
-        staticPointerInstance.gameObject.SetActive(true);
-        staticPointerInstance.position = targetTransform.position + Vector3.up * staticPointerHeightOffset;
+        staticPointer.gameObject.SetActive(true);
+        staticPointer.position = targetTransform.position + offset;
     }
     
     private void Hide()
@@ -122,6 +119,6 @@ public class TutorialUI : MonoBehaviour
     {
         isPointerActive = false;
         movingPointer.gameObject.SetActive(false);
-        staticPointerInstance.gameObject.SetActive(false);
+        staticPointer.gameObject.SetActive(false);
     }
 }

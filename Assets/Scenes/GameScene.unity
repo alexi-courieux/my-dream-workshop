@@ -1382,15 +1382,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db7723fe5064c2f80d61c737649a099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialName: Blade business
-  tutorialText: Craft the sword at the assembly table and sell it. You can see the
-    recipe in the recipe book (TAB).
+  tutorialName: My first sword
+  tutorialText: Craft the sword at the assembly table. You can see the recipe in
+    the recipe book (TAB).
   objective: {fileID: 1480467506}
-  recipesAfterCompletion: {fileID: 11400000, guid: b7c884f1b3f8d3d4c9ad1544607d03a5,
-    type: 2}
-  orderablesAfterCompletion:
-  - {fileID: 11400000, guid: 0fc746cb698ee3b4d812ae2ebe246990, type: 2}
-  - {fileID: 11400000, guid: d70e357cbcab53d408f3d68e9820e51e, type: 2}
+  pointerOffset: {x: 0, y: 3.5, z: 0}
+  assemblyStation: {fileID: 2090766143}
+  swordProductSo: {fileID: 11400000, guid: 34eec52b6a01bc345ae5609d8ab7081e, type: 2}
 --- !u!4 &168226153 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 186621203884497955, guid: 05f80ab8753fc2d49b5f6913fec6fc8e,
@@ -1453,11 +1451,9 @@ MonoBehaviour:
   movingPointer: {fileID: 2071490179}
   pointerOffset: 2
   playerTransform: {fileID: 1008133018}
-  pointerLerpDuration: 10
+  pointerMoveSpeed: 10
   playerNearDistance: 2
-  staticPointerPrefab: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
-    type: 3}
-  staticPointerHeightOffset: 2.5
+  staticPointer: {fileID: 527408986}
 --- !u!1 &172510060
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,6 +2408,7 @@ MonoBehaviour:
   tutorialName: Shop addict
   tutorialText: Interact with the order station in your workshop
   objective: {fileID: 1430113952}
+  pointerOffset: {x: 0, y: 2, z: 0}
   orderStation: {fileID: 1430113953}
 --- !u!1001 &253542475
 PrefabInstance:
@@ -4931,12 +4928,141 @@ MonoBehaviour:
   - {fileID: 675793401}
   - {fileID: 1450390597}
   - {fileID: 162181564}
-  tutorialStepDelay: 1
+  - {fileID: 812683142}
 --- !u!4 &523439528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8189339906586034208, guid: 71e31a106a58fb14993f74c50ccd9ae3,
     type: 3}
   m_PrefabInstance: {fileID: 240477122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &527408985
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5346069601264837153, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_Name
+      value: TutorialStaticPointer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8712504860507196052, guid: 089b31d087e38b9488262d4cf4fd3983,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 089b31d087e38b9488262d4cf4fd3983, type: 3}
+--- !u!224 &527408986 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3445717817200315755, guid: 089b31d087e38b9488262d4cf4fd3983,
+    type: 3}
+  m_PrefabInstance: {fileID: 527408985}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &528933786 stripped
 GameObject:
@@ -6943,6 +7069,7 @@ MonoBehaviour:
   tutorialText: Craft a plank using the woodcutting station. Put the log on the station
     (E) and press 'Use'(F) to start the crafting process
   objective: {fileID: 523439528}
+  pointerOffset: {x: 0, y: 2.5, z: 0}
   woodcuttingStation: {fileID: 2069853195}
   plankProductSo: {fileID: 11400000, guid: 4c4b77891a73c5f42bcad7dc5acf877a, type: 2}
 --- !u!1 &675882612
@@ -6992,6 +7119,7 @@ MonoBehaviour:
   tutorialName: So you sell... wood
   tutorialText: Buy 3 Logs from the order station.
   objective: {fileID: 1430113952}
+  pointerOffset: {x: 0, y: 2, z: 0}
   orderManager: {fileID: 2029444169}
   logProductSo: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
 --- !u!4 &682602255 stripped
@@ -8396,6 +8524,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1544428836}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &812683140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 812683141}
+  - component: {fileID: 812683142}
+  m_Layer: 0
+  m_Name: TutorialSellSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &812683141
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812683140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 849024489}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812683142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812683140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de19a7860c994b3797f816ccc3abcaca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialName: Blade business
+  tutorialText: Sell the sword
+  objective: {fileID: 1534096567}
+  pointerOffset: {x: 0, y: 2, z: 0}
+  recipesAfterCompletion: {fileID: 11400000, guid: b7c884f1b3f8d3d4c9ad1544607d03a5,
+    type: 2}
+  orderablesAfterCompletion:
+  - {fileID: 11400000, guid: 0fc746cb698ee3b4d812ae2ebe246990, type: 2}
+  - {fileID: 11400000, guid: d70e357cbcab53d408f3d68e9820e51e, type: 2}
 --- !u!1001 &816174146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8926,6 +9107,7 @@ Transform:
   - {fileID: 675793400}
   - {fileID: 1450390596}
   - {fileID: 162181563}
+  - {fileID: 812683141}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &856568651 stripped
@@ -16695,6 +16877,7 @@ MonoBehaviour:
   tutorialText: Craft a sword handle at the sculpting station using the plank. Press
     'Use' (F) until the process is completed
   objective: {fileID: 338453061}
+  pointerOffset: {x: 0, y: 3.5, z: 0}
   sculptingStation: {fileID: 1003015710}
   swordHandleProductSo: {fileID: 11400000, guid: 82d1415511fecb940bf7215e29204f7a,
     type: 2}
@@ -17010,6 +17193,7 @@ MonoBehaviour:
   tutorialName: Where is my order
   tutorialText: Get one of the logs from the order chest near the window.
   objective: {fileID: 9145434804217874956}
+  pointerOffset: {x: 0, y: 2, z: 0}
   orderChestStation: {fileID: 9145434804217874957}
   logProductSo: {fileID: 11400000, guid: fdc8d165336465b43a06c2ecbcd83abd, type: 2}
 --- !u!1 &1459234500
@@ -23075,6 +23259,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089839957}
   m_CullTransparentMesh: 1
+--- !u!114 &2090766143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8816669866138325601, guid: fbf842878c8ee9a40a1353c4c68994c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 643301631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33e5b2685a0f034087e948b3ca75c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2095488688 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7c60a4bb6d113f348b660d6a9b5e5e93,
@@ -26689,6 +26885,7 @@ SceneRoots:
   - {fileID: 73823288}
   - {fileID: 1271417287}
   - {fileID: 1204905453}
+  - {fileID: 527408985}
   - {fileID: 1380634685}
   - {fileID: 1830031799}
   - {fileID: 1662267091}

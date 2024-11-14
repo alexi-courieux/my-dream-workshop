@@ -9,6 +9,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     public event EventHandler<SelectedProductEventArgs> OnProductSelected; 
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler<ProductSo> OnProductCrafted;
 
     private enum State
     {
@@ -125,6 +126,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
     {
         _items.ToList().ForEach(i => i.DestroySelf());
         Item.SpawnItem(_selectedRecipe.output.prefab, this);
+        OnProductCrafted?.Invoke(this, _selectedRecipe.output);
         ClearRecipe();
         _state = State.Idle;
     }
