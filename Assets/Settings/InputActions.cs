@@ -64,7 +64,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Previous/Next"",
+                    ""name"": ""Previous/Next (Recipe)"",
                     ""type"": ""Button"",
                     ""id"": ""e23b2448-dfd5-4999-b0b2-2dac1f978c91"",
                     ""expectedControlType"": """",
@@ -73,7 +73,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PreviousSlot/NextSlot"",
+                    ""name"": ""Previous/Next (Slot)"",
                     ""type"": ""Button"",
                     ""id"": ""caca1518-2e5a-4fcc-92f6-41548e7ddf1a"",
                     ""expectedControlType"": """",
@@ -156,7 +156,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""InteractAlt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -167,7 +167,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""InteractAlt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -178,7 +178,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Interact"",
+                    ""action"": ""InteractAlt"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -189,7 +189,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InteractAlt"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -200,7 +200,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InteractAlt"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -211,7 +211,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""InteractAlt"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -293,68 +293,101 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""WX [Keyboard]"",
-                    ""id"": ""4f12ded8-4d5a-4791-8171-dc1bdef6a296"",
+                    ""name"": ""Scroll [Mouse]"",
+                    ""id"": ""bcba83b1-d89e-475d-b562-3f9082c3837b"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous/Next"",
+                    ""action"": ""Previous/Next (Recipe)"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""451349ec-3b7f-431c-b00c-eedb3347d81d"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""id"": ""5fde7a04-c1d0-4b65-aad4-7a207e8e77ec"",
+                    ""path"": ""<Mouse>/scroll/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous/Next"",
+                    ""action"": ""Previous/Next (Recipe)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""42235391-fa51-4b32-895b-4ef8595be491"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""id"": ""5050dfdb-b609-41bb-8271-f85c04ff791c"",
+                    ""path"": ""<Mouse>/scroll/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous/Next"",
+                    ""action"": ""Previous/Next (Recipe)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""DPad LR [Gamepad]"",
-                    ""id"": ""3962ae73-c299-4005-acbc-2eb0d9e1bb08"",
+                    ""name"": ""Arrows LR [Keyboard]"",
+                    ""id"": ""e6033943-2d27-4685-b92d-93e55d02d3f7"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous/Next"",
+                    ""action"": ""Previous/Next (Recipe)"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""41b90ffb-68b3-4e3b-a609-071fc47687e9"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""id"": ""c053ee42-c198-4b62-880d-4d36ec4aebd8"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous/Next"",
+                    ""action"": ""Previous/Next (Recipe)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""96e1f43c-2d4e-4907-8965-99b96d392bb2"",
-                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""id"": ""40c7d444-51c6-4d77-a2d4-04c3c94acc1c"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Previous/Next"",
+                    ""action"": ""Previous/Next (Recipe)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""LB/RB [Gamepad]"",
+                    ""id"": ""a8fefcdc-08b2-4b72-ad24-b41516339798"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous/Next (Recipe)"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""2fddbecd-c4b7-4609-927e-f3767afe80ee"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous/Next (Recipe)"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""b3307c24-9e9f-4fe7-ad08-a3c99b050df3"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous/Next (Recipe)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -365,7 +398,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -376,7 +409,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -387,7 +420,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -398,7 +431,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -409,7 +442,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -420,7 +453,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -431,7 +464,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -442,7 +475,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -453,7 +486,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PreviousSlot/NextSlot"",
+                    ""action"": ""Previous/Next (Slot)"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -780,8 +813,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_InteractAlt = m_Player.FindAction("InteractAlt", throwIfNotFound: true);
-        m_Player_PreviousNext = m_Player.FindAction("Previous/Next", throwIfNotFound: true);
-        m_Player_PreviousSlotNextSlot = m_Player.FindAction("PreviousSlot/NextSlot", throwIfNotFound: true);
+        m_Player_PreviousNextRecipe = m_Player.FindAction("Previous/Next (Recipe)", throwIfNotFound: true);
+        m_Player_PreviousNextSlot = m_Player.FindAction("Previous/Next (Slot)", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Cancel = m_Menu.FindAction("Cancel", throwIfNotFound: true);
@@ -864,8 +897,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_InteractAlt;
-    private readonly InputAction m_Player_PreviousNext;
-    private readonly InputAction m_Player_PreviousSlotNextSlot;
+    private readonly InputAction m_Player_PreviousNextRecipe;
+    private readonly InputAction m_Player_PreviousNextSlot;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -874,8 +907,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @InteractAlt => m_Wrapper.m_Player_InteractAlt;
-        public InputAction @PreviousNext => m_Wrapper.m_Player_PreviousNext;
-        public InputAction @PreviousSlotNextSlot => m_Wrapper.m_Player_PreviousSlotNextSlot;
+        public InputAction @PreviousNextRecipe => m_Wrapper.m_Player_PreviousNextRecipe;
+        public InputAction @PreviousNextSlot => m_Wrapper.m_Player_PreviousNextSlot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -897,12 +930,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractAlt.started += instance.OnInteractAlt;
             @InteractAlt.performed += instance.OnInteractAlt;
             @InteractAlt.canceled += instance.OnInteractAlt;
-            @PreviousNext.started += instance.OnPreviousNext;
-            @PreviousNext.performed += instance.OnPreviousNext;
-            @PreviousNext.canceled += instance.OnPreviousNext;
-            @PreviousSlotNextSlot.started += instance.OnPreviousSlotNextSlot;
-            @PreviousSlotNextSlot.performed += instance.OnPreviousSlotNextSlot;
-            @PreviousSlotNextSlot.canceled += instance.OnPreviousSlotNextSlot;
+            @PreviousNextRecipe.started += instance.OnPreviousNextRecipe;
+            @PreviousNextRecipe.performed += instance.OnPreviousNextRecipe;
+            @PreviousNextRecipe.canceled += instance.OnPreviousNextRecipe;
+            @PreviousNextSlot.started += instance.OnPreviousNextSlot;
+            @PreviousNextSlot.performed += instance.OnPreviousNextSlot;
+            @PreviousNextSlot.canceled += instance.OnPreviousNextSlot;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -919,12 +952,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @InteractAlt.started -= instance.OnInteractAlt;
             @InteractAlt.performed -= instance.OnInteractAlt;
             @InteractAlt.canceled -= instance.OnInteractAlt;
-            @PreviousNext.started -= instance.OnPreviousNext;
-            @PreviousNext.performed -= instance.OnPreviousNext;
-            @PreviousNext.canceled -= instance.OnPreviousNext;
-            @PreviousSlotNextSlot.started -= instance.OnPreviousSlotNextSlot;
-            @PreviousSlotNextSlot.performed -= instance.OnPreviousSlotNextSlot;
-            @PreviousSlotNextSlot.canceled -= instance.OnPreviousSlotNextSlot;
+            @PreviousNextRecipe.started -= instance.OnPreviousNextRecipe;
+            @PreviousNextRecipe.performed -= instance.OnPreviousNextRecipe;
+            @PreviousNextRecipe.canceled -= instance.OnPreviousNextRecipe;
+            @PreviousNextSlot.started -= instance.OnPreviousNextSlot;
+            @PreviousNextSlot.performed -= instance.OnPreviousNextSlot;
+            @PreviousNextSlot.canceled -= instance.OnPreviousNextSlot;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1072,8 +1105,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnInteractAlt(InputAction.CallbackContext context);
-        void OnPreviousNext(InputAction.CallbackContext context);
-        void OnPreviousSlotNextSlot(InputAction.CallbackContext context);
+        void OnPreviousNextRecipe(InputAction.CallbackContext context);
+        void OnPreviousNextSlot(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
