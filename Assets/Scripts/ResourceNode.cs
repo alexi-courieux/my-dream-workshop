@@ -3,7 +3,7 @@ using System.Linq;
 using AshLight.BakerySim.ScriptableObjects;
 using UnityEngine;
 
-public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
+public class ResourceNode : MonoBehaviour, IUseable, IHasProgress
 {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler OnHarvesting;
@@ -59,7 +59,7 @@ public class ResourceNode : MonoBehaviour, IInteractableAlt, IHasProgress
         }
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if (state is State.Depleted) return;
         if (timeBeforeNextInteraction > 0) return;

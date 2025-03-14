@@ -11,10 +11,10 @@ public class OrderUI : TabsManager
         base.Start();
         SetMoneyText();
         EconomyManager.Instance.OnMoneyChanged += EconomyManager_OnMoneyChanged;
-        orderStation.OnInteract += OrderStation_OnInteract;
+        orderStation.OnUse += OrderStation_OnUse;
     }
     
-    private void OrderStation_OnInteract(object sender, EventArgs e)
+    private void OrderStation_OnUse(object sender, EventArgs e)
     {
         Show();
     }

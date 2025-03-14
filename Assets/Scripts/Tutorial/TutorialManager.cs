@@ -32,19 +32,19 @@ public class TutorialManager : MonoBehaviour
             step.gameObject.SetActive(false);
         }
         keyTutorial.SetActive(true);
-        InputManager.Instance.OnInteract += InputManager_OnInteract;
+        InputManager.Instance.OnUse += InputManager_OnUse;
         CustomerManager.Instance.DisableSpawning();
     }
     
     private void OnDestroy()
     {
-        InputManager.Instance.OnInteract -= InputManager_OnInteract;
+        InputManager.Instance.OnUse -= InputManager_OnUse;
     }
 
-    private void InputManager_OnInteract(object sender, EventArgs e)
+    private void InputManager_OnUse(object sender, EventArgs e)
     {
         keyTutorial.SetActive(false);
-        InputManager.Instance.OnInteract -= InputManager_OnInteract;
+        InputManager.Instance.OnUse -= InputManager_OnUse;
         SetupTutorialStep();
     }
 

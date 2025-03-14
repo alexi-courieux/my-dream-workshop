@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; private set; }
 
     public EventHandler OnInteract;
-    public EventHandler OnInteractAlt;
+    public EventHandler OnUse;
     public EventHandler OnPause;
     public EventHandler OnNext;
     public EventHandler OnPrevious;
@@ -31,7 +31,7 @@ public class InputManager : MonoBehaviour
         _inputActions.Enable();
 
         _inputActions.Player.Interact.performed += Interact_OnPerformed;
-        _inputActions.Player.InteractAlt.performed += InteractAlt_OnPerformed;
+        _inputActions.Player.Use.performed += Use_OnPerformed;
         _inputActions.Player.PreviousNextRecipe.performed += PreviousNextRecipe_OnPerformed;
         _inputActions.Player.PreviousNextSlot.performed += PreviousNextSlot_OnPerformed;
         
@@ -47,7 +47,7 @@ public class InputManager : MonoBehaviour
     private void OnDestroy()
     {
         _inputActions.Player.Interact.performed -= Interact_OnPerformed;
-        _inputActions.Player.InteractAlt.performed -= InteractAlt_OnPerformed;
+        _inputActions.Player.Use.performed -= Use_OnPerformed;
         _inputActions.Player.PreviousNextRecipe.performed -= PreviousNextRecipe_OnPerformed;
         _inputActions.Player.PreviousNextSlot.performed -= PreviousNextSlot_OnPerformed;
         
@@ -75,9 +75,9 @@ public class InputManager : MonoBehaviour
         OnInteract?.Invoke(this, EventArgs.Empty);
     }
 
-    private void InteractAlt_OnPerformed(InputAction.CallbackContext obj)
+    private void Use_OnPerformed(InputAction.CallbackContext obj)
     {
-        OnInteractAlt?.Invoke(this, EventArgs.Empty);
+        OnUse?.Invoke(this, EventArgs.Empty);
     }
 
     private void Pause_OnPerformed(InputAction.CallbackContext obj)
@@ -158,7 +158,6 @@ public class InputManager : MonoBehaviour
     
     public void DisableChangeSlotInput()
     {
-        Debug.Log("DisableChangeSlotInput");
         _inputActions.Player.PreviousNextSlot.Disable();
     }
     

@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         InputManager.Instance.OnInteract += InputManager_OnInteract;
-        InputManager.Instance.OnInteractAlt += InputManager_OnInteractAlt;
+        InputManager.Instance.OnUse += InputManager_OnInteractAlt;
         InputManager.Instance.OnNext += InputManager_OnNext;
         InputManager.Instance.OnPrevious += InputManager_OnPrevious;
     }
@@ -148,9 +148,9 @@ public class Player : MonoBehaviour
     {
         if (!CheckForRaycastHit(out RaycastHit hitInfo,
                 new[] {_stationMask, _resourceNodeMask})) return;
-        if (hitInfo.transform.TryGetComponent(out IInteractableAlt interactableComponent))
+        if (hitInfo.transform.TryGetComponent(out IUseable interactableComponent))
         {
-            interactableComponent.InteractAlt();
+            interactableComponent.Use();
             OnPlayerInteractAlt?.Invoke(this, EventArgs.Empty);
         }
     }

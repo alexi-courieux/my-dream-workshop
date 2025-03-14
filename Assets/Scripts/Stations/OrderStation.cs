@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-public class OrderStation : MonoBehaviour, IInteractable
+public class OrderStation : MonoBehaviour, IUseable
 {
-    public event EventHandler OnInteract;
+    public event EventHandler OnUse;
     
-    public void Interact()
+    public void Use()
     {
-        OnInteract?.Invoke(this, EventArgs.Empty);
+        OnUse?.Invoke(this, EventArgs.Empty);
     }
 }

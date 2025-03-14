@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
+public class WoodcuttingStation : MonoBehaviour, IInteractable, IUseable, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
 {
     public event EventHandler OnProcessing;
     public event EventHandler OnStopProcessing;
@@ -94,7 +94,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         }
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if (_product is null) return;
 
