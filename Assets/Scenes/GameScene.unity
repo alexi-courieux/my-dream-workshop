@@ -2162,7 +2162,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -18911,6 +18911,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IronResourceNode
       objectReference: {fileID: 0}
+    - target: {fileID: 5602845221923743382, guid: 05f80ab8753fc2d49b5f6913fec6fc8e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20152,6 +20157,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1714830644}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1745553006 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8477299419043233955, guid: 11517da42cb2dee459f4934a3e4ba60d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5208641900485498384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1745553007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745553006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 1
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0, y: 0, z: 1}
+  m_EndPoint: {x: 0, y: 0, z: -1}
+  m_StartTransform: {fileID: 0}
+  m_EndTransform: {fileID: 0}
+  m_Activated: 1
+  m_Width: 1.5
+  m_CostModifier: 1
+  m_IsOverridingCost: 0
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 0
+  m_Area: 0
 --- !u!1001 &1751440775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25560,7 +25596,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8477299419043233955, guid: 11517da42cb2dee459f4934a3e4ba60d,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1745553007}
   m_SourcePrefab: {fileID: 100100000, guid: 11517da42cb2dee459f4934a3e4ba60d, type: 3}
 --- !u!114 &5334544370319666566
 MonoBehaviour:
