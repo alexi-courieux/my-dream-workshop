@@ -15,7 +15,7 @@ public class ChestUI : MonoBehaviour
         singleItemChestStation.OnFocus += ((sender, args) => ShowCount());
         singleItemChestStation.OnStopFocus += ((sender, args) => HideCount());
         singleItemChestStation.OnProductAmountChanged += ((sender, args) => UpdateVisuals());
-        productImage.sprite = singleItemChestStation.GetProductSo().sprite;
+        productImage.sprite = singleItemChestStation.GetItemSo().sprite;
         HideCount();
     }
 

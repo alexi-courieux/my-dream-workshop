@@ -63,12 +63,9 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IUseable, IHandl
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItemSelected<Product>();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             _state = State.Idle;
             OnStopProcessing?.Invoke(this, EventArgs.Empty);
@@ -79,7 +76,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IUseable, IHandl
         }
         else
         {
-            if (!isPlayerHoldingProduct) return;
+            if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
             Item item = Player.Instance.HandleSystem.GetSelectedItem();
             if (item is not Product product)
             {

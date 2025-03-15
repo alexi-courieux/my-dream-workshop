@@ -35,11 +35,10 @@ public class AnvilStation : MonoBehaviour, IInteractable, IUseable, IHandleItems
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            // Try to pass the product to the player
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
@@ -48,9 +47,8 @@ public class AnvilStation : MonoBehaviour, IInteractable, IUseable, IHandleItems
         }
         else
         {
-            if (!isPlayerHoldingSomething) return;
+            // Try to get the product from the player
             if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
-            
             _state = State.Idle;
             Item product = Player.Instance.HandleSystem.GetSelectedItem();
             product.SetParent(this);
@@ -58,7 +56,6 @@ public class AnvilStation : MonoBehaviour, IInteractable, IUseable, IHandleItems
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
-            
         }
     }
 

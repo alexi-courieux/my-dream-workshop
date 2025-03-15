@@ -58,12 +58,9 @@ public class SmelterStation : MonoBehaviour, IInteractable, IUseable, IHandleIte
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItemSelected<Product>();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             _state = State.Idle;
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
@@ -73,7 +70,7 @@ public class SmelterStation : MonoBehaviour, IInteractable, IUseable, IHandleIte
         }
         else
         {
-            if (!isPlayerHoldingProduct) return;
+            if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
             Item item = Player.Instance.HandleSystem.GetSelectedItem();
             if (item is not Product product)
             {

@@ -30,12 +30,9 @@ public class SculptingStation : MonoBehaviour, IInteractable, IUseable, IHandleI
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItemSelected<Product>();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
@@ -44,7 +41,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IUseable, IHandleI
         }
         else
         {
-            if (!isPlayerHoldingProduct) return;
+            if (!Player.Instance.HandleSystem.HaveAnyItemSelected()) return;
             
             _state = State.Idle;
             Item product = Player.Instance.HandleSystem.GetSelectedItem();
