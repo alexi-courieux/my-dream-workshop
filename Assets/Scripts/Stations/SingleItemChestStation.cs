@@ -50,7 +50,7 @@ public class SingleItemChestStation : MonoBehaviour, IInteractable, IUseable, IF
         return productAmount;
     }
 
-    public ItemSo GetItemSo()
+    public ItemSo GetProductSo()
     {
         return productSo;
     }

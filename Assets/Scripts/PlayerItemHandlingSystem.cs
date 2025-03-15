@@ -127,7 +127,8 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     
     public bool HaveItemSelected<T>() where T : Item
     {
-        return items[selectedSlotIndex, 0] is T;
+        int slotAmount = itemInventory.GetSlot(selectedSlotIndex).Amount;
+        return items[selectedSlotIndex, slotAmount - 1] is T;
     }
 
     public bool HaveAnyItems()
