@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
+public class CastingStation : MonoBehaviour, IInteractable, IUseable, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
 {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
@@ -58,12 +58,9 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItemSelected<Product>();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             _state = State.Idle;
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
@@ -73,7 +70,7 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         }
         else
         {
-            if (!isPlayerHoldingProduct) return;
+            if (!Player.Instance.HandleSystem.HaveAnyItemSelected()) return;
             Item item = Player.Instance.HandleSystem.GetSelectedItem();
             if (item is not Product product) return;
             product.SetParent(this);
@@ -84,7 +81,7 @@ public class CastingStation : MonoBehaviour, IInteractable, IInteractableAlt, IH
         }
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if (_product is null) return;
 

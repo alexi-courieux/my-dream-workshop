@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
-public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInteractableAlt, IFocusable, IInteractableNext, IInteractablePrevious, ISelectableProduct
+public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IUseable, IFocusable, IInteractableNext, IInteractablePrevious, ISelectableProduct
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
@@ -47,7 +47,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IInterac
         RefreshRecipes();
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if (!HaveItems<Product>()) return;
         if (!HaveItems<Tool>() && !Player.Instance.HandleSystem.HaveItems<Tool>()) return;

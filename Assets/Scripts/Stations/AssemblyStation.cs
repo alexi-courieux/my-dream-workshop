@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Utils;
 
-public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
+public class AssemblyStation : MonoBehaviour, IInteractable, IUseable, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
 { 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected; 
@@ -106,7 +106,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IInteractableAlt, I
         OnProductSelected?.Invoke(this, new SelectedProductEventArgs(null, 0));
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if(_selectedRecipe is null) return;
         _state = State.Processing;

@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
+public class WoodcuttingStation : MonoBehaviour, IInteractable, IUseable, IHandleItems, IHasProgress, ISelectableProduct, IInteractablePrevious, IInteractableNext, IFocusable
 {
     public event EventHandler OnProcessing;
     public event EventHandler OnStopProcessing;
@@ -63,12 +63,9 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItemSelected<Product>();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             _state = State.Idle;
             OnStopProcessing?.Invoke(this, EventArgs.Empty);
@@ -79,7 +76,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         }
         else
         {
-            if (!isPlayerHoldingProduct) return;
+            if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
             Item item = Player.Instance.HandleSystem.GetSelectedItem();
             if (item is not Product product)
             {
@@ -94,7 +91,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IInteractableAlt
         }
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if (_product is null) return;
 

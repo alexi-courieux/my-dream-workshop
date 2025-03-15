@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableProduct, IInteractableNext, IInteractablePrevious, IFocusable
+public class SculptingStation : MonoBehaviour, IInteractable, IUseable, IHandleItems, IHasProgress, ISelectableProduct, IInteractableNext, IInteractablePrevious, IFocusable
 {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
@@ -30,12 +30,9 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        bool isPlayerHoldingProduct = Player.Instance.HandleSystem.HaveItemSelected<Product>();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
@@ -44,7 +41,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
         }
         else
         {
-            if (!isPlayerHoldingProduct) return;
+            if (!Player.Instance.HandleSystem.HaveAnyItemSelected()) return;
             
             _state = State.Idle;
             Item product = Player.Instance.HandleSystem.GetSelectedItem();
@@ -57,7 +54,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IInteractableAlt, 
         }
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if (_recipeSo is null) return;
         

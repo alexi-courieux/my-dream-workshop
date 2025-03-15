@@ -2,7 +2,7 @@
 using AshLight.BakerySim;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFocusable
+public abstract class Item : MonoBehaviour, IInteractable, IUseable, IFocusable
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
@@ -66,11 +66,11 @@ public abstract class Item : MonoBehaviour, IInteractable, IInteractableAlt, IFo
         }
     }
 
-    public void InteractAlt()
+    public void Use()
     {
-        if (_parent is IInteractableAlt interactableParent)
+        if (_parent is IUseable interactableParent)
         {
-            interactableParent.InteractAlt();
+            interactableParent.Use();
         }
     }
 

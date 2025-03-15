@@ -67,11 +67,24 @@ namespace AshLight.BakerySim.UI
         private void Show()
         {
             if (_selectedOutput is null) return;
+            
+            if (_availableRecipesCount > 1)
+            {
+                InputManager.Instance.DisableChangeSlotInput();
+            }
+            else
+            {
+                next.SetActive(false);
+                previous.SetActive(false);
+            }
+            
             gameObject.SetActive(true);
         }
         private void Hide()
         {
             gameObject.SetActive(false);
+            
+            InputManager.Instance.EnableChangeSlotInput();
         }
 
         private void UpdateVisuals()

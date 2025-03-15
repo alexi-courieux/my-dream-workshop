@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHandleItems, IHasProgress, ISelectableProduct, IInteractableNext, IInteractablePrevious, IFocusable
+public class AnvilStation : MonoBehaviour, IInteractable, IUseable, IHandleItems, IHasProgress, ISelectableProduct, IInteractableNext, IInteractablePrevious, IFocusable
 {
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
@@ -35,11 +35,10 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
 
     public void Interact()
     {
-        bool isPlayerHoldingSomething = Player.Instance.HandleSystem.HaveAnyItemSelected();
-        
         if (HaveItems<Product>())
         {
-            if (isPlayerHoldingSomething) return;
+            // Try to pass the product to the player
+            if (!Player.Instance.HandleSystem.HaveSpace(_product.ProductSo)) return;
             _product.SetParent(Player.Instance.HandleSystem);
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
@@ -48,9 +47,8 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
         }
         else
         {
-            if (!isPlayerHoldingSomething) return;
+            // Try to get the product from the player
             if (!Player.Instance.HandleSystem.HaveItemSelected<Product>()) return;
-            
             _state = State.Idle;
             Item product = Player.Instance.HandleSystem.GetSelectedItem();
             product.SetParent(this);
@@ -58,11 +56,10 @@ public class AnvilStation : MonoBehaviour, IInteractable, IInteractableAlt, IHan
             OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs {
                 progressNormalized = 0f
             });
-            
         }
     }
 
-    public void InteractAlt()
+    public void Use()
     {
         if (_anvilRecipeSo is null) return;
         

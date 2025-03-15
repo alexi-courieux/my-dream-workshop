@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
     public EventHandler OnInteract;
-    public EventHandler OnInteractAlt;
+    public EventHandler OnUse;
     public EventHandler OnPause;
     public EventHandler OnNext;
     public EventHandler OnPrevious;
@@ -21,6 +22,7 @@ public class InputManager : MonoBehaviour
     public EventHandler OnMenuPrevious;
 
     private InputActions _inputActions;
+    private InputDevice _lastUsedDevice;
 
     private void Awake()
     {
@@ -29,23 +31,25 @@ public class InputManager : MonoBehaviour
         _inputActions.Enable();
 
         _inputActions.Player.Interact.performed += Interact_OnPerformed;
-        _inputActions.Player.InteractAlt.performed += InteractAlt_OnPerformed;
-        _inputActions.Player.PreviousNext.performed += PreviousNext_OnPerformed;
-        _inputActions.Player.PreviousSlotNextSlot.performed += PreviousSlotNextSlot_OnPerformed;
+        _inputActions.Player.Use.performed += Use_OnPerformed;
+        _inputActions.Player.PreviousNextRecipe.performed += PreviousNextRecipe_OnPerformed;
+        _inputActions.Player.PreviousNextSlot.performed += PreviousNextSlot_OnPerformed;
         
         _inputActions.MenuTransitions.Pause.performed += Pause_OnPerformed;
         _inputActions.MenuTransitions.RecipeBook.performed += RecipeBook_OnPerformed;
         
         _inputActions.Menu.Cancel.performed += MenuCancel_OnPerformed;
         _inputActions.Menu.PreviousNext.performed += MenuPreviousNext_OnPerformed;
+        
+        InputSystem.onAnyButtonPress.Call(InputSystem_OnAnyButtonPress);
     }
 
     private void OnDestroy()
     {
         _inputActions.Player.Interact.performed -= Interact_OnPerformed;
-        _inputActions.Player.InteractAlt.performed -= InteractAlt_OnPerformed;
-        _inputActions.Player.PreviousNext.performed -= PreviousNext_OnPerformed;
-        _inputActions.Player.PreviousSlotNextSlot.performed -= PreviousSlotNextSlot_OnPerformed;
+        _inputActions.Player.Use.performed -= Use_OnPerformed;
+        _inputActions.Player.PreviousNextRecipe.performed -= PreviousNextRecipe_OnPerformed;
+        _inputActions.Player.PreviousNextSlot.performed -= PreviousNextSlot_OnPerformed;
         
         _inputActions.MenuTransitions.RecipeBook.performed -= RecipeBook_OnPerformed;
         _inputActions.MenuTransitions.Pause.performed -= Pause_OnPerformed;
@@ -71,9 +75,9 @@ public class InputManager : MonoBehaviour
         OnInteract?.Invoke(this, EventArgs.Empty);
     }
 
-    private void InteractAlt_OnPerformed(InputAction.CallbackContext obj)
+    private void Use_OnPerformed(InputAction.CallbackContext obj)
     {
-        OnInteractAlt?.Invoke(this, EventArgs.Empty);
+        OnUse?.Invoke(this, EventArgs.Empty);
     }
 
     private void Pause_OnPerformed(InputAction.CallbackContext obj)
@@ -81,7 +85,7 @@ public class InputManager : MonoBehaviour
         OnPause?.Invoke(this, EventArgs.Empty);
     }
 
-    private void PreviousNext_OnPerformed(InputAction.CallbackContext obj)
+    private void PreviousNextRecipe_OnPerformed(InputAction.CallbackContext obj)
     {
         if (obj.ReadValue<float>() > 0)
         {
@@ -93,7 +97,7 @@ public class InputManager : MonoBehaviour
         }
     }
     
-    private void PreviousSlotNextSlot_OnPerformed(InputAction.CallbackContext obj)
+    private void PreviousNextSlot_OnPerformed(InputAction.CallbackContext obj)
     {
         if (obj.ReadValue<float>() > 0)
         {
@@ -145,5 +149,20 @@ public class InputManager : MonoBehaviour
     public void DisableMenuInput()
     {
         _inputActions.Menu.Disable();
+    }
+    
+    public void EnableChangeSlotInput()
+    {
+        _inputActions.Player.PreviousNextSlot.Enable();
+    }
+    
+    public void DisableChangeSlotInput()
+    {
+        _inputActions.Player.PreviousNextSlot.Disable();
+    }
+    
+    private void InputSystem_OnAnyButtonPress(InputControl obj)
+    {
+        _lastUsedDevice = obj.device;
     }
 }

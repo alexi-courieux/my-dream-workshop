@@ -10,7 +10,7 @@ public class ContainerStation : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (Player.Instance.HandleSystem.HaveAnyItemSelected()) return;
+        if (!Player.Instance.HandleSystem.HaveSpace(productSo)) return;
         Item.SpawnItem(productSo.prefab, Player.Instance.HandleSystem);
     }
 }
