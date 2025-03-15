@@ -30,34 +30,44 @@ public abstract class SlotInventory<T>: IInventory<T>
         return ItemSlots;
     }
     
-    public bool TryAddItem(T item, int amount)
+    public int TryAddItem(T item, int amount)
     {
-        if (item is null || amount <= 0) return false;
+        if (item is null || amount <= 0) return -1;
         
         int index = Array.FindIndex(ItemSlots, slot => slot is not null && slot.Item.Equals(item));
         if (index >= 0 && ItemSlots[index].Amount < _maxAmountPerSlot) // Item already in inventory & slot not full
         {
             ItemSlots[index].Amount += amount;
             OnItemAdded?.Invoke(this, EventArgs.Empty);
-            return true;
+            return index;
         }
         
         index = Array.IndexOf(ItemSlots, default);
-        if (index < 0) return false; // No empty slots
+        if (index < 0) return -1; // No empty slots
         
         ItemSlots[index] = new SlotInventoryItem<T> { Item = item, Amount = amount };
         OnItemAdded?.Invoke(this, EventArgs.Empty);
-        return true;
+        return index;
 
     }
     
-    public void AddItem(int index, T item, int amount)
+    public void AddItem(int index, T itemToAdd, int amountToAdd)
     {
         if (index < 0 || index >= ItemSlots.Length) throw new Exception("Index out of range");
-        if (item is null || amount <= 0) throw new Exception("Item or amount invalid");
-        if (amount > _maxAmountPerSlot) throw new Exception("Amount exceeds max amount per slot");
-        if (ItemSlots[index] != null) throw new Exception("Slot is not empty");
-        ItemSlots[index] = new SlotInventoryItem<T> { Item = item, Amount = amount };
+        if (itemToAdd is null || amountToAdd <= 0) throw new Exception("Item or amount invalid");
+        if (ItemSlots[index] != null)
+        {
+            // Item already in inventory, add amount
+            if (ItemSlots[index].Amount + amountToAdd > _maxAmountPerSlot) throw new Exception("Amount exceeds max amount per slot");
+            if (!itemToAdd.Equals(ItemSlots[index].Item)) throw new Exception("Item not in specified index");
+            ItemSlots[index].Amount += amountToAdd;
+        }
+        else
+        {
+            // Add new item
+            if (amountToAdd > _maxAmountPerSlot) throw new Exception("Amount exceeds max amount per slot");
+            ItemSlots[index] = new SlotInventoryItem<T> { Item = itemToAdd, Amount = amountToAdd };
+        }
         OnItemAdded?.Invoke(this, EventArgs.Empty);
     }
     
@@ -136,9 +146,14 @@ public abstract class SlotInventory<T>: IInventory<T>
         return ItemSlots.Length;
     }
     
-    public int GetItemSlot(T item)
+    public int[] GetItemSlots(T item)
     {
-        return Array.FindIndex(ItemSlots, slot => slot is not null && slot.Item.Equals(item));
+        return ItemSlots
+            .Select((slot, index) => new { slot, index })
+            .Where(x => x.slot is not null && x.slot.Item.Equals(item))
+            .Select(x => x.index)
+            .OrderBy(x => x)
+            .ToArray();
     }
     
     protected void SortItems(Func<KeyValuePair<T, int>, object> keySelector, bool ascending = true)

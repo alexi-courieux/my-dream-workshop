@@ -21,10 +21,10 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
 
     public void Interact()
     {
-        if (Player.Instance.HandleSystem.HaveAnyItemSelected()) return;
         if (_products.Count <= 0) return;
 
         ProductSo productSo = _products[_index];
+        if (!Player.Instance.HandleSystem.HaveSpace(productSo)) return;
         Item.SpawnItem(productSo.prefab, Player.Instance.HandleSystem);
         _products.RemoveAt(_index);
         OnProductTaken?.Invoke(this, productSo);
