@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
+public class BuyableStation : MonoBehaviour, IUseable, IFocusable
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
@@ -25,9 +25,9 @@ public class BuyableStation : MonoBehaviour, IInteractable, IFocusable
         }
     }
     
-    public void Interact()
+    public void Use()
     {
-        if (EconomyManager.Instance.GetMoney() <= price) return;
+        if (EconomyManager.Instance.GetMoney() < price) return;
         
         EconomyManager.Instance.AddMoney(-price);
         foreach (GameObject station in stations)
