@@ -17,6 +17,7 @@ public class TutorialManager : MonoBehaviour
     
     [SerializeField] private GameObject keyTutorial;
     [SerializeField] private TutorialStep[] tutorialSteps;
+    [SerializeField] private GameObject[] stationsToDisable;
     private int tutorialStepIndex;
 
     private void Awake()
@@ -34,6 +35,10 @@ public class TutorialManager : MonoBehaviour
         keyTutorial.SetActive(true);
         InputManager.Instance.OnUse += InputManager_OnUse;
         CustomerManager.Instance.DisableSpawning();
+        foreach (GameObject station in stationsToDisable)
+        {
+            station.SetActive(false);
+        }
     }
     
     private void OnDestroy()
