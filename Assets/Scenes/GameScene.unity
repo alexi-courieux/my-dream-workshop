@@ -4927,8 +4927,8 @@ MonoBehaviour:
   - {fileID: 162181564}
   - {fileID: 812683142}
   stationsToDisable:
-  - {fileID: 2119689775}
   - {fileID: 1303114949}
+  - {fileID: 2119689775}
 --- !u!4 &523439528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8189339906586034208, guid: 71e31a106a58fb14993f74c50ccd9ae3,
