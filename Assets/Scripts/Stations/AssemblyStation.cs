@@ -9,6 +9,8 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IUseable, IHandleIt
     public event EventHandler<SelectedProductEventArgs> OnProductSelected; 
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
     public event EventHandler<ProductSo> OnProductCrafted;
 
     private enum State
@@ -140,6 +142,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IUseable, IHandleIt
         index--;
         if (index < 0) index = _availableRecipes.Length - 1;
         SelectRecipe(_availableRecipes[index]);
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
     
     public void InteractNext()
@@ -151,6 +154,7 @@ public class AssemblyStation : MonoBehaviour, IInteractable, IUseable, IHandleIt
         index++;
         if (index >= _availableRecipes.Length) index = 0;
         SelectRecipe(_availableRecipes[index]);
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
     
     public void Focus()

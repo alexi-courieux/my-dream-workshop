@@ -10,6 +10,9 @@ namespace AshLight.BakerySim.UI
         [SerializeField] Image icon;
         [SerializeField] private GameObject next;
         [SerializeField] private GameObject previous;
+        [SerializeField] private Animator animator;
+        [SerializeField] private String onNextAnimationTrigger = "Next";
+        [SerializeField] private String onPreviousAnimationTrigger = "Previous";
     
         private ProductSo _selectedOutput;
         private int _availableRecipesCount;
@@ -31,6 +34,24 @@ namespace AshLight.BakerySim.UI
                 SelectableRecipeStation.OnProductSelected += SelectableRecipeStation_OnRecipeSelected;
             } else {
                 Debug.LogError("Station doesn't Implement ISelectableRecipe");
+            }
+            
+            if (station.TryGetComponent(out IInteractableNext interactableNext))
+            {
+                interactableNext.OnNext += InteractableNext_OnNext;
+            }
+            else
+            {
+                Debug.LogError("Station doesn't Implement IInteractableNext");
+            }
+            
+            if (station.TryGetComponent(out IInteractablePrevious interactablePrevious))
+            {
+                interactablePrevious.OnPrevious += InteractablePrevious_OnPrevious;
+            }
+            else
+            {
+                Debug.LogError("Station doesn't Implement IInteractablePrevious");
             }
         }
 
@@ -62,6 +83,18 @@ namespace AshLight.BakerySim.UI
                 UpdateVisuals();
                 Show();
             }
+        }
+        
+        private void InteractableNext_OnNext(object sender, EventArgs e)
+        {
+            if (_availableRecipesCount <= 1) return;
+            animator?.SetTrigger(onNextAnimationTrigger);
+        }
+        
+        private void InteractablePrevious_OnPrevious(object sender, EventArgs e)
+        {
+            if (_availableRecipesCount <= 1) return;
+            animator?.SetTrigger(onPreviousAnimationTrigger);
         }
 
         private void Show()

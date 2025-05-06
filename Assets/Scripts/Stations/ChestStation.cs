@@ -8,6 +8,8 @@ public class ChestStation : MonoBehaviour, IInteractable, IUseable, IFocusable, 
     public event EventHandler OnStopFocus;
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
 
     private const int Capacity = 10;
 
@@ -66,6 +68,7 @@ public class ChestStation : MonoBehaviour, IInteractable, IUseable, IFocusable, 
             _index = _products.Count - 1;
         }
         SelectProduct();
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
     public void InteractNext()
     {
@@ -75,6 +78,7 @@ public class ChestStation : MonoBehaviour, IInteractable, IUseable, IFocusable, 
             _index = 0;
         }
         SelectProduct();
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
     
     private void SelectProduct()

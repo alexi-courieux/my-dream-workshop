@@ -6,6 +6,8 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler<ProductSo> OnProductTaken; 
 
@@ -42,6 +44,7 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
             _index = _products.Count - 1;
         }
         SelectProduct();
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
     public void InteractNext()
     {
@@ -51,6 +54,7 @@ public class OrderChestStation : MonoBehaviour, IInteractable, IFocusable, IInte
             _index = 0;
         }
         SelectProduct();
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
     
     private void SelectProduct()

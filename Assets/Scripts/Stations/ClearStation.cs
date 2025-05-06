@@ -5,6 +5,8 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IUseable
 {
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     [SerializeField] private RecipesDictionarySo recipesDictionarySo;
     [SerializeField] private Transform productSlot;
@@ -109,6 +111,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IUseable
         }
         _selectedRecipe = _recipes[index];
         OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_selectedRecipe?.output, _recipes.Length));
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
 
     public void InteractPrevious()
@@ -122,6 +125,7 @@ public class ClearStation : MonoBehaviour, IInteractable, IHandleItems, IUseable
         }
         _selectedRecipe = _recipes[index];
         OnProductSelected?.Invoke(this, new SelectedProductEventArgs(_selectedRecipe?.output, _recipes.Length));
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
 
     public void StopFocus()

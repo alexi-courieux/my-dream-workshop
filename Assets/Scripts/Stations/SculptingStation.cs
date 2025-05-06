@@ -9,6 +9,8 @@ public class SculptingStation : MonoBehaviour, IInteractable, IUseable, IHandleI
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
     public event EventHandler<ProductSo> OnProductCrafted;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
 
     private enum State
     {
@@ -166,6 +168,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IUseable, IHandleI
             index = 0;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
     public void InteractPrevious()
     {
@@ -179,6 +182,7 @@ public class SculptingStation : MonoBehaviour, IInteractable, IUseable, IHandleI
             index = _availableRecipes.Length - 1;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
     public void Focus()
     {

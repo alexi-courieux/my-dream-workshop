@@ -10,6 +10,8 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IUseable, IHandl
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
     public event EventHandler<ProductSo> OnProductCrafted; 
 
     private enum State
@@ -206,6 +208,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IUseable, IHandl
             index = _availableRecipes.Length - 1;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
     
     public void InteractNext()
@@ -220,6 +223,7 @@ public class WoodcuttingStation : MonoBehaviour, IInteractable, IUseable, IHandl
             index = 0;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
     public void Focus()
     {

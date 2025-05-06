@@ -8,6 +8,8 @@ public class InventorySlotUI : MonoBehaviour
     [SerializeField] private TMP_Text amountText;
     [SerializeField] private Transform defaultBackground;
     [SerializeField] private Transform selectedBackground;
+    [SerializeField] private Transform defaultCountBackground;
+    [SerializeField] private Transform selectedCountBackground;
     
     private SlotInventoryItem<ItemSo> item;
 
@@ -26,12 +28,30 @@ public class InventorySlotUI : MonoBehaviour
         {
             productImage.enabled = false;
             amountText.enabled = false;
+            defaultCountBackground.gameObject.SetActive(false);
+            selectedCountBackground.gameObject.SetActive(false);
             return;
         }
         
         productImage.enabled = true;
         productImage.sprite = item.Item.sprite;
-        amountText.enabled = item.Amount > 1;
-        amountText.text = $"{item.Amount:D}";
+        
+        bool hasAmount = item.Amount > 1;
+        amountText.enabled = hasAmount;
+        if (hasAmount)
+        {
+            defaultCountBackground.gameObject.SetActive(true);
+            if (!defaultCountBackground.Equals(selectedCountBackground))
+            {
+                defaultCountBackground.gameObject.SetActive(!selected);
+                selectedCountBackground.gameObject.SetActive(selected);
+            }
+            amountText.text = $"{item.Amount:D}";
+        }
+        else
+        {
+            defaultCountBackground.gameObject.SetActive(false);
+            selectedCountBackground.gameObject.SetActive(false);
+        }
     }
 }

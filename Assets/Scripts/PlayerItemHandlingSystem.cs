@@ -222,6 +222,7 @@ public class PlayerItemHandlingSystem : MonoBehaviour, IHandleItems
     }
 }
 
+# if UNITY_EDITOR
 [CustomEditor(typeof(PlayerItemHandlingSystem))]
 public class PlayerItemHandlingSystemEditor : Editor
 {
@@ -246,3 +247,4 @@ public class PlayerItemHandlingSystemEditor : Editor
         }
     }
 }
+#endif

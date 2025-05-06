@@ -8,6 +8,8 @@ public class CastingStation : MonoBehaviour, IInteractable, IUseable, IHandleIte
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
 
     private enum State
     {
@@ -194,6 +196,7 @@ public class CastingStation : MonoBehaviour, IInteractable, IUseable, IHandleIte
             index = _availableRecipes.Length - 1;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
     
     public void InteractNext()
@@ -208,6 +211,7 @@ public class CastingStation : MonoBehaviour, IInteractable, IUseable, IHandleIte
             index = 0;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
     public void Focus()
     {

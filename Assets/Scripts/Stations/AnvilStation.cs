@@ -8,6 +8,8 @@ public class AnvilStation : MonoBehaviour, IInteractable, IUseable, IHandleItems
     public event EventHandler<SelectedProductEventArgs> OnProductSelected;
     public event EventHandler OnFocus;
     public event EventHandler OnStopFocus;
+    public event EventHandler OnNext;
+    public event EventHandler OnPrevious;
 
     private enum State
     {
@@ -172,6 +174,7 @@ public class AnvilStation : MonoBehaviour, IInteractable, IUseable, IHandleItems
             index = 0;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnNext?.Invoke(this, EventArgs.Empty);
     }
     public void InteractPrevious()
     {
@@ -185,6 +188,7 @@ public class AnvilStation : MonoBehaviour, IInteractable, IUseable, IHandleItems
             index = _availableRecipes.Length - 1;
         }
         SelectRecipe(_availableRecipes[index]);
+        OnPrevious?.Invoke(this, EventArgs.Empty);
     }
     public void Focus()
     {
